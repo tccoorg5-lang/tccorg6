@@ -158,7 +158,8 @@ def run_all_tests():
         "roundtable.html",
         "archives.html",
         "meeting-room.html",
-        "security-centre.html"
+        "security-centre.html",
+        "notifications.html"
     ]
     for r in routes:
         f = server_app_dir / r

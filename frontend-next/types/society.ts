@@ -14,6 +14,8 @@ export interface MemberProfile {
   id: string;
   codename: string | null;
   member_number: string | null;
+  username?: string | null;
+  email?: string | null;
   society_role: SocietyRole;
   society_rank: SocietyRank;
   designation?: string | null;

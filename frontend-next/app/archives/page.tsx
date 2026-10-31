@@ -1,74 +1,154 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { SocietySeal } from '@/components/brand/society-seal';
-import { ArrowLeft, BookOpen, FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { SearchInput } from '@/components/ui/input';
+import { ArrowLeft, BookOpen, FileText, Lock, Download, CheckCircle2 } from 'lucide-react';
+import { useToast } from '@/components/ui/toast';
+
+interface ArchiveDocument {
+  ref: string;
+  title: string;
+  category: string;
+  summary: string;
+  classification: string;
+  date: string;
+}
+
+const ARCHIVE_DOCUMENTS: ArchiveDocument[] = [
+  {
+    ref: 'ARC-2026-001',
+    title: 'The Sovereign Decree of Foundation & Cryptographic Standard',
+    category: 'Constitutional Charter',
+    summary: 'Original charter establishing the non-indexed private fellowship, single-use high-entropy invitation protocol, and strict cryptographic row-level security.',
+    classification: 'Class I Sovereign',
+    date: 'Founding Epoch',
+  },
+  {
+    ref: 'ARC-2026-002',
+    title: 'The Lexicon of Conferred Codenames & Taxonomic Heraldry',
+    category: 'Institutional Taxonomy',
+    summary: 'Philosophical and intellectual etymology of official codenames conferred to Fellows. Details the doctrine of pseudonymity as an instrument of meritocracy.',
+    classification: 'Class II Internal',
+    date: 'Ratified 2026',
+  },
+  {
+    ref: 'ARC-2026-003',
+    title: 'Standard Operating Procedures for Lawful Public Accountability',
+    category: 'Investigative Doctrine',
+    summary: 'Strict methodological guidelines for conducting open-source forensic research into public fund misallocations without violating statutory privacy protections.',
+    classification: 'Class III Research',
+    date: 'Updated 2026',
+  },
+  {
+    ref: 'ARC-2026-004',
+    title: 'Precedents of the High Council Conclave (Sessions I - III)',
+    category: 'Parliamentary Minutes',
+    summary: 'Verbatim transcripts and certified resolutions governing quorum voting, merit elevations, and disciplinary oversight protocols.',
+    classification: 'Council Standing',
+    date: 'Permanent Vault',
+  },
+];
 
 export default function ArchivesPage() {
-  const documents = [
-    {
-      ref: 'ARC-001',
-      title: 'Document 001: The Sovereign Decree of Foundation',
-      summary: 'Original constitutional charter establishing encrypted vault protocols and single-use cryptographic access.',
-    },
-    {
-      ref: 'ARC-002',
-      title: 'Document 002: Lexicon of Conferred Codenames',
-      summary: 'Etymological and intellectual taxonomy of codenames assigned to the Fellowship under the meritocratic doctrine.',
-    },
-    {
-      ref: 'ARC-003',
-      title: 'Document 003: Guidelines for Lawful Public Accountability',
-      summary: 'Standard operating procedures for verifying public filings and forensic documentation without violating privacy statutes.',
-    },
-  ];
+  const { toast } = useToast();
+  const [search, setSearch] = useState('');
+
+  const filtered = ARCHIVE_DOCUMENTS.filter((doc) => {
+    const q = search.toLowerCase();
+    return (
+      doc.title.toLowerCase().includes(q) ||
+      doc.ref.toLowerCase().includes(q) ||
+      doc.category.toLowerCase().includes(q)
+    );
+  });
+
+  const handleDownload = (ref: string) => {
+    toast({
+      type: 'info',
+      title: 'Archival Extract Requested',
+      description: `Cryptographic digest for ${ref} verified. Signed archival document generated.`,
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-[var(--midnight-black)] text-[var(--ivory)] p-6 md:p-12">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="flex items-center justify-between border-b border-[var(--charcoal-border)] pb-4">
-          <Link
-            href="/member"
-            className="society-btn-secondary text-xs"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Vault</span>
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-6 md:p-12 select-none">
+      <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
+        {/* Navigation Bar */}
+        <div className="flex items-center justify-between border-b border-[#262C3A]/70 pb-4">
+          <Link href="/member">
+            <Button variant="secondary" size="sm">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Return to Vault</span>
+            </Button>
           </Link>
-          <span className="society-badge">Archival Access</span>
+          <Badge variant="gold">Society Historical Archives</Badge>
         </div>
 
+        {/* Heading */}
         <div className="text-center space-y-3">
           <SocietySeal size={72} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-3xl font-bold tracking-widest text-[var(--imperial-gold)]">
-            SOCIETY ARCHIVES
+          <h1 className="font-serif-formal text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
+            Society Archives & Vault
           </h1>
-          <p className="font-serif-editorial text-base text-[var(--ivory-muted)] italic">
-            Historical Resolutions, Decrees & The Lexicon of Codenames
+          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+            Historical Resolutions, Founding Decrees & The Lexicon of Codenames
           </p>
         </div>
 
-        <div className="society-card p-6 md:p-8 space-y-4">
-          <div className="space-y-4 divide-y divide-[var(--charcoal-border)]">
-            {documents.map((doc) => (
-              <div key={doc.ref} className="pt-4 first:pt-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-[var(--antique-gold)] shrink-0" />
-                    <h3 className="font-serif-formal text-sm md:text-base font-bold text-[var(--imperial-gold)]">
-                      {doc.title}
-                    </h3>
-                  </div>
-                  <p className="font-serif-editorial text-xs md:text-sm text-[var(--ivory-muted)] pl-6 italic">
-                    {doc.summary}
-                  </p>
+        {/* Search */}
+        <div className="max-w-md mx-auto">
+          <SearchInput
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search archival records, references, categories..."
+          />
+        </div>
+
+        {/* Documents Ledger */}
+        <div className="space-y-4">
+          {filtered.map((doc) => (
+            <div
+              key={doc.ref}
+              className="p-6 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.35)] transition-all space-y-3 shadow-md"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#262C3A]/60 pb-3">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-[#C5A059]" />
+                  <span className="font-mono text-xs font-bold text-[#C5A059]">{doc.ref}</span>
+                  <span className="text-[#858995] text-xs">&bull;</span>
+                  <span className="font-serif-formal text-xs text-[#858995] uppercase tracking-wider">
+                    {doc.category}
+                  </span>
                 </div>
-                <span className="font-mono text-[0.6875rem] text-[var(--antique-gold)] shrink-0 pl-6 sm:pl-0">
-                  {doc.ref}
-                </span>
+                <Badge variant="outline">{doc.classification}</Badge>
               </div>
-            ))}
-          </div>
+
+              <h3 className="font-serif-formal text-base font-bold text-[#E9E2D3]">
+                {doc.title}
+              </h3>
+
+              <p className="font-serif-editorial text-xs md:text-sm text-[#858995] leading-relaxed italic">
+                {doc.summary}
+              </p>
+
+              <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/50 text-xs text-[#858995]">
+                <span className="font-mono text-[0.625rem]">Date Ratified: {doc.date}</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleDownload(doc.ref)}
+                  className="text-[0.6875rem] py-1 px-2.5"
+                >
+                  <Download className="w-3 h-3" />
+                  <span>Request Copy</span>
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
