@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from app.core.config import settings
-from app.api import auth, users, conversations, messages
+from app.api import auth, users, conversations, messages, invitations, members
 
 app = FastAPI(
     title="Pulse Chat API",
@@ -48,6 +48,8 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
 app.include_router(conversations.router, prefix="/api")
 app.include_router(messages.router, prefix="/api")
+app.include_router(invitations.router, prefix="/api")
+app.include_router(members.router, prefix="/api")
 
 # Public Config Endpoint (exposes only the public anon key & URL, NEVER service role key)
 @app.get("/api/config", tags=["Configuration"])

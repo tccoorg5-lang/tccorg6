@@ -177,11 +177,24 @@ class AuthService:
             resolved_email = identifier
         else:
             try:
+                # 1. Check username
                 prof_res = admin_client.from_("profiles").select("id, email, username, avatar_url").ilike("username", identifier).limit(1).execute()
                 if prof_res.data and len(prof_res.data) > 0:
                     resolved_email = prof_res.data[0].get("email")
+                
+                # 2. Check codename if not found
+                if not resolved_email:
+                    code_res = admin_client.from_("profiles").select("id, email, username, codename").ilike("codename", identifier).limit(1).execute()
+                    if code_res.data and len(code_res.data) > 0:
+                        resolved_email = code_res.data[0].get("email")
+
+                # 3. Check member_number if not found
+                if not resolved_email:
+                    num_res = admin_client.from_("profiles").select("id, email, username, member_number").ilike("member_number", identifier).limit(1).execute()
+                    if num_res.data and len(num_res.data) > 0:
+                        resolved_email = num_res.data[0].get("email")
             except Exception as e:
-                logger.warning(f"Could not resolve username to email: {e}")
+                logger.warning(f"Could not resolve identifier to email: {e}")
 
         if not resolved_email:
             # Check if identifier matches an invite code

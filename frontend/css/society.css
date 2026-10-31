@@ -1,0 +1,230 @@
+/* ====================================================================
+   PRIVATE SOCIETY PLATFORM — REGAL SOCIETY DESIGN TOKENS
+   British Gentlemen's Club & Indian Institutional Elegance
+   ==================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Society Noble Palette */
+  --society-bg-void: #06080B;
+  --society-bg-primary: #0A0D14;
+  --society-bg-card: #10141F;
+  --society-bg-elevated: #161C2B;
+  --society-bg-input: #0D1018;
+
+  /* Gold Metallics */
+  --gold-primary: #C5A059;
+  --gold-light: #E0C58A;
+  --gold-dark: #8C6D2D;
+  --gold-glow: rgba(197, 160, 89, 0.18);
+  --gold-border: rgba(197, 160, 89, 0.35);
+  --gold-border-subtle: rgba(197, 160, 89, 0.15);
+  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #AA771C 100%);
+
+  /* Imperial Burgundy */
+  --burgundy-primary: #5C161D;
+  --burgundy-hover: #751C25;
+  --burgundy-glow: rgba(92, 22, 29, 0.25);
+  --burgundy-subtle: rgba(92, 22, 29, 0.12);
+
+  /* Typography */
+  --text-radiant: #FFFFFF;
+  --text-platinum: #E2E8F0;
+  --text-parchment: #C5CBD3;
+  --text-muted: #7E8B9B;
+
+  /* States */
+  --accent-verified: #22C55E;
+  --accent-alert: #EF4444;
+
+  --shadow-vault: 0 12px 35px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px var(--gold-border-subtle);
+  --shadow-gold: 0 4px 20px -2px var(--gold-glow);
+
+  --radius-badge: 4px;
+  --radius-card: 8px;
+  --radius-pill: 9999px;
+
+  --transition-noble: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Society Base Styles */
+body.society-theme {
+  background-color: var(--society-bg-void);
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(92, 22, 29, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(197, 160, 89, 0.08) 0%, transparent 50%);
+  color: var(--text-parchment);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Regal Card & Container */
+.society-card {
+  background-color: var(--society-bg-card);
+  border: 1px solid var(--gold-border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-vault);
+  position: relative;
+  overflow: hidden;
+}
+
+.society-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold-gradient);
+}
+
+/* Society Insignia Badge */
+.society-emblem {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px auto;
+  border-radius: 50%;
+  border: 1px solid var(--gold-primary);
+  background: radial-gradient(circle, var(--burgundy-primary) 0%, var(--society-bg-void) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.society-emblem svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Titles */
+.society-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.society-subtitle {
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* Inputs */
+.society-form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.society-label {
+  font-size: 0.76rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  font-weight: 600;
+}
+
+.society-input {
+  background-color: var(--society-bg-input);
+  border: 1px solid var(--gold-border-subtle);
+  color: var(--text-platinum);
+  padding: 12px 14px;
+  border-radius: var(--radius-badge);
+  font-size: 0.92rem;
+  outline: none;
+  transition: var(--transition-noble);
+}
+
+.society-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px var(--gold-glow);
+}
+
+/* Verification Code Step Banner */
+.invite-verification-banner {
+  background: rgba(197, 160, 89, 0.08);
+  border: 1px solid var(--gold-border);
+  padding: 14px;
+  border-radius: var(--radius-badge);
+  margin-bottom: 18px;
+  display: none;
+}
+
+.invite-verification-banner.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.assigned-codename-tag {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Buttons */
+.society-btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: var(--gold-gradient);
+  color: #0B0D12;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-badge);
+  cursor: pointer;
+  transition: var(--transition-noble);
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.society-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+}
+
+.society-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.society-link {
+  color: var(--gold-primary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-noble);
+}
+
+.society-link:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
