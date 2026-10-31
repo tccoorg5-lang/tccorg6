@@ -35,6 +35,14 @@ app.include_router(users.router, prefix="/api")
 app.include_router(conversations.router, prefix="/api")
 app.include_router(messages.router, prefix="/api")
 
+# Public Config Endpoint (exposes only the public anon key & URL, NEVER service role key)
+@app.get("/api/config", tags=["Configuration"])
+async def get_public_config():
+    return {
+        "supabase_url": settings.SUPABASE_URL,
+        "supabase_anon_key": settings.SUPABASE_KEY
+    }
+
 # Health Check Endpoint
 @app.get("/health", tags=["Health"])
 async def health_check():

@@ -1,10 +1,13 @@
 import os
+from pathlib import Path
 from typing import List, Union
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
-# Load from local .env if present
-load_dotenv()
+# Load from local .env if present (override system defaults with local project credentials)
+load_dotenv(override=True)
+load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env", override=True)
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Pulse Chat API"
