@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse Chat - Real-Time Messaging</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/style.css?v=2.1">
+  <link rel="stylesheet" href="css/responsive.css?v=2.1">
   <script>
     const savedTheme = localStorage.getItem('pulse_theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -265,11 +265,11 @@
 
   <!-- Supabase CDN Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- App Scripts -->
-  <script src="js/config.js"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/profile.js"></script>
-  <script src="js/chat.js"></script>
+  <!-- App Scripts (with cache-busting version params) -->
+  <script src="js/config.js?v=2.1"></script>
+  <script src="js/supabase.js?v=2.1"></script>
+  <script src="js/api.js?v=2.1"></script>
+  <script src="js/profile.js?v=2.1"></script>
+  <script src="js/chat.js?v=2.1"></script>
 </body>
 </html>

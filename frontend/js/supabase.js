@@ -10,10 +10,6 @@ function initSupabase() {
     return null;
   }
 
-  if (!CONFIG.SUPABASE_URL || CONFIG.SUPABASE_URL.includes('YOUR_SUPABASE_PROJECT_REF')) {
-    console.warn('Supabase URL is not yet configured. Please set your credentials.');
-  }
-
   try {
     supabaseClient = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
       auth: {
@@ -21,8 +17,21 @@ function initSupabase() {
         autoRefreshToken: true,
         detectSessionInUrl: true,
         storage: window.localStorage
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
       }
     });
+
+    // Auto-sync realtime auth token whenever auth state changes
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (session?.access_token) {
+        supabaseClient.realtime.setAuth(session.access_token);
+      }
+    });
+
     return supabaseClient;
   } catch (err) {
     console.error('Failed to initialize Supabase client:', err);
@@ -34,7 +43,7 @@ function initSupabase() {
 initSupabase();
 
 /**
- * Get current authenticated user session
+ * Get current authenticated user session and guarantee Realtime auth
  */
 async function getSupabaseSession() {
   if (!supabaseClient) return null;
@@ -42,6 +51,13 @@ async function getSupabaseSession() {
   if (error) {
     console.error('Error getting session:', error);
     return null;
+  }
+  if (session?.access_token) {
+    try {
+      supabaseClient.realtime.setAuth(session.access_token);
+    } catch (e) {
+      // ignore
+    }
   }
   return session;
 }

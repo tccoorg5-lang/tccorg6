@@ -1,11 +1,14 @@
 /**
  * Pulse Chat - Core Messaging, Search & Realtime Logic
+ * Enhanced with WebSocket Realtime + Intelligent Background Sync (No Refresh Needed!)
  */
 
 let activeConversationId = null;
 let activePartner = null;
 let conversationsCache = [];
 let realtimeChannel = null;
+let syncIntervalTimer = null;
+let convsSyncIntervalTimer = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Only initialize on main chat dashboard
@@ -23,7 +26,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupChatEventListeners();
 
   // Setup Supabase Realtime subscription
-  setupRealtimeSubscription();
+  await setupRealtimeSubscription();
+
+  // Start intelligent background sync (fallback for seamless live updates)
+  startBackgroundSync();
 });
 
 /**
@@ -88,6 +94,19 @@ function setupChatEventListeners() {
   if (emptyNewChatBtn) emptyNewChatBtn.addEventListener('click', openSearch);
   if (welcomeStartBtn) welcomeStartBtn.addEventListener('click', openSearch);
   if (openSearchBtn) openSearchBtn.addEventListener('click', openSearch);
+
+  // Instant sync on tab visibility change or window focus
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      if (activeConversationId) loadMessages(activeConversationId, false);
+      loadConversations();
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (activeConversationId) loadMessages(activeConversationId, false);
+    loadConversations();
+  });
 }
 
 /**
@@ -113,7 +132,7 @@ function setupUserSearchModal() {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         searchUsers(e.target.value.trim());
-      }, 300);
+      }, 250);
     });
   }
 }
@@ -133,8 +152,6 @@ async function searchUsers(query) {
     `;
 
     const users = await api.get(`/users${query ? `?query=${encodeURIComponent(query)}` : ''}`);
-
-    // Filter out current user from results
     const currentUserId = currentUserProfile?.id;
     const filteredUsers = (users || []).filter(u => u.id !== currentUserId);
 
@@ -193,7 +210,7 @@ async function searchUsers(query) {
  */
 async function startConversationWithUser(user) {
   try {
-    showToast(`Starting chat with ${user.username}...`, 'info', 1500);
+    showToast(`Starting chat with ${user.username}...`, 'info', 1200);
 
     const conv = await api.post('/conversations', {
       recipient_id: user.id
@@ -362,43 +379,51 @@ async function openConversation(conversationId, partner) {
   const messageInput = document.getElementById('messageInput');
   if (messageInput) messageInput.focus();
 
-  // Load messages
-  await loadMessages(conversationId);
+  // Load messages with initial spinner
+  await loadMessages(conversationId, true);
 }
 
 /**
- * Load Messages for a Conversation
+ * Load Messages for a Conversation (with smooth non-destructive diffing)
  */
-async function loadMessages(conversationId) {
+async function loadMessages(conversationId, showSpinner = false) {
   const container = document.getElementById('messagesContainer');
-  if (!container) return;
+  if (!container || activeConversationId !== conversationId) return;
 
-  container.innerHTML = `
-    <div style="display:flex; justify-content:center; align-items:center; height: 100%;">
-      <div class="spinner dark"></div>
-    </div>
-  `;
+  if (showSpinner) {
+    container.innerHTML = `
+      <div style="display:flex; justify-content:center; align-items:center; height: 100%;">
+        <div class="spinner dark"></div>
+      </div>
+    `;
+  }
 
   try {
     const messages = await api.get(`/messages/${conversationId}`);
+    if (activeConversationId !== conversationId) return;
+
     renderMessages(messages || []);
-    scrollToBottom();
   } catch (err) {
     console.error('Failed to load messages:', err);
-    container.innerHTML = `
-      <div style="text-align: center; color: var(--accent-danger); padding: 40px 20px;">
-        Failed to load messages. Please try again.
-      </div>
-    `;
+    if (showSpinner) {
+      container.innerHTML = `
+        <div style="text-align: center; color: var(--accent-danger); padding: 40px 20px;">
+          Failed to load messages. Please try again.
+        </div>
+      `;
+    }
   }
 }
 
 /**
- * Render Message List
+ * Render Message List with Non-Flicker Diffing
  */
 function renderMessages(messages) {
   const container = document.getElementById('messagesContainer');
   if (!container) return;
+
+  // Check if user was already near bottom before updating
+  const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 160;
 
   if (messages.length === 0) {
     container.innerHTML = `
@@ -412,28 +437,40 @@ function renderMessages(messages) {
     return;
   }
 
-  container.innerHTML = '';
-  const currentUserId = currentUserProfile?.id;
+  // If container has empty message placeholder or spinner, clear it
+  if (container.querySelector('.spinner') || container.innerText.includes('No messages here yet')) {
+    container.innerHTML = '';
+  }
 
-  let lastDateStr = null;
+  const currentUserId = currentUserProfile?.id;
+  let hasNewMessages = false;
 
   messages.forEach(msg => {
-    // Insert date dividers if needed
-    const msgDate = new Date(msg.created_at);
-    const dateStr = msgDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-    
-    if (dateStr !== lastDateStr) {
-      lastDateStr = dateStr;
-      const divider = document.createElement('div');
-      divider.className = 'messages-date-divider';
-      divider.innerHTML = `<span>${dateStr}</span>`;
-      container.appendChild(divider);
-    }
+    let existingRow = container.querySelector(`[data-message-id="${msg.id}"]`);
 
-    const isOutgoing = msg.sender_id === currentUserId;
-    const bubble = createMessageBubble(msg, isOutgoing);
-    container.appendChild(bubble);
+    if (!existingRow) {
+      hasNewMessages = true;
+      const isOutgoing = msg.sender_id === currentUserId;
+      const bubble = createMessageBubble(msg, isOutgoing);
+      container.appendChild(bubble);
+    } else {
+      // Update read status indicator if changed
+      if (msg.sender_id === currentUserId && msg.is_read) {
+        const meta = existingRow.querySelector('.message-meta');
+        if (meta && !meta.querySelector('.read-status-icon.double-check')) {
+          meta.innerHTML = `
+            <span>${formatMessageClock(msg.created_at)}</span>
+            <svg class="read-status-icon double-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 6 9 17 4 12"></polyline><polyline points="22 10 13 21 8 16"></polyline></svg>
+          `;
+        }
+      }
+    }
   });
+
+  // Only auto-scroll down if user was already near bottom or new messages were added
+  if (hasNewMessages && isNearBottom) {
+    scrollToBottom();
+  }
 }
 
 /**
@@ -447,7 +484,7 @@ function createMessageBubble(msg, isOutgoing) {
   const timeFormatted = formatMessageClock(msg.created_at);
   const readStatusIcon = isOutgoing
     ? (msg.is_read
-        ? `<svg class="read-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 6 9 17 4 12"></polyline><polyline points="22 10 13 21 8 16"></polyline></svg>`
+        ? `<svg class="read-status-icon double-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 6 9 17 4 12"></polyline><polyline points="22 10 13 21 8 16"></polyline></svg>`
         : `<svg class="read-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>`)
     : '';
 
@@ -477,7 +514,7 @@ async function handleSendMessage(e) {
 
   if (!content) return;
 
-  // Clear input immediately for responsive feel
+  // Clear input immediately for responsive typing feel
   input.value = '';
 
   try {
@@ -510,8 +547,7 @@ function appendIncomingOrOutgoingMessage(msg) {
   if (!container) return;
 
   // Remove empty state message if present
-  const emptyNotice = container.querySelector('p');
-  if (emptyNotice && emptyNotice.innerText.includes('Say hello')) {
+  if (container.querySelector('.spinner') || container.innerText.includes('No messages here yet')) {
     container.innerHTML = '';
   }
 
@@ -529,69 +565,104 @@ function appendIncomingOrOutgoingMessage(msg) {
 /**
  * Setup Realtime Subscriptions via Supabase SDK
  */
-function setupRealtimeSubscription() {
+async function setupRealtimeSubscription() {
   if (!supabaseClient) {
     console.warn('Supabase client not ready for realtime subscription');
     return;
   }
 
-  if (realtimeChannel) {
-    supabaseClient.removeChannel(realtimeChannel);
-  }
+  try {
+    const session = await getSupabaseSession();
+    if (session?.access_token) {
+      await supabaseClient.realtime.setAuth(session.access_token);
+    }
 
-  realtimeChannel = supabaseClient
-    .channel('pulse_chat_realtime')
-    .on(
-      'postgres_changes',
-      {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'messages'
-      },
-      async (payload) => {
-        const newMsg = payload.new;
-        if (!newMsg) return;
+    if (realtimeChannel) {
+      supabaseClient.removeChannel(realtimeChannel);
+    }
 
-        // If message belongs to active conversation
-        if (newMsg.conversation_id === activeConversationId) {
-          appendIncomingOrOutgoingMessage(newMsg);
+    realtimeChannel = supabaseClient
+      .channel('pulse_chat_realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'messages'
+        },
+        async (payload) => {
+          if (payload.eventType === 'INSERT') {
+            const newMsg = payload.new;
+            if (!newMsg) return;
 
-          // Mark message as read if incoming
-          if (newMsg.sender_id !== currentUserProfile?.id) {
-            api.put(`/messages/${newMsg.id}/read`).catch(() => {});
-          }
-        }
+            // If message belongs to active conversation
+            if (newMsg.conversation_id === activeConversationId) {
+              appendIncomingOrOutgoingMessage(newMsg);
 
-        // Refresh conversation previews & ordering
-        await loadConversations();
-      }
-    )
-    .on(
-      'postgres_changes',
-      {
-        event: 'UPDATE',
-        schema: 'public',
-        table: 'messages'
-      },
-      (payload) => {
-        const updatedMsg = payload.new;
-        if (updatedMsg && updatedMsg.conversation_id === activeConversationId) {
-          const el = document.querySelector(`[data-message-id="${updatedMsg.id}"]`);
-          if (el && updatedMsg.is_read) {
-            const meta = el.querySelector('.message-meta');
-            if (meta && el.classList.contains('outgoing')) {
-              meta.innerHTML = `
-                <span>${formatMessageClock(updatedMsg.created_at)}</span>
-                <svg class="read-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 6 9 17 4 12"></polyline><polyline points="22 10 13 21 8 16"></polyline></svg>
-              `;
+              // Mark message as read if incoming
+              if (newMsg.sender_id !== currentUserProfile?.id) {
+                api.put(`/messages/${newMsg.id}/read`).catch(() => {});
+              }
+            }
+
+            // Refresh conversation previews & ordering in sidebar
+            await loadConversations();
+          } else if (payload.eventType === 'UPDATE') {
+            const updatedMsg = payload.new;
+            if (updatedMsg && updatedMsg.conversation_id === activeConversationId) {
+              const el = document.querySelector(`[data-message-id="${updatedMsg.id}"]`);
+              if (el && updatedMsg.is_read) {
+                const meta = el.querySelector('.message-meta');
+                if (meta && el.classList.contains('outgoing')) {
+                  meta.innerHTML = `
+                    <span>${formatMessageClock(updatedMsg.created_at)}</span>
+                    <svg class="read-status-icon double-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 6 9 17 4 12"></polyline><polyline points="22 10 13 21 8 16"></polyline></svg>
+                  `;
+                }
+              }
             }
           }
         }
-      }
-    )
-    .subscribe((status) => {
-      console.log('Supabase Realtime subscription status:', status);
-    });
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'conversations'
+        },
+        async () => {
+          await loadConversations();
+        }
+      )
+      .subscribe((status, err) => {
+        console.log('Supabase Realtime subscription status:', status, err || '');
+      });
+  } catch (e) {
+    console.warn('Realtime subscription init warning:', e);
+  }
+}
+
+/**
+ * Intelligent Background Sync - Guarantees Real-time Updates Even If WebSocket Drops
+ */
+function startBackgroundSync() {
+  if (syncIntervalTimer) clearInterval(syncIntervalTimer);
+  if (convsSyncIntervalTimer) clearInterval(convsSyncIntervalTimer);
+
+  // Poll active chat every 2.0s silently
+  syncIntervalTimer = setInterval(async () => {
+    if (activeConversationId && !document.hidden) {
+      await loadMessages(activeConversationId, false);
+    }
+  }, 2000);
+
+  // Poll conversations list in sidebar every 4.0s
+  convsSyncIntervalTimer = setInterval(async () => {
+    if (!document.hidden) {
+      await loadConversations();
+    }
+  }, 4000);
 }
 
 /**
@@ -600,7 +671,10 @@ function setupRealtimeSubscription() {
 function scrollToBottom() {
   const container = document.getElementById('messagesContainer');
   if (container) {
-    container.scrollTop = container.scrollHeight;
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: 'smooth'
+    });
   }
 }
 

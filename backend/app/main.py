@@ -29,6 +29,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# No-Cache Middleware for static assets & HTML (prevents browser stale cache issues)
+@app.middleware("http")
+async def no_cache_static_middleware(request: Request, call_next):
+    response = await call_next(request)
+    path = request.url.path
+    if (
+        path.endswith((".html", ".js", ".css"))
+        or path in ("/", "/index.html", "/login.html", "/register.html")
+    ):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
 # API Routers
 app.include_router(auth.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
