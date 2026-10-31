@@ -121,32 +121,45 @@ async function handleRegister(e) {
     setLoadingState(submitBtn, true, 'Creating Account...');
     showAlert(alertEl, '', '');
 
-    // Register via Supabase Auth
-    const { data, error } = await supabaseClient.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          username: username
-        }
-      }
-    });
-
-    if (error) {
-      throw error;
+    // Register via backend API (bypasses Supabase default SMTP email rate limit with instant confirmation)
+    let regSuccess = false;
+    try {
+      const regRes = await api.post('/auth/register', {
+        email,
+        password,
+        username
+      });
+      if (regRes) regSuccess = true;
+    } catch (apiErr) {
+      // Fallback directly to Supabase client if backend is unreachable
+      console.warn('Backend register failed, trying client signUp:', apiErr);
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options: { data: { username } }
+      });
+      if (error) throw error;
+      regSuccess = true;
     }
 
-    // If confirmation is not required and session exists
-    if (data.session) {
-      showAlert(alertEl, 'Account created successfully! Redirecting...', 'success');
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 700);
-    } else {
-      showAlert(alertEl, 'Registration successful! If confirmation email was sent, please verify it before logging in.', 'success');
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 2500);
+    if (regSuccess) {
+      // Auto-login to establish session immediately
+      const { data: loginData, error: loginErr } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (!loginErr && loginData?.session) {
+        showAlert(alertEl, 'Account created! Redirecting to chat...', 'success');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 600);
+      } else {
+        showAlert(alertEl, 'Account created successfully! Please log in.', 'success');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1200);
+      }
     }
 
   } catch (err) {

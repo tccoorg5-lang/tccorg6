@@ -26,19 +26,57 @@ class AuthService:
         except Exception as e:
             logger.warning(f"Could not verify username uniqueness directly: {e}")
 
-        # Sign up via Supabase Auth REST endpoint (rock-solid HTTP/1.1 transport)
-        url = f"{settings.SUPABASE_URL}/auth/v1/signup"
-        headers = {
-            "apikey": settings.SUPABASE_KEY,
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "email": data.email,
-            "password": data.password,
-            "data": {
-                "username": data.username
+        # Prefer Admin API with auto email_confirm to bypass SMTP rate limits
+        if settings.SUPABASE_SERVICE_ROLE_KEY:
+            admin_url = f"{settings.SUPABASE_URL}/auth/v1/admin/users"
+            admin_headers = {
+                "apikey": settings.SUPABASE_SERVICE_ROLE_KEY,
+                "Authorization": f"Bearer {settings.SUPABASE_SERVICE_ROLE_KEY}",
+                "Content-Type": "application/json"
             }
-        }
+            admin_payload = {
+                "email": data.email,
+                "password": data.password,
+                "email_confirm": True,
+                "user_metadata": {
+                    "username": data.username
+                }
+            }
+
+            try:
+                with httpx.Client(timeout=20.0, http2=False) as http_client:
+                    resp = http_client.post(admin_url, headers=admin_headers, json=admin_payload)
+                    resp_data = resp.json()
+
+                if resp.status_code < 400 and resp_data.get("id"):
+                    user_id = resp_data["id"]
+                    try:
+                        admin_client.from_("profiles").upsert({
+                            "id": user_id,
+                            "username": data.username,
+                            "email": data.email,
+                            "avatar_url": "",
+                            "updated_at": "now()"
+                        }).execute()
+                    except Exception as pe:
+                        logger.warning(f"Profile upsert notice: {pe}")
+
+                    return {
+                        "message": "User registered successfully",
+                        "user": {
+                            "id": user_id,
+                            "email": data.email,
+                            "username": data.username
+                        }
+                    }
+                elif resp.status_code == 422 or "already exists" in str(resp_data):
+                    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="A user with this email already exists")
+            except HTTPException:
+                raise
+            except Exception as admin_err:
+                logger.warning(f"Admin registration fallback: {admin_err}")
+
+        # Fallback to standard Supabase Auth REST endpoint
 
         try:
             with httpx.Client(timeout=20.0, http2=False) as http_client:
