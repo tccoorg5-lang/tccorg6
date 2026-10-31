@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Society — Founder Central Command</title>
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/society.css?v=3.0">
+  <link rel="stylesheet" href="css/admin.css?v=3.0">
+  <link rel="stylesheet" href="css/responsive.css?v=3.0">
+</head>
+<body class="society-theme">
+
+  <div class="society-app-shell" id="adminLayout">
+    <!-- ================================================================
+         LEFT NAVIGATION RAIL (5 FOUNDER COMMAND SECTIONS)
+         ================================================================ -->
+    <aside class="society-nav-rail">
+      <div>
+        <div class="society-rail-header">
+          <div class="society-rail-seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="society-rail-brand">
+            <span class="society-rail-name">Central Command</span>
+            <span class="society-rail-role">Founder Portal</span>
+          </div>
+        </div>
+
+        <ul class="society-nav-menu">
+          <li>
+            <a class="society-nav-item active" data-section="secCommand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span class="nav-text">Central Command</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-section="secIntelligence">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span class="nav-text">Membership Intelligence</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-section="secOperations">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+              </svg>
+              <span class="nav-text">Operations & Challenges</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-section="secCommunications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-text">Communications Control</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-section="secGovernance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span class="nav-text">Governance & Legacy</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="society-rail-footer">
+        <a href="index.html" class="society-member-pill" title="Switch to Member View">
+          <div class="society-member-avatar" id="founderAvatarLetter">S</div>
+          <div class="society-member-meta">
+            <span class="society-member-codename" id="founderCodenameBadge">SOVEREIGN</span>
+            <span class="society-member-num">Switch to Member</span>
+          </div>
+        </a>
+        <a href="login.html" id="adminLogoutBtn" class="society-link" style="font-size: 0.78rem;" title="Lock Vault">
+          Exit
+        </a>
+      </div>
+    </aside>
+
+    <!-- ================================================================
+         MAIN CONTENT AREA (5 SECTION PANELS)
+         ================================================================ -->
+    <main class="admin-content-area">
+      <!-- Top Section Header Bar -->
+      <div class="admin-header-bar">
+        <div class="admin-title-group">
+          <h1 class="admin-page-title" id="currentSectionTitle">Central Command</h1>
+          <span class="admin-page-sub" id="currentSectionSubtitle">Real-Time Institutional Metrics & System Health</span>
+        </div>
+        <div class="admin-toolbar">
+          <button id="openInviteModalBtn" class="society-btn-primary" style="width: auto; padding: 10px 18px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Issue Invitation</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- --------------------------------------------------------------
+           SECTION 01: CENTRAL COMMAND
+           -------------------------------------------------------------- -->
+      <section class="admin-section active" id="secCommand">
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-tile">
+            <div class="kpi-label">Total Membership</div>
+            <div class="kpi-value" id="kpiTotalMembers">--</div>
+            <div class="kpi-sub">Official Registry</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-label">Active Fellows</div>
+            <div class="kpi-value" id="kpiActiveMembers">--</div>
+            <div class="kpi-sub">Good Standing</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-label">Hall of Legends</div>
+            <div class="kpi-value" id="kpiLegendsCount">--</div>
+            <div class="kpi-sub">Honoured Fellows</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-label">Vault Security</div>
+            <div class="kpi-value" style="color: #4ADE80; font-size: 1.5rem;">OPTIMAL</div>
+            <div class="kpi-sub">RLS & SHA-256 Active</div>
+          </div>
+        </div>
+
+        <!-- Operations & Activity Overview -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          <div class="society-card">
+            <div class="society-card-header">
+              <h3 class="society-card-title">Institutional Directives</h3>
+            </div>
+            <div class="society-card-body">
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="border-left: 3px solid var(--antique-gold); padding-left: 14px;">
+                  <div style="font-family: var(--font-formal); font-size: 0.95rem; color: var(--imperial-gold);">Project Veritas: Public Accountability Scan</div>
+                  <div style="font-size: 0.82rem; color: var(--ivory-muted); margin-top: 2px;">Comprehensive audit of institutional compliance and lawful disclosures.</div>
+                  <div style="font-size: 0.72rem; color: var(--antique-gold); margin-top: 4px;">PRIORITY: HIGH • WORKING GROUP ALPHA</div>
+                </div>
+                <div style="border-left: 3px solid var(--deep-burgundy); padding-left: 14px;">
+                  <div style="font-family: var(--font-formal); font-size: 0.95rem; color: var(--imperial-gold);">Round Table Discourse IV: AI Governance</div>
+                  <div style="font-size: 0.82rem; color: var(--ivory-muted); margin-top: 2px;">Senior member symposium on ethical intelligence deployment frameworks.</div>
+                  <div style="font-size: 0.72rem; color: var(--muted-grey); margin-top: 4px;">CONVENING: UPCOMING SATURDAY</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="society-card">
+            <div class="society-card-header">
+              <h3 class="society-card-title">Recent Audit Log</h3>
+            </div>
+            <div class="society-card-body" id="auditLogStream" style="font-size: 0.82rem;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------------
+           SECTION 02: MEMBERSHIP INTELLIGENCE
+           -------------------------------------------------------------- -->
+      <section class="admin-section" id="secIntelligence">
+        <div class="roster-controls">
+          <input type="text" id="rosterSearch" class="roster-search-input" placeholder="Search codename, rank, or member #...">
+          <div class="roster-filter-group">
+            <select class="roster-select" id="rankFilter">
+              <option value="all">All Ranks</option>
+              <option value="Initiate">Initiate</option>
+              <option value="Associate">Associate</option>
+              <option value="Contributor">Contributor</option>
+              <option value="Trusted Member">Trusted Member</option>
+              <option value="Senior Member">Senior Member</option>
+              <option value="Round Table Candidate">Round Table Candidate</option>
+              <option value="Round Table Member">Round Table Member</option>
+              <option value="Founder">Founder</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="society-table-wrapper">
+          <table class="society-table">
+            <thead>
+              <tr>
+                <th>Codename</th>
+                <th>Member No.</th>
+                <th>Rank</th>
+                <th>Points</th>
+                <th>Status</th>
+                <th>Induction Date</th>
+              </tr>
+            </thead>
+            <tbody id="rosterTableBody">
+              <!-- Dynamically Populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------------
+           SECTION 03: OPERATIONS & CHALLENGES
+           -------------------------------------------------------------- -->
+      <section class="admin-section" id="secOperations">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <p style="color: var(--ivory-muted); font-size: 0.9rem; margin: 0;">Active investigative directives and intellectual challenges assigned to Fellows.</p>
+        </div>
+
+        <div class="challenges-grid">
+          <div class="challenge-card">
+            <div>
+              <div class="challenge-badge-row">
+                <span class="rank-badge">Investigation</span>
+                <span style="font-family: monospace; color: var(--imperial-gold); font-size: 0.8rem;">500 PTS</span>
+              </div>
+              <h4 class="challenge-title">The Sovereign Ledger</h4>
+              <p class="challenge-desc">Analyze regional procurement patterns from publicly accessible filings to identify potential fiscal discrepancies.</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--charcoal-border); padding-top: 12px;">
+              <span style="font-size: 0.74rem; color: var(--muted-grey);">Difficulty: Senior Fellow</span>
+              <span class="status-pill active">Active</span>
+            </div>
+          </div>
+
+          <div class="challenge-card">
+            <div>
+              <div class="challenge-badge-row">
+                <span class="rank-badge">Research</span>
+                <span style="font-family: monospace; color: var(--imperial-gold); font-size: 0.8rem;">350 PTS</span>
+              </div>
+              <h4 class="challenge-title">The Archival Codex</h4>
+              <p class="challenge-desc">Translate and contextualize classical epigraphic records regarding institutional governance and civic oversight.</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--charcoal-border); padding-top: 12px;">
+              <span style="font-size: 0.74rem; color: var(--muted-grey);">Difficulty: Intermediate</span>
+              <span class="status-pill active">Active</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------------
+           SECTION 04: COMMUNICATIONS CONTROL
+           -------------------------------------------------------------- -->
+      <section class="admin-section" id="secCommunications">
+        <div class="society-card" style="max-width: 680px; margin-bottom: 24px;">
+          <div class="society-card-header">
+            <h3 class="society-card-title">Founder Communiqué Broadcast</h3>
+          </div>
+          <div class="society-card-body">
+            <p style="color: var(--ivory-muted); font-size: 0.85rem; margin-top: 0;">
+              Transmit an official Society Communiqué to all active Fellows. Broadcast messages are prioritized and pinned across the Communications view.
+            </p>
+            <div class="society-form-group">
+              <label class="society-label">Broadcast Title</label>
+              <input type="text" class="society-input" placeholder="e.g. Directive regarding Archival Standards">
+            </div>
+            <div class="society-form-group">
+              <label class="society-label">Dispatch Text</label>
+              <textarea class="society-input" rows="4" placeholder="Transmit official statement..."></textarea>
+            </div>
+            <button type="button" class="society-btn-primary" style="width: auto; padding: 10px 22px;">
+              <span>Transmit Communiqué</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------------
+           SECTION 05: GOVERNANCE & LEGACY
+           -------------------------------------------------------------- -->
+      <section class="admin-section" id="secGovernance">
+        <div class="society-card" style="margin-bottom: 24px;">
+          <div class="society-card-header">
+            <h3 class="society-card-title">Constitutional Principles of The Society</h3>
+          </div>
+          <div class="society-card-body">
+            <ol style="color: var(--ivory-muted); font-size: 0.9rem; line-height: 1.8; padding-left: 20px;">
+              <li><strong>The Rule of Discretion:</strong> All societal operations, member codenames, and research findings remain confidential within the vault.</li>
+              <li><strong>Lawful Inquiry:</strong> Investigations are conducted strictly within legal and constitutional bounds to promote public welfare.</li>
+              <li><strong>Meritocratic Hierarchy:</strong> Elevation in rank is earned through intellectual rigor, verified contributions, and peer evaluation.</li>
+              <li><strong>Separation of Identity:</strong> Codename identities shield Fellows from external retaliation while maintaining internal integrity.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ================================================================
+       MODAL: GENERATE CRYPTOGRAPHIC INVITATION TOKEN
+       ================================================================ -->
+  <div class="society-modal-backdrop" id="inviteModal">
+    <div class="society-modal">
+      <div class="society-card-header">
+        <h3 class="society-card-title">Issue Single-Use Invitation</h3>
+        <button id="closeInviteModalBtn" class="society-link" style="background: none; border: none; cursor: pointer; color: var(--antique-gold); font-size: 1.2rem;">&times;</button>
+      </div>
+      <div class="society-card-body">
+        <form id="createInviteForm">
+          <div class="society-form-group">
+            <label class="society-label" for="invIntendedName">Candidate Real Name</label>
+            <input type="text" id="invIntendedName" class="society-input" placeholder="e.g. Arthur Pendelton" required>
+            <span style="font-size: 0.70rem; color: var(--muted-grey);">Stored strictly in protected Founder-only private records.</span>
+          </div>
+
+          <div class="society-form-group">
+            <label class="society-label" for="invIntendedEmail">Candidate Intended Email</label>
+            <input type="email" id="invIntendedEmail" class="society-input" placeholder="candidate@domain.com" required>
+            <span style="font-size: 0.70rem; color: var(--muted-grey);">Token binds strictly to this email.</span>
+          </div>
+
+          <div class="society-form-group">
+            <label class="society-label" for="invCodename">Assigned Codename</label>
+            <input type="text" id="invCodename" class="society-input" placeholder="e.g. Vanguard, Sentinel" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="society-form-group">
+              <label class="society-label" for="invRank">Initial Rank</label>
+              <select id="invRank" class="roster-select" style="width: 100%;">
+                <option value="Initiate">Initiate</option>
+                <option value="Associate">Associate</option>
+                <option value="Contributor">Contributor</option>
+              </select>
+            </div>
+            <div class="society-form-group">
+              <label class="society-label" for="invRole">Role</label>
+              <select id="invRole" class="roster-select" style="width: 100%;">
+                <option value="member">Member</option>
+                <option value="council">Council</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="inviteResultArea" style="display: none; margin: 16px 0; padding: 12px; background: rgba(197, 160, 89, 0.1); border: 1px solid var(--antique-gold); border-radius: var(--radius-xs);">
+            <div style="font-size: 0.72rem; color: var(--antique-gold); text-transform: uppercase; letter-spacing: 1px;">Generated Cryptographic Token</div>
+            <input type="text" id="generatedTokenDisplay" class="society-input" readonly style="margin-top: 6px; font-family: monospace; font-size: 0.8rem; letter-spacing: 1px; color: var(--imperial-gold);">
+            <span style="font-size: 0.70rem; color: var(--muted-grey); display: block; margin-top: 4px;">Share this raw token securely with candidate. Token is SHA-256 hashed in database.</span>
+          </div>
+
+          <button type="submit" id="submitInviteBtn" class="society-btn-primary" style="margin-top: 10px;">
+            <span>Issue Cryptographic Token</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- App Scripts -->
+  <script src="js/config.js?v=3.0"></script>
+  <script src="js/supabase.js?v=3.0"></script>
+  <script src="js/api.js?v=3.0"></script>
+  <script src="js/admin_portal.js?v=3.0"></script>
+</body>
+</html>

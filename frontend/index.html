@@ -3,187 +3,381 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse Chat - Real-Time Messaging</title>
-  <link rel="stylesheet" href="css/style.css?v=2.1">
-  <link rel="stylesheet" href="css/responsive.css?v=2.1">
-  <script>
-    const savedTheme = localStorage.getItem('pulse_theme') || 
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  </script>
+  <title>The Society — Member Portal</title>
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/society.css?v=3.0">
+  <link rel="stylesheet" href="css/member.css?v=3.0">
+  <link rel="stylesheet" href="css/responsive.css?v=3.0">
 </head>
-<body>
-  <div class="app-container" id="appContainer">
-    
-    <!-- ==========================================
-         SIDEBAR (LEFT PANEL)
-         ========================================== -->
-    <aside class="sidebar" id="sidebar">
-      <!-- Sidebar Header -->
-      <div class="sidebar-header">
-        <div class="user-profile-badge" id="currentUserBadge" title="Open Profile Settings">
-          <div class="avatar-container sm" id="currentUserAvatar">
-            <span id="currentUserAvatarText">U</span>
+<body class="society-theme">
+
+  <div class="society-app-shell" id="memberLayout">
+    <!-- ================================================================
+         VERTICAL NAVIGATION RAIL (3 PRIMARY TABS)
+         ================================================================ -->
+    <aside class="society-nav-rail">
+      <div>
+        <!-- Institutional Emblem & Brand Header -->
+        <div class="society-rail-header">
+          <div class="society-rail-seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
           </div>
-          <div class="user-profile-info">
-            <span class="user-display-name" id="currentUserName">Loading...</span>
-            <span class="user-status-text">Online</span>
+          <div class="society-rail-brand">
+            <span class="society-rail-name">The Society</span>
+            <span class="society-rail-role">Fellow Access</span>
           </div>
         </div>
 
-        <div class="sidebar-actions">
-          <button id="openSearchModalBtn" class="icon-btn" title="New Chat" aria-label="New Chat">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 5v14M5 12h14"></path>
-            </svg>
-          </button>
-          
-          <button id="themeToggleBtn" class="icon-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
-            <svg id="themeIconSun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg id="themeIconMoon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-
-          <button id="openProfileBtn" class="icon-btn" title="Settings" aria-label="Settings">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button>
-
-          <button id="logoutBtn" class="icon-btn" title="Log Out" aria-label="Log Out">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-          </button>
-        </div>
+        <!-- 3 Primary Navigation Tabs -->
+        <ul class="society-nav-menu">
+          <li>
+            <a class="society-nav-item active" data-tab="tabProfile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-tab="tabCommunications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Communications</span>
+              <span class="society-nav-badge" id="chatUnreadBadge" style="display:none;">0</span>
+            </a>
+          </li>
+          <li>
+            <a class="society-nav-item" data-tab="tabCodename">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>Codename</span>
+            </a>
+          </li>
+          <!-- Founder Central Command Shortcut (Revealed if user is founder) -->
+          <li id="founderPortalLink" style="display: none; margin-top: 10px; border-top: 1px solid var(--charcoal-border); padding-top: 8px;">
+            <a href="admin.html" class="society-nav-item" style="color: var(--antique-gold);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Central Command</span>
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <!-- Search Conversation Filter -->
-      <div class="sidebar-search">
-        <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="conversationFilterInput" class="search-input" placeholder="Search or start new chat...">
+      <!-- Rail Footer (User Pill & Logout) -->
+      <div class="society-rail-footer">
+        <div class="society-member-pill" id="railMemberPill">
+          <div class="society-member-avatar" id="railAvatarText">F</div>
+          <div class="society-member-meta">
+            <span class="society-member-codename" id="railCodename">Loading...</span>
+            <span class="society-member-num" id="railMemberNum">SOC-0000</span>
+          </div>
         </div>
-      </div>
-
-      <!-- Conversation List Container -->
-      <ul class="conversation-list" id="conversationList">
-        <li class="empty-list-state">
-          <svg class="empty-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        <button id="logoutBtn" class="icon-btn" title="Exit Vault" aria-label="Exit Vault" style="color: var(--antique-gold);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
           </svg>
-          <div class="empty-list-title">No conversations yet</div>
-          <div class="empty-list-desc">Search for users and start private real-time chats!</div>
-          <button id="emptyStateNewChatBtn" class="btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M12 5v14M5 12h14"></path>
-            </svg>
-            <span>Find Users</span>
-          </button>
-        </li>
-      </ul>
-    </aside>
-
-    <!-- ==========================================
-         CHAT MAIN (RIGHT PANEL)
-         ========================================== -->
-    <main class="chat-main" id="chatMain">
-      
-      <!-- State 1: No conversation selected (Welcome Screen) -->
-      <div class="chat-welcome-state" id="chatWelcomeState">
-        <div class="welcome-logo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-          </svg>
-        </div>
-        <h2 class="welcome-title">Pulse Chat for Web</h2>
-        <p class="welcome-desc">
-          Send and receive messages in real time with end-to-end privacy. Select an existing conversation from the left or search for users to start chatting.
-        </p>
-        <button id="welcomeStartChatBtn" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 5v14M5 12h14"></path>
-          </svg>
-          <span>Start a New Conversation</span>
         </button>
       </div>
+    </aside>
 
-      <!-- State 2: Active Chat View (Initially hidden) -->
-      <div id="activeChatView" style="display: none; height: 100%; flex-direction: column;">
-        <!-- Chat Header -->
-        <header class="chat-header">
-          <div class="chat-header-user">
-            <button id="backToConversationsBtn" class="btn-back" title="Back to conversations" aria-label="Back">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-              </svg>
-            </button>
-            <div class="avatar-container" id="activeChatAvatar">
-              <span id="activeChatAvatarText">?</span>
-            </div>
-            <div>
-              <div class="chat-partner-name" id="activeChatPartnerName">User</div>
-              <div class="chat-partner-status" id="activeChatPartnerStatus">Active</div>
+    <!-- ================================================================
+         MAIN CONTENT AREA (3 TAB PANELS)
+         ================================================================ -->
+    <main class="society-main-content">
+      
+      <!-- --------------------------------------------------------------
+           TAB 1: MY PROFILE (SOCIETY MEMBER DOSSIER)
+           -------------------------------------------------------------- -->
+      <div class="society-tab-panel active" id="tabProfile">
+        <div class="dossier-view-wrapper">
+          <!-- Hero Identity Card -->
+          <div class="dossier-hero">
+            <div class="dossier-hero-header">
+              <div class="dossier-identity-group">
+                <div class="dossier-seal-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <div class="dossier-titles">
+                  <h1 class="dossier-codename" id="dossierCodename">Initiate</h1>
+                  <span class="dossier-designation" id="dossierDesignation">Society Fellow</span>
+                  <div class="dossier-number-tag">
+                    <span>MEMBER IDENTIFIER:</span>
+                    <strong id="dossierNumber">SOC-PENDING</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dossier-meta-aside">
+                <span class="rank-badge" id="dossierRank">Initiate</span>
+                <span class="status-pill active" id="dossierStatusPill">In Good Standing</span>
+                <span id="legendsBadge" class="rank-badge" style="display:none; border-color: var(--imperial-gold); background: rgba(216,178,110,0.2);">
+                  Hall of Legends
+                </span>
+              </div>
             </div>
           </div>
-        </header>
 
-        <!-- Message List -->
-        <div class="messages-container" id="messagesContainer">
-          <!-- Messages will be dynamically rendered here -->
-        </div>
-
-        <!-- Chat Input Bar -->
-        <footer class="chat-input-bar">
-          <form id="sendMessageForm" class="chat-input-form">
-            <div class="chat-input-wrapper">
-              <input 
-                type="text" 
-                id="messageInput" 
-                class="chat-input" 
-                placeholder="Type a message..." 
-                autocomplete="off" 
-                required
-              >
+          <!-- Progression Track -->
+          <div class="progression-card">
+            <div class="progression-header">
+              <div>
+                <span class="society-label">Institutional Standing</span>
+                <div style="font-family: var(--font-formal); font-size: 1.15rem; color: var(--imperial-gold); margin-top: 2px;" id="dossierLevel">
+                  Level 1
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span class="society-label">Honorific Points</span>
+                <div style="font-family: monospace; font-size: 1.1rem; color: var(--ivory); margin-top: 2px;" id="dossierPoints">
+                  0
+                </div>
+              </div>
             </div>
-            <button type="submit" id="sendMessageBtn" class="btn-send" title="Send message" aria-label="Send message">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            <div class="progression-track">
+              <div class="progression-fill" id="dossierProgFill" style="width: 15%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted-grey); margin-top: 8px;">
+              <span>Initiate Track</span>
+              <span>Next Elevation: Council Review</span>
+            </div>
+          </div>
+
+          <!-- Statistics & Achievement Matrix -->
+          <div class="stats-matrix">
+            <div class="stat-tile">
+              <div class="stat-label">Induction Date</div>
+              <div class="stat-value" id="dossierInduction" style="font-size: 1.1rem;">Verified</div>
+              <div class="stat-sub">Official Registry Record</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label">Investigative Directives</div>
+              <div class="stat-value">Active</div>
+              <div class="stat-sub">Operations Participated</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label">Security Clearance</div>
+              <div class="stat-value" style="color: #4ADE80;">CLASS IV</div>
+              <div class="stat-sub">Encrypted Dispatch Enabled</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label">Hall of Legends</div>
+              <div class="stat-value" id="legendsStatusText" style="font-size: 1.1rem;">Nomination Track</div>
+              <div class="stat-sub">Annual Council Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- --------------------------------------------------------------
+           TAB 2: COMMUNICATIONS (PRESERVES EXISTING REAL-TIME CHAT)
+           -------------------------------------------------------------- -->
+      <div class="society-tab-panel" id="tabCommunications" style="height: 100%;">
+        <!-- Mount pulse chat application container -->
+        <div class="app-container" id="appContainer">
+          
+          <!-- SIDEBAR (CONVERSATIONS LIST) -->
+          <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+              <div class="user-profile-badge" id="currentUserBadge" title="Open Profile Settings">
+                <div class="avatar-container sm" id="currentUserAvatar">
+                  <span id="currentUserAvatarText">U</span>
+                </div>
+                <div class="user-profile-info">
+                  <span class="user-display-name" id="currentUserName">Loading...</span>
+                  <span class="user-status-text">Online</span>
+                </div>
+              </div>
+
+              <div class="sidebar-actions">
+                <button id="openSearchModalBtn" class="icon-btn" title="New Dispatch" aria-label="New Chat">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"></path>
+                  </svg>
+                </button>
+                <button id="themeToggleBtn" class="icon-btn" style="display:none;" title="Toggle Theme">
+                  <svg id="themeIconSun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+                  <svg id="themeIconMoon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"></svg>
+                </button>
+                <button id="openProfileBtn" class="icon-btn" title="Settings" aria-label="Settings">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search Conversation Filter -->
+            <div class="sidebar-search">
+              <div class="search-input-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="conversationFilterInput" class="search-input" placeholder="Search dispatches...">
+              </div>
+            </div>
+
+            <!-- Conversation List Container -->
+            <ul class="conversation-list" id="conversationList">
+              <li class="empty-list-state">
+                <svg class="empty-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <div class="empty-list-title">No Dispatches Yet</div>
+                <div class="empty-list-desc">Search for Fellows to establish direct encrypted dispatches.</div>
+                <button id="emptyStateNewChatBtn" class="btn-primary">
+                  <span>Locate Fellows</span>
+                </button>
+              </li>
+            </ul>
+          </aside>
+
+          <!-- CHAT MAIN (RIGHT PANEL) -->
+          <main class="chat-main" id="chatMain">
+            <!-- Welcome Screen -->
+            <div class="chat-welcome-state" id="chatWelcomeState">
+              <div class="welcome-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <h2 class="welcome-title">Society Communications Vault</h2>
+              <p class="welcome-desc">
+                Encrypted Real-Time Dispatch. Select an established channel or initiate a secure communique with fellow members.
+              </p>
+              <button id="welcomeStartChatBtn" class="btn-primary">
+                <span>Initiate New Dispatch</span>
+              </button>
+            </div>
+
+            <!-- Active Chat View -->
+            <div id="activeChatView" style="display: none; height: 100%; flex-direction: column;">
+              <header class="chat-header">
+                <div class="chat-header-user">
+                  <button id="backToConversationsBtn" class="btn-back" title="Back" aria-label="Back">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                  </button>
+                  <div class="avatar-container" id="activeChatAvatar">
+                    <span id="activeChatAvatarText">?</span>
+                  </div>
+                  <div>
+                    <div class="chat-partner-name" id="activeChatPartnerName">Fellow</div>
+                    <div class="chat-partner-status" id="activeChatPartnerStatus">In Good Standing</div>
+                  </div>
+                </div>
+              </header>
+
+              <!-- Messages Container -->
+              <div class="messages-container" id="messagesContainer"></div>
+
+              <!-- Chat Input Bar -->
+              <footer class="chat-input-bar">
+                <form id="sendMessageForm" class="chat-input-form">
+                  <div class="chat-input-wrapper">
+                    <input 
+                      type="text" 
+                      id="messageInput" 
+                      class="chat-input" 
+                      placeholder="Transmit encrypted dispatch..." 
+                      autocomplete="off" 
+                      required
+                    >
+                  </div>
+                  <button type="submit" id="sendMessageBtn" class="btn-send" title="Transmit" aria-label="Transmit">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </button>
+                </form>
+              </footer>
+            </div>
+          </main>
+        </div>
+      </div>
+
+      <!-- --------------------------------------------------------------
+           TAB 3: CODENAME (FORMAL IDENTITY DOSSIER)
+           -------------------------------------------------------------- -->
+      <div class="society-tab-panel" id="tabCodename">
+        <div class="dossier-view-wrapper">
+          <div class="codename-dossier-card">
+            <!-- Insignia Watermark -->
+            <div class="codename-watermark-seal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-            </button>
-          </form>
-        </footer>
+            </div>
+
+            <div style="font-size: 0.76rem; letter-spacing: 2px; color: var(--antique-gold); text-transform: uppercase;">
+              Formal Identity Dossier
+            </div>
+            <h1 class="dossier-codename" id="codenameTitle" style="margin-top: 6px;">SOVEREIGN</h1>
+
+            <!-- Narrative Breakdown -->
+            <div class="codename-narrative" id="codenameNarrativeText">
+              The designation represents a solemn covenant between the Fellow and The Society. Conferred under the charter of merit, intellectual rectitude, and disciplined discretion, this identity supersedes personal distinction to advance the higher imperatives of public welfare, lawful investigation, and institutional legacy.
+            </div>
+
+            <!-- Formal Attributes Matrix -->
+            <div style="margin-top: 32px; border-top: 1px solid var(--charcoal-border); padding-top: 16px;">
+              <div class="codename-attribute-row">
+                <span class="codename-attr-key">Official Codename</span>
+                <span class="codename-attr-val" id="attrCodename">--</span>
+              </div>
+              <div class="codename-attribute-row">
+                <span class="codename-attr-key">Member Identifier</span>
+                <span class="codename-attr-val" id="attrNumber" style="font-family: monospace;">--</span>
+              </div>
+              <div class="codename-attribute-row">
+                <span class="codename-attr-key">Societal Rank</span>
+                <span class="codename-attr-val" id="attrRank">--</span>
+              </div>
+              <div class="codename-attribute-row">
+                <span class="codename-attr-key">Constitutional Role</span>
+                <span class="codename-attr-val" id="attrRole">--</span>
+              </div>
+              <div class="codename-attribute-row">
+                <span class="codename-attr-key">Standing</span>
+                <span class="codename-attr-val" id="attrStatus" style="color: #4ADE80;">Active</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; padding: 14px; background: rgba(197, 160, 89, 0.05); border: 1px solid var(--gold-border-subtle); border-radius: var(--radius-xs); font-size: 0.78rem; color: var(--ivory-muted);">
+              <strong>Constitutional Notice:</strong> Official codenames and identifiers are immutable and conferred exclusively by Founder decree under the Society Charter.
+            </div>
+          </div>
+        </div>
       </div>
 
     </main>
   </div>
 
-  <!-- ==========================================
-       MODAL 1: USER SEARCH / NEW CHAT
-       ========================================== -->
+  <!-- ================================================================
+       MODAL 1: USER SEARCH / NEW DISPATCH
+       ================================================================ -->
   <div class="modal-overlay" id="userSearchModal">
-    <div class="modal-box">
+    <div class="modal-box society-card" style="max-width: 440px;">
       <div class="modal-header">
-        <h3 class="modal-title">New Conversation</h3>
+        <h3 class="modal-title" style="font-family: var(--font-formal); color: var(--imperial-gold);">Locate Fellow</h3>
         <button id="closeSearchModalBtn" class="icon-btn modal-close-btn" aria-label="Close modal">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -197,24 +391,24 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="userSearchQueryInput" class="search-input" placeholder="Search by username or email...">
+          <input type="text" id="userSearchQueryInput" class="search-input" placeholder="Search by codename or username...">
         </div>
         <div class="user-search-results" id="userSearchResults">
-          <div style="text-align: center; color: var(--text-muted); padding: 24px 0; font-size: 0.88rem;">
-            Type a username or email to search for users
+          <div style="text-align: center; color: var(--muted-grey); padding: 24px 0; font-size: 0.88rem;">
+            Type a codename to search the Society Registry
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ==========================================
+  <!-- ================================================================
        MODAL 2: USER PROFILE & SETTINGS
-       ========================================== -->
+       ================================================================ -->
   <div class="modal-overlay" id="profileModal">
-    <div class="modal-box">
+    <div class="modal-box society-card" style="max-width: 440px;">
       <div class="modal-header">
-        <h3 class="modal-title">Profile Settings</h3>
+        <h3 class="modal-title" style="font-family: var(--font-formal); color: var(--imperial-gold);">Fellow Settings</h3>
         <button id="closeProfileModalBtn" class="icon-btn modal-close-btn" aria-label="Close modal">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -229,47 +423,40 @@
               <div class="avatar-container lg" id="profileModalAvatar">
                 <span id="profileModalAvatarText">U</span>
               </div>
-              <div class="profile-avatar-overlay">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                  <circle cx="12" cy="13" r="4"></circle>
-                </svg>
-              </div>
             </div>
             <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
-            <span style="font-size: 0.78rem; color: var(--text-muted);">Click avatar to upload new photo</span>
           </div>
 
-          <div class="profile-field">
-            <label class="profile-label" for="profileUsernameInput">Username</label>
-            <input type="text" id="profileUsernameInput" class="form-input" required pattern="^[a-zA-Z0-9_]{3,24}$">
+          <div class="society-form-group">
+            <label class="society-label" for="profileUsernameInput">Public Username</label>
+            <input type="text" id="profileUsernameInput" class="society-input" required>
           </div>
 
-          <div class="profile-field">
-            <label class="profile-label" for="profileEmailInput">Email Address</label>
-            <input type="email" id="profileEmailInput" class="form-input" disabled style="opacity: 0.7; cursor: not-allowed;">
+          <div class="society-form-group">
+            <label class="society-label" for="profileEmailInput">Vault Contact</label>
+            <input type="email" id="profileEmailInput" class="society-input" disabled style="opacity: 0.6; cursor: not-allowed;">
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" id="cancelProfileBtn" class="btn-secondary">Cancel</button>
-          <button type="submit" id="saveProfileBtn" class="btn-primary">
-            <span>Save Changes</span>
+        <div class="modal-footer" style="padding: 16px 20px; border-top: 1px solid var(--charcoal-border); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" id="cancelProfileBtn" class="society-btn-secondary">Cancel</button>
+          <button type="submit" id="saveProfileBtn" class="society-btn-primary" style="width: auto;">
+            <span>Save</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Supabase CDN Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- App Scripts (with cache-busting version params) -->
-  <script src="js/config.js?v=2.1"></script>
-  <script src="js/supabase.js?v=2.1"></script>
-  <script src="js/api.js?v=2.1"></script>
-  <script src="js/profile.js?v=2.1"></script>
-  <script src="js/chat.js?v=2.1"></script>
+  <!-- App Scripts -->
+  <script src="js/config.js?v=3.0"></script>
+  <script src="js/supabase.js?v=3.0"></script>
+  <script src="js/api.js?v=3.0"></script>
+  <script src="js/profile.js?v=3.0"></script>
+  <script src="js/chat.js?v=3.0"></script>
+  <script src="js/member_portal.js?v=3.0"></script>
 </body>
 </html>

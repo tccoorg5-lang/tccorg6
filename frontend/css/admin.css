@@ -1,0 +1,186 @@
+/* ====================================================================
+   THE SOCIETY — FOUNDER CENTRAL COMMAND STYLES (5 SECTIONS)
+   01. Central Command | 02. Membership Intelligence | 03. Operations
+   04. Communications Control | 05. Governance & Legacy
+   ==================================================================== */
+
+.admin-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--midnight-black);
+}
+
+.admin-content-area {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.admin-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--charcoal-border);
+}
+
+.admin-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-page-title {
+  font-family: var(--font-formal);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--imperial-gold);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.admin-page-sub {
+  font-size: 0.76rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted-grey);
+  margin-top: 4px;
+}
+
+/* Administrative Action Bar */
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Section Containers */
+.admin-section {
+  display: none;
+  animation: societyFadeIn 0.22s ease-out forwards;
+}
+
+.admin-section.active {
+  display: block;
+}
+
+/* Intelligence Roster Filter Controls */
+.roster-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.roster-search-input {
+  max-width: 340px;
+  background-color: var(--obsidian);
+  border: 1px solid var(--charcoal-border);
+  padding: 10px 14px;
+  color: var(--ivory);
+  border-radius: var(--radius-xs);
+  font-size: 0.86rem;
+  outline: none;
+}
+
+.roster-search-input:focus {
+  border-color: var(--antique-gold);
+}
+
+.roster-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roster-select {
+  background-color: var(--obsidian);
+  border: 1px solid var(--charcoal-border);
+  color: var(--ivory);
+  padding: 9px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  outline: none;
+}
+
+/* Operations & Challenges Card Grid */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.challenge-card {
+  background-color: var(--obsidian);
+  border: 1px solid var(--charcoal-border);
+  border-top: 3px solid var(--antique-gold);
+  border-radius: var(--radius-sm);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--trans-noble);
+}
+
+.challenge-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-border);
+  box-shadow: var(--shadow-vault);
+}
+
+.challenge-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.challenge-title {
+  font-family: var(--font-formal);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--imperial-gold);
+  letter-spacing: 1px;
+  margin: 0 0 8px 0;
+}
+
+.challenge-desc {
+  font-size: 0.84rem;
+  color: var(--ivory-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* Audit Log Stream */
+.audit-log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--charcoal-border);
+  font-size: 0.84rem;
+}
+
+.audit-action-tag {
+  font-family: monospace;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background-color: rgba(197, 160, 89, 0.12);
+  color: var(--antique-gold);
+  border: 1px solid var(--gold-border-subtle);
+  white-space: nowrap;
+}
+
+.audit-meta {
+  color: var(--muted-grey);
+  font-size: 0.74rem;
+  margin-top: 3px;
+}

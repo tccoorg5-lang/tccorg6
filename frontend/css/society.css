@@ -1,75 +1,382 @@
 /* ====================================================================
-   PRIVATE SOCIETY PLATFORM — REGAL SOCIETY DESIGN TOKENS
+   THE SOCIETY — COMPREHENSIVE FRONTEND DESIGN SYSTEM
    British Gentlemen's Club & Indian Institutional Elegance
    ==================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  /* Society Noble Palette */
-  --society-bg-void: #06080B;
-  --society-bg-primary: #0A0D14;
-  --society-bg-card: #10141F;
-  --society-bg-elevated: #161C2B;
-  --society-bg-input: #0D1018;
+  /* ------------------------------------------------------------------
+     1. COLOR PALETTE (EXACT MANDATE SPECIFICATION)
+     ------------------------------------------------------------------ */
+  --midnight-black: #080A0E;
+  --obsidian:       #0F1218;
+  --charcoal:       #161A22;
+  --charcoal-light: #202632;
+  --charcoal-border:#262C3A;
 
   /* Gold Metallics */
-  --gold-primary: #C5A059;
-  --gold-light: #E0C58A;
-  --gold-dark: #8C6D2D;
-  --gold-glow: rgba(197, 160, 89, 0.18);
-  --gold-border: rgba(197, 160, 89, 0.35);
+  --antique-gold:   #C5A059;
+  --imperial-gold:  #D8B26E;
+  --burnished-gold: #8C6D2D;
+  --gold-glow:      rgba(197, 160, 89, 0.18);
+  --gold-glow-lg:   rgba(197, 160, 89, 0.28);
+  --gold-border:    rgba(197, 160, 89, 0.35);
   --gold-border-subtle: rgba(197, 160, 89, 0.15);
-  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #AA771C 100%);
+  --gold-gradient:  linear-gradient(135deg, #C5A059 0%, #E6CA85 50%, #8C6D2D 100%);
+  --gold-gradient-radial: radial-gradient(circle, #E6CA85 0%, #C5A059 50%, #8C6D2D 100%);
 
   /* Imperial Burgundy */
-  --burgundy-primary: #5C161D;
+  --deep-burgundy:  #5C161D;
   --burgundy-hover: #751C25;
-  --burgundy-glow: rgba(92, 22, 29, 0.25);
-  --burgundy-subtle: rgba(92, 22, 29, 0.12);
+  --burgundy-glow:  rgba(92, 22, 29, 0.35);
+  --burgundy-subtle:rgba(92, 22, 29, 0.14);
 
-  /* Typography */
-  --text-radiant: #FFFFFF;
-  --text-platinum: #E2E8F0;
-  --text-parchment: #C5CBD3;
-  --text-muted: #7E8B9B;
+  /* Ivory & Neutral Tones */
+  --ivory:          #E9E2D3;
+  --ivory-muted:    #D5CEBF;
+  --muted-grey:     #92939A;
+  --dim-grey:       #5C5F68;
 
-  /* States */
-  --accent-verified: #22C55E;
-  --accent-alert: #EF4444;
+  /* Status Accents */
+  --status-active:   #2E7D32;
+  --status-gold:     #C5A059;
+  --status-pending:  #D8B26E;
+  --status-revoked:  #991B1B;
 
-  --shadow-vault: 0 12px 35px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px var(--gold-border-subtle);
-  --shadow-gold: 0 4px 20px -2px var(--gold-glow);
+  /* ------------------------------------------------------------------
+     2. TYPOGRAPHY
+     ------------------------------------------------------------------ */
+  --font-formal:   'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-editorial:'Cormorant Garamond', Georgia, serif;
+  --font-body:     'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --radius-badge: 4px;
-  --radius-card: 8px;
+  /* ------------------------------------------------------------------
+     3. SHADOWS & ELEVATION
+     ------------------------------------------------------------------ */
+  --shadow-vault:     0 14px 40px -10px rgba(0, 0, 0, 0.9), 0 0 1px 1px var(--gold-border-subtle);
+  --shadow-gold:      0 4px 24px -2px var(--gold-glow);
+  --shadow-burgundy:  0 4px 24px -2px var(--burgundy-glow);
+  --shadow-subtle:    0 2px 8px rgba(0, 0, 0, 0.5);
+
+  /* ------------------------------------------------------------------
+     4. GEOMETRY & TRANSITIONS
+     ------------------------------------------------------------------ */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-pill: 9999px;
 
-  --transition-noble: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-noble: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-smooth: all 0.18s ease-in-out;
 }
 
-/* Society Base Styles */
+/* ------------------------------------------------------------------
+   5. BASE RESET & THEME STYLES
+   ------------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body.society-theme {
-  background-color: var(--society-bg-void);
+  background-color: var(--midnight-black);
   background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(92, 22, 29, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 50% 100%, rgba(197, 160, 89, 0.08) 0%, transparent 50%);
-  color: var(--text-parchment);
-  font-family: var(--font-sans);
+    radial-gradient(ellipse at 50% -10%, rgba(92, 22, 29, 0.20) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(197, 160, 89, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(15, 18, 24, 0.9) 0%, transparent 60%);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Regal Card & Container */
-.society-card {
-  background-color: var(--society-bg-card);
+/* ------------------------------------------------------------------
+   6. HERALDIC EMBLEM & INSTITUTIONAL BRANDING
+   ------------------------------------------------------------------ */
+.society-emblem {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px auto;
+  border-radius: 50%;
+  border: 1px solid var(--antique-gold);
+  background: radial-gradient(circle at 40% 30%, var(--deep-burgundy) 0%, var(--midnight-black) 85%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--antique-gold);
+  box-shadow: var(--shadow-gold), inset 0 0 12px rgba(197, 160, 89, 0.2);
+  position: relative;
+  transition: var(--trans-noble);
+}
+
+.society-emblem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold), 0 0 20px var(--gold-glow-lg);
+  border-color: var(--imperial-gold);
+}
+
+.society-emblem svg {
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
+}
+
+.society-title {
+  font-family: var(--font-formal);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.society-editorial {
+  font-family: var(--font-editorial);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ivory);
+  letter-spacing: 0.5px;
+}
+
+.society-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted-grey);
+  margin: 0 0 22px 0;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------
+   7. NAVIGATION ARCHITECTURE (MEMBER & FOUNDER RAILS)
+   ------------------------------------------------------------------ */
+.society-app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--midnight-black);
+}
+
+.society-nav-rail {
+  width: 250px;
+  min-width: 250px;
+  background-color: var(--obsidian);
+  border-right: 1px solid var(--charcoal-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  position: relative;
+  z-index: 50;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.society-rail-header {
+  padding: 0 20px 18px 20px;
+  border-bottom: 1px solid var(--gold-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.society-rail-seal {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--antique-gold);
+  background: radial-gradient(circle, var(--deep-burgundy) 0%, var(--midnight-black) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--antique-gold);
+  flex-shrink: 0;
+}
+
+.society-rail-seal svg {
+  width: 20px;
+  height: 20px;
+}
+
+.society-rail-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.society-rail-name {
+  font-family: var(--font-formal);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--imperial-gold);
+  text-transform: uppercase;
+}
+
+.society-rail-role {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted-grey);
+}
+
+.society-nav-menu {
+  list-style: none;
+  padding: 16px 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.society-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  color: var(--ivory-muted);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: var(--trans-noble);
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.society-nav-item:hover {
+  background-color: var(--charcoal);
+  color: var(--imperial-gold);
+  border-color: var(--gold-border-subtle);
+}
+
+.society-nav-item.active {
+  background-color: var(--charcoal);
+  color: var(--imperial-gold);
+  border-color: var(--gold-border);
+  box-shadow: inset 3px 0 0 var(--imperial-gold), var(--shadow-subtle);
+  font-weight: 600;
+}
+
+.society-nav-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke-width: 1.8;
+  color: inherit;
+}
+
+.society-nav-badge {
+  margin-left: auto;
+  font-size: 0.70rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background-color: var(--deep-burgundy);
+  color: var(--ivory);
   border: 1px solid var(--gold-border-subtle);
-  border-radius: var(--radius-card);
+}
+
+.society-rail-footer {
+  padding: 14px 16px;
+  border-top: 1px solid var(--charcoal-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.society-member-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ivory);
+}
+
+.society-member-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  border: 1px solid var(--antique-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-formal);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--imperial-gold);
+}
+
+.society-member-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.society-member-codename {
+  font-family: var(--font-formal);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--imperial-gold);
+}
+
+.society-member-num {
+  font-size: 0.68rem;
+  font-family: monospace;
+  color: var(--muted-grey);
+}
+
+/* ------------------------------------------------------------------
+   8. MAIN CONTENT CONTAINER & TAB PANELS
+   ------------------------------------------------------------------ */
+.society-main-content {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: var(--midnight-black);
+  position: relative;
+}
+
+.society-tab-panel {
+  display: none;
+  height: 100%;
+  animation: societyFadeIn 0.25s ease-out forwards;
+}
+
+.society-tab-panel.active {
+  display: block;
+}
+
+@keyframes societyFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------------------------
+   9. CARDS, DOSSIERS & METRIC TILES
+   ------------------------------------------------------------------ */
+.society-card {
+  background-color: var(--obsidian);
+  border: 1px solid var(--gold-border-subtle);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-vault);
   position: relative;
   overflow: hidden;
+  transition: var(--trans-noble);
 }
 
 .society-card::before {
@@ -82,48 +389,172 @@ body.society-theme {
   background: var(--gold-gradient);
 }
 
-/* Society Insignia Badge */
-.society-emblem {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 16px auto;
-  border-radius: 50%;
-  border: 1px solid var(--gold-primary);
-  background: radial-gradient(circle, var(--burgundy-primary) 0%, var(--society-bg-void) 100%);
+.society-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--charcoal-border);
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--gold-primary);
-  box-shadow: var(--shadow-gold);
+  justify-content: space-between;
 }
 
-.society-emblem svg {
-  width: 32px;
-  height: 32px;
-}
-
-/* Titles */
-.society-title {
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  letter-spacing: 2px;
-  color: var(--gold-light);
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 6px;
+.society-card-title {
+  font-family: var(--font-formal);
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--imperial-gold);
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.society-subtitle {
-  font-size: 0.82rem;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  text-align: center;
-  text-transform: uppercase;
+.society-card-body {
+  padding: 20px;
+}
+
+/* KPI Tiles (Founder Command & Member Statistics) */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
   margin-bottom: 24px;
 }
 
-/* Inputs */
+.kpi-tile {
+  background-color: var(--obsidian);
+  border: 1px solid var(--charcoal-border);
+  border-left: 3px solid var(--antique-gold);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  position: relative;
+  transition: var(--trans-noble);
+}
+
+.kpi-tile:hover {
+  border-color: var(--gold-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtle);
+}
+
+.kpi-label {
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted-grey);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-value {
+  font-family: var(--font-formal);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--ivory);
+  letter-spacing: 1px;
+}
+
+.kpi-sub {
+  font-size: 0.72rem;
+  color: var(--antique-gold);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ------------------------------------------------------------------
+   10. STATUS PILLS & RANK BADGES
+   ------------------------------------------------------------------ */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-formal);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(197, 160, 89, 0.12);
+  color: var(--imperial-gold);
+  border: 1px solid var(--gold-border);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.status-pill.active {
+  background: rgba(46, 125, 50, 0.18);
+  color: #4ADE80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-pill.pending {
+  background: rgba(216, 178, 110, 0.15);
+  color: var(--imperial-gold);
+  border: 1px solid var(--gold-border);
+}
+
+.status-pill.revoked {
+  background: rgba(153, 27, 27, 0.2);
+  color: #F87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+/* ------------------------------------------------------------------
+   11. DATA TABLES (MEMBERSHIP ROSTER & AUDIT LOGS)
+   ------------------------------------------------------------------ */
+.society-table-wrapper {
+  background-color: var(--obsidian);
+  border: 1px solid var(--charcoal-border);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+
+.society-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.society-table th {
+  background-color: var(--charcoal);
+  color: var(--antique-gold);
+  font-family: var(--font-formal);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gold-border-subtle);
+}
+
+.society-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--charcoal-border);
+  color: var(--ivory);
+  vertical-align: middle;
+}
+
+.society-table tr:hover td {
+  background-color: rgba(197, 160, 89, 0.03);
+}
+
+/* ------------------------------------------------------------------
+   12. FORM INPUTS & BUTTONS
+   ------------------------------------------------------------------ */
 .society-form-group {
   margin-bottom: 18px;
   display: flex;
@@ -132,99 +563,210 @@ body.society-theme {
 }
 
 .society-label {
-  font-size: 0.76rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gold-primary);
+  font-family: var(--font-formal);
+  font-size: 0.74rem;
   font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--antique-gold);
 }
 
 .society-input {
-  background-color: var(--society-bg-input);
-  border: 1px solid var(--gold-border-subtle);
-  color: var(--text-platinum);
+  width: 100%;
+  background-color: var(--charcoal);
+  border: 1px solid var(--charcoal-border);
+  border-radius: var(--radius-xs);
   padding: 12px 14px;
-  border-radius: var(--radius-badge);
+  color: var(--ivory);
+  font-family: var(--font-body);
   font-size: 0.92rem;
   outline: none;
-  transition: var(--transition-noble);
+  transition: var(--trans-noble);
 }
 
 .society-input:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 0 2px var(--gold-glow);
+  border-color: var(--antique-gold);
+  box-shadow: 0 0 0 1px var(--antique-gold), var(--shadow-gold);
+  background-color: var(--obsidian);
 }
 
-/* Verification Code Step Banner */
-.invite-verification-banner {
-  background: rgba(197, 160, 89, 0.08);
-  border: 1px solid var(--gold-border);
-  padding: 14px;
-  border-radius: var(--radius-badge);
-  margin-bottom: 18px;
-  display: none;
-}
-
-.invite-verification-banner.active {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
-.assigned-codename-tag {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--gold-light);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-/* Buttons */
 .society-btn-primary {
-  width: 100%;
-  padding: 13px;
-  background: var(--gold-gradient);
-  color: #0B0D12;
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border: none;
-  border-radius: var(--radius-badge);
-  cursor: pointer;
-  transition: var(--transition-noble);
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.25);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
+  padding: 13px 20px;
+  background: var(--gold-gradient);
+  color: var(--midnight-black);
+  border: 1px solid var(--imperial-gold);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-formal);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--trans-noble);
+  box-shadow: var(--shadow-gold);
 }
 
 .society-btn-primary:hover {
+  filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
 }
 
-.society-btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
+.society-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: transparent;
+  color: var(--antique-gold);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-formal);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--trans-noble);
+}
+
+.society-btn-secondary:hover {
+  background: rgba(197, 160, 89, 0.08);
+  border-color: var(--imperial-gold);
+  color: var(--imperial-gold);
 }
 
 .society-link {
-  color: var(--gold-primary);
+  color: var(--antique-gold);
   text-decoration: none;
-  font-size: 0.82rem;
-  letter-spacing: 0.5px;
-  transition: var(--transition-noble);
+  font-weight: 500;
+  transition: var(--trans-smooth);
 }
 
 .society-link:hover {
-  color: var(--gold-light);
+  color: var(--imperial-gold);
   text-decoration: underline;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ------------------------------------------------------------------
+   13. PULSE CHAT REGAL OVERRIDES (COMMUNICATIONS TAB)
+   Preserves 100% of chat.js functionality while applying the visual identity
+   ------------------------------------------------------------------ */
+body.society-theme .app-container {
+  background-color: var(--midnight-black);
+  height: 100%;
+}
+
+body.society-theme .sidebar {
+  background-color: var(--obsidian);
+  border-right: 1px solid var(--charcoal-border);
+}
+
+body.society-theme .sidebar-header {
+  background-color: var(--obsidian);
+  border-bottom: 1px solid var(--charcoal-border);
+}
+
+body.society-theme .conversation-item {
+  border-bottom: 1px solid rgba(38, 44, 58, 0.5);
+}
+
+body.society-theme .conversation-item:hover {
+  background-color: var(--charcoal);
+}
+
+body.society-theme .conversation-item.active {
+  background-color: var(--charcoal);
+  border-left: 3px solid var(--antique-gold);
+}
+
+body.society-theme .chat-main {
+  background-color: var(--midnight-black);
+}
+
+body.society-theme .chat-header {
+  background-color: var(--obsidian);
+  border-bottom: 1px solid var(--charcoal-border);
+}
+
+body.society-theme .chat-input-area {
+  background-color: var(--obsidian);
+  border-top: 1px solid var(--charcoal-border);
+}
+
+body.society-theme .message-bubble.outgoing {
+  background: linear-gradient(135deg, #1C2331 0%, #291518 100%);
+  border: 1px solid var(--gold-border-subtle);
+  color: var(--ivory);
+}
+
+body.society-theme .message-bubble.incoming {
+  background: var(--charcoal);
+  border: 1px solid var(--charcoal-border);
+  color: var(--ivory);
+}
+
+body.society-theme .send-btn {
+  background: var(--gold-gradient);
+  color: var(--midnight-black);
+}
+
+/* ------------------------------------------------------------------
+   14. MODAL DIALOGS & TOAST ALERTS
+   ------------------------------------------------------------------ */
+.society-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(8, 10, 14, 0.85);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.society-modal-backdrop.active {
+  display: flex;
+}
+
+.society-modal {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--obsidian);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-vault), 0 0 40px rgba(197, 160, 89, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: societyModalSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes societyModalSlide {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.society-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 20px;
+  background-color: var(--obsidian);
+  border: 1px solid var(--gold-border);
+  border-left: 4px solid var(--imperial-gold);
+  border-radius: var(--radius-xs);
+  color: var(--ivory);
+  font-size: 0.86rem;
+  box-shadow: var(--shadow-vault);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
