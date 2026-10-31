@@ -307,3 +307,26 @@ DROP POLICY IF EXISTS "Authenticated users can update avatar" ON storage.objects
 CREATE POLICY "Authenticated users can update avatar"
 ON storage.objects FOR UPDATE TO authenticated
 USING (bucket_id = 'avatars');
+
+-- 13. INVITES TABLE (MANUAL INVITE CODES FOR PRIVATE 1-TO-1 CHAT)
+CREATE TABLE IF NOT EXISTS public.invites (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    code TEXT UNIQUE NOT NULL,
+    conversation_id UUID REFERENCES public.conversations(id) ON DELETE SET NULL,
+    max_uses INT DEFAULT 2,
+    uses_count INT DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_invites_code ON public.invites(code);
+
+ALTER TABLE public.invites ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can view invites to validate" ON public.invites;
+CREATE POLICY "Public can view invites to validate"
+ON public.invites FOR SELECT
+USING (true);
+
+-- Manual Insert Examples for Supabase:
+-- INSERT INTO public.invites (code, max_uses) VALUES ('SECRET123', 2);
+-- INSERT INTO public.invites (code, max_uses) VALUES ('PAIR-001', 2);

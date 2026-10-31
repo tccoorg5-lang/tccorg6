@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse Chat - Create Account</title>
-  <link rel="stylesheet" href="css/style.css?v=2.1">
-  <link rel="stylesheet" href="css/auth.css?v=2.1">
-  <link rel="stylesheet" href="css/responsive.css?v=2.1">
+  <title>Pulse Chat - Join with Invite</title>
+  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/auth.css?v=2.2">
+  <link rel="stylesheet" href="css/responsive.css?v=2.2">
   <script>
     const savedTheme = localStorage.getItem('pulse_theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -35,21 +35,37 @@
     <div class="auth-header">
       <div class="auth-logo-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <line x1="19" y1="8" x2="19" y2="14"></line>
-          <line x1="22" y1="11" x2="16" y2="11"></line>
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
         </svg>
       </div>
-      <h1 class="auth-title">Create Account</h1>
-      <p class="auth-subtitle">Join Pulse Chat and start messaging in real time</p>
+      <h1 class="auth-title">Join Private Chat</h1>
+      <p class="auth-subtitle">Enter your private invite code to connect</p>
     </div>
 
     <div id="authAlert" class="auth-alert" role="alert"></div>
 
     <form id="registerForm" class="auth-form" autocomplete="on">
       <div class="form-group">
-        <label class="form-label" for="regUsername">Username</label>
+        <label class="form-label" for="regInviteCode">Invite Code</label>
+        <div class="form-input-wrapper">
+          <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+          </svg>
+          <input 
+            type="text" 
+            id="regInviteCode" 
+            class="form-input" 
+            placeholder="e.g. VIP-2024" 
+            required 
+            autocomplete="off"
+            style="text-transform: uppercase; font-weight: 600; letter-spacing: 1px;"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="regUsername">Choose Username</label>
         <div class="form-input-wrapper">
           <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -59,29 +75,11 @@
             type="text" 
             id="regUsername" 
             class="form-input" 
-            placeholder="johndoe" 
+            placeholder="e.g. Alex" 
             required 
-            pattern="^[a-zA-Z0-9_]{3,24}$"
-            title="3 to 24 characters, letters, numbers, and underscores only"
+            minlength="2"
+            maxlength="24"
             autocomplete="username"
-          >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="regEmail">Email Address</label>
-        <div class="form-input-wrapper">
-          <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          <input 
-            type="email" 
-            id="regEmail" 
-            class="form-input" 
-            placeholder="you@example.com" 
-            required 
-            autocomplete="email"
           >
         </div>
       </div>
@@ -111,31 +109,13 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="regConfirmPassword">Confirm Password</label>
-        <div class="form-input-wrapper">
-          <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          <input 
-            type="password" 
-            id="regConfirmPassword" 
-            class="form-input" 
-            placeholder="Re-enter password" 
-            minlength="6"
-            required 
-            autocomplete="new-password"
-          >
-        </div>
-      </div>
-
       <button type="submit" id="regSubmitBtn" class="auth-btn-submit">
-        <span>Create Account</span>
+        <span>Join Private Chat</span>
       </button>
     </form>
 
     <div class="auth-footer">
-      Already have an account? <a href="login.html" class="auth-link">Log In</a>
+      Already registered? <a href="login.html" class="auth-link">Log In</a>
     </div>
   </div>
 
@@ -144,9 +124,9 @@
   <!-- Supabase CDN Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- App Scripts -->
-  <script src="js/config.js?v=2.1"></script>
-  <script src="js/supabase.js?v=2.1"></script>
-  <script src="js/api.js?v=2.1"></script>
-  <script src="js/auth.js?v=2.1"></script>
+  <script src="js/config.js?v=2.2"></script>
+  <script src="js/supabase.js?v=2.2"></script>
+  <script src="js/api.js?v=2.2"></script>
+  <script src="js/auth.js?v=2.2"></script>
 </body>
 </html>

@@ -237,6 +237,11 @@ async function loadConversations() {
     const conversations = await api.get('/conversations');
     conversationsCache = conversations || [];
     renderConversationList(conversationsCache);
+
+    // Auto-open paired conversation on load if no chat currently open
+    if (!activeConversationId && conversationsCache.length > 0 && window.innerWidth > 768) {
+      openConversation(conversationsCache[0].id, conversationsCache[0].partner);
+    }
   } catch (err) {
     console.error('Failed to fetch conversations:', err);
   }
@@ -255,19 +260,10 @@ function renderConversationList(conversations) {
         <svg class="empty-list-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
-        <div class="empty-list-title">No conversations yet</div>
-        <div class="empty-list-desc">Search for users and start private real-time chats!</div>
-        <button id="emptyStateNewChatBtnInline" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 5v14M5 12h14"></path>
-          </svg>
-          <span>Find Users</span>
-        </button>
+        <div class="empty-list-title">Private Room Connected</div>
+        <div class="empty-list-desc">Waiting for your partner to join with your invite code...</div>
       </li>
     `;
-    document.getElementById('emptyStateNewChatBtnInline')?.addEventListener('click', () => {
-      document.getElementById('openSearchModalBtn')?.click();
-    });
     return;
   }
 

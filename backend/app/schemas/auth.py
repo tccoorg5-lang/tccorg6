@@ -1,23 +1,18 @@
-from typing import Optional, Dict, Any
+from typing import Optional
 from pydantic import BaseModel, Field
 
-try:
-    from pydantic import EmailStr
-except ImportError:
-    EmailStr = str
-
 class UserRegisterRequest(BaseModel):
-    email: EmailStr
+    invite_code: str = Field(..., min_length=2, max_length=50, description="Invite code provided by admin")
+    username: str = Field(..., min_length=2, max_length=30, pattern=r"^[a-zA-Z0-9_\-\.]+$")
     password: str = Field(..., min_length=6, description="Password must be at least 6 characters")
-    username: str = Field(..., min_length=3, max_length=30, pattern="^[a-zA-Z0-9_]+$")
 
 class UserLoginRequest(BaseModel):
-    email: EmailStr
-    password: str
+    username: str = Field(..., min_length=2, description="Username or email")
+    password: str = Field(..., min_length=6)
 
 class AuthUserResponse(BaseModel):
     id: str
-    email: str
+    email: Optional[str] = None
     username: Optional[str] = None
     avatar_url: Optional[str] = None
 

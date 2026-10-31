@@ -49,17 +49,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Handle Login
+ * Handle Login (Clean Username + Password)
  */
 async function handleLogin(e) {
   e.preventDefault();
   const alertEl = document.getElementById('authAlert');
   const submitBtn = document.getElementById('loginSubmitBtn');
-  const email = document.getElementById('loginEmail').value.trim();
+  const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value;
 
-  if (!email || !password) {
-    showAlert(alertEl, 'Please enter both email and password', 'error');
+  if (!username || !password) {
+    showAlert(alertEl, 'Please enter your username and password', 'error');
     return;
   }
 
@@ -67,106 +67,101 @@ async function handleLogin(e) {
     setLoadingState(submitBtn, true, 'Logging In...');
     showAlert(alertEl, '', '');
 
-    // Authenticate with Supabase Auth
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      throw error;
+    // Call backend API login endpoint
+    const res = await api.post('/auth/login', { username, password });
+    if (!res || !res.access_token) {
+      throw new Error('Login failed. Please check your username and password.');
     }
 
-    if (!data.session) {
-      throw new Error('No session returned. Please check your credentials.');
+    // Set Supabase session in client
+    if (supabaseClient) {
+      try {
+        await supabaseClient.auth.setSession({
+          access_token: res.access_token,
+          refresh_token: res.access_token
+        });
+        supabaseClient.realtime.setAuth(res.access_token);
+      } catch (se) {
+        console.warn('Set session notice:', se);
+      }
     }
+    localStorage.setItem(CONFIG.STORAGE_KEYS.SESSION, JSON.stringify(res));
 
-    // Success
     showAlert(alertEl, 'Login successful! Redirecting...', 'success');
     setTimeout(() => {
       window.location.href = 'index.html';
-    }, 600);
+    }, 500);
 
   } catch (err) {
     console.error('Login error:', err);
-    showAlert(alertEl, err.message || 'Invalid email or password', 'error');
+    showAlert(alertEl, err.message || 'Invalid username or password', 'error');
   } finally {
     setLoadingState(submitBtn, false, 'Log In');
   }
 }
 
 /**
- * Handle Registration
+ * Handle Registration via Invite Code
  */
 async function handleRegister(e) {
   e.preventDefault();
   const alertEl = document.getElementById('authAlert');
   const submitBtn = document.getElementById('regSubmitBtn');
+  const inviteCode = document.getElementById('regInviteCode').value.trim();
   const username = document.getElementById('regUsername').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
-  const confirmPassword = document.getElementById('regConfirmPassword').value;
 
-  if (password !== confirmPassword) {
-    showAlert(alertEl, 'Passwords do not match', 'error');
+  if (!inviteCode) {
+    showAlert(alertEl, 'Please enter an invite code', 'error');
     return;
   }
-
+  if (!username) {
+    showAlert(alertEl, 'Please choose a username', 'error');
+    return;
+  }
   if (password.length < 6) {
     showAlert(alertEl, 'Password must be at least 6 characters long', 'error');
     return;
   }
 
   try {
-    setLoadingState(submitBtn, true, 'Creating Account...');
+    setLoadingState(submitBtn, true, 'Verifying Invite & Joining...');
     showAlert(alertEl, '', '');
 
-    // Register via backend API (bypasses Supabase default SMTP email rate limit with instant confirmation)
-    let regSuccess = false;
-    try {
-      const regRes = await api.post('/auth/register', {
-        email,
-        password,
-        username
-      });
-      if (regRes) regSuccess = true;
-    } catch (apiErr) {
-      // Fallback directly to Supabase client if backend is unreachable
-      console.warn('Backend register failed, trying client signUp:', apiErr);
-      const { data, error } = await supabaseClient.auth.signUp({
-        email,
-        password,
-        options: { data: { username } }
-      });
-      if (error) throw error;
-      regSuccess = true;
+    // Call backend invite registration
+    const res = await api.post('/auth/register', {
+      invite_code: inviteCode,
+      username: username,
+      password: password
+    });
+
+    if (!res || !res.access_token) {
+      throw new Error('Registration failed');
     }
 
-    if (regSuccess) {
-      // Auto-login to establish session immediately
-      const { data: loginData, error: loginErr } = await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (!loginErr && loginData?.session) {
-        showAlert(alertEl, 'Account created! Redirecting to chat...', 'success');
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 600);
-      } else {
-        showAlert(alertEl, 'Account created successfully! Please log in.', 'success');
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 1200);
+    if (supabaseClient) {
+      try {
+        await supabaseClient.auth.setSession({
+          access_token: res.access_token,
+          refresh_token: res.access_token
+        });
+        supabaseClient.realtime.setAuth(res.access_token);
+      } catch (se) {
+        console.warn('Set session notice:', se);
       }
     }
+    localStorage.setItem(CONFIG.STORAGE_KEYS.SESSION, JSON.stringify(res));
+
+    showAlert(alertEl, 'Invite verified! Connected to private chat...', 'success');
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 600);
 
   } catch (err) {
     console.error('Registration error:', err);
-    showAlert(alertEl, err.message || 'Failed to create account', 'error');
+    showAlert(alertEl, err.message || 'Failed to join with invite code', 'error');
   } finally {
-    setLoadingState(submitBtn, false, 'Create Account');
+    setLoadingState(submitBtn, false, 'Join Private Chat');
   }
 }
 

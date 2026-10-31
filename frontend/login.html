@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse Chat - Login</title>
-  <link rel="stylesheet" href="css/style.css?v=2.1">
-  <link rel="stylesheet" href="css/auth.css?v=2.1">
-  <link rel="stylesheet" href="css/responsive.css?v=2.1">
+  <title>Pulse Chat - Log In</title>
+  <link rel="stylesheet" href="css/style.css?v=2.2">
+  <link rel="stylesheet" href="css/auth.css?v=2.2">
+  <link rel="stylesheet" href="css/responsive.css?v=2.2">
   <script>
-    // Prevent theme flicker
     const savedTheme = localStorage.getItem('pulse_theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -40,26 +39,26 @@
         </svg>
       </div>
       <h1 class="auth-title">Welcome Back</h1>
-      <p class="auth-subtitle">Log in to continue chatting with your friends</p>
+      <p class="auth-subtitle">Sign in to your private chat</p>
     </div>
 
     <div id="authAlert" class="auth-alert" role="alert"></div>
 
     <form id="loginForm" class="auth-form" autocomplete="on">
       <div class="form-group">
-        <label class="form-label" for="loginEmail">Email Address</label>
+        <label class="form-label" for="loginUsername">Username</label>
         <div class="form-input-wrapper">
           <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
           </svg>
           <input 
-            type="email" 
-            id="loginEmail" 
+            type="text" 
+            id="loginUsername" 
             class="form-input" 
-            placeholder="you@example.com" 
+            placeholder="Enter your username" 
             required 
-            autocomplete="email"
+            autocomplete="username"
           >
         </div>
       </div>
@@ -98,7 +97,7 @@
     </form>
 
     <div class="auth-footer">
-      Don't have an account? <a href="register.html" class="auth-link">Sign Up</a>
+      Have an invite code? <a href="register.html" class="auth-link">Join with Invite</a>
     </div>
   </div>
 
@@ -107,9 +106,9 @@
   <!-- Supabase CDN Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- App Scripts -->
-  <script src="js/config.js?v=2.1"></script>
-  <script src="js/supabase.js?v=2.1"></script>
-  <script src="js/api.js?v=2.1"></script>
-  <script src="js/auth.js?v=2.1"></script>
+  <script src="js/config.js?v=2.2"></script>
+  <script src="js/supabase.js?v=2.2"></script>
+  <script src="js/api.js?v=2.2"></script>
+  <script src="js/auth.js?v=2.2"></script>
 </body>
 </html>
