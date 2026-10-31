@@ -43,16 +43,18 @@ async def no_cache_static_middleware(request: Request, call_next):
         response.headers["Expires"] = "0"
     return response
 
-# API Routers
-app.include_router(auth.router, prefix="/api")
-app.include_router(users.router, prefix="/api")
-app.include_router(conversations.router, prefix="/api")
-app.include_router(messages.router, prefix="/api")
-app.include_router(invitations.router, prefix="/api")
-app.include_router(members.router, prefix="/api")
+# API Routers (Mount on both /api and /api/v1 for seamless backward compatibility)
+for prefix in ("/api", "/api/v1"):
+    app.include_router(auth.router, prefix=prefix)
+    app.include_router(users.router, prefix=prefix)
+    app.include_router(conversations.router, prefix=prefix)
+    app.include_router(messages.router, prefix=prefix)
+    app.include_router(invitations.router, prefix=prefix)
+    app.include_router(members.router, prefix=prefix)
 
 # Public Config Endpoint (exposes only the public anon key & URL, NEVER service role key)
 @app.get("/api/config", tags=["Configuration"])
+@app.get("/api/v1/config", tags=["Configuration"])
 async def get_public_config():
     return {
         "supabase_url": settings.SUPABASE_URL,
@@ -61,6 +63,8 @@ async def get_public_config():
 
 # Health Check Endpoint
 @app.get("/health", tags=["Health"])
+@app.get("/api/health", tags=["Health"])
+@app.get("/api/v1/health", tags=["Health"])
 async def health_check():
     return {
         "status": "ok",

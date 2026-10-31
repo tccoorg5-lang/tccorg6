@@ -1,4 +1,30 @@
 services:
+  # ------------------------------------------------------------------
+  # SERVICE 1: THE SOCIETY — NEXT.JS 16 APPS & PORTAL (FRONTEND)
+  # ------------------------------------------------------------------
+  - type: web
+    name: the-society-web
+    runtime: node
+    rootDir: frontend-next
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm run start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.14.0
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: FASTAPI_INTERNAL_URL
+        fromService:
+          type: web
+          name: pulse-realtime-chat
+          property: host
+
+  # ------------------------------------------------------------------
+  # SERVICE 2: THE SOCIETY — FASTAPI CORE AUTHORITY (BACKEND)
+  # ------------------------------------------------------------------
   - type: web
     name: pulse-realtime-chat
     runtime: python
