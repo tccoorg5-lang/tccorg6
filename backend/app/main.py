@@ -113,6 +113,26 @@ if frontend_dir:
     async def serve_register():
         return FileResponse(frontend_dir / "register.html")
 
+    @app.get("/admin.html")
+    async def serve_admin():
+        return FileResponse(frontend_dir / "admin.html")
+
+    @app.get("/legends.html")
+    async def serve_legends():
+        return FileResponse(frontend_dir / "legends.html")
+
+    @app.get("/charter.html")
+    async def serve_charter():
+        return FileResponse(frontend_dir / "charter.html")
+
+    @app.get("/roundtable.html")
+    async def serve_roundtable():
+        return FileResponse(frontend_dir / "roundtable.html")
+
+    @app.get("/archives.html")
+    async def serve_archives():
+        return FileResponse(frontend_dir / "archives.html")
+
 # Global Exception Handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):

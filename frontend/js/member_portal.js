@@ -7,11 +7,46 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Only execute on Member Portal (index.html)
   if (!document.getElementById('memberLayout')) return;
 
-  // Verify authentication session
-  const session = getLocalSession();
+  // Verify authentication session via Supabase or LocalStorage
+  let session = await getSupabaseSession();
   if (!session || !session.access_token) {
+    const local = getLocalSession();
+    if (local && local.access_token) {
+      session = local;
+      if (supabaseClient) {
+        try {
+          await supabaseClient.auth.setSession({
+            access_token: local.access_token,
+            refresh_token: local.access_token
+          });
+        } catch (_) {}
+      }
+    }
+  }
+
+  if (!session || !session.access_token) {
+    localStorage.removeItem('pulse_session');
     window.location.href = 'login.html';
     return;
+  }
+
+  // Ensure local storage is in sync
+  localStorage.setItem('pulse_session', JSON.stringify({
+    access_token: session.access_token,
+    user: session.user || {}
+  }));
+
+  // Bind Logout
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      localStorage.removeItem('pulse_session');
+      if (supabaseClient) {
+        try { await supabaseClient.auth.signOut(); } catch (_) {}
+      }
+      window.location.href = 'login.html';
+    });
   }
 
   // Set up tab switching

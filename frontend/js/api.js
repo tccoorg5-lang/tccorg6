@@ -25,8 +25,9 @@ const api = {
       // Handle 401 Unauthorized
       if (response.status === 401 && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('register.html')) {
         console.warn('Session expired or unauthorized. Redirecting to login.');
+        localStorage.removeItem(CONFIG.STORAGE_KEYS.SESSION);
         if (supabaseClient) {
-          await supabaseClient.auth.signOut();
+          try { await supabaseClient.auth.signOut(); } catch (_) {}
         }
         window.location.href = 'login.html';
         return null;

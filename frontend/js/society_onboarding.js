@@ -8,19 +8,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isLoginPage = !!document.getElementById('societyLoginForm');
   const isRegisterPage = !!document.getElementById('inductionForm');
 
-  // Check if session exists; redirect appropriately
-  const session = await getSupabaseSession();
-  if (session && (isLoginPage || isRegisterPage)) {
-    try {
-      const myProfile = await api.get('/members/me');
-      if (myProfile?.society_role === 'founder') {
-        window.location.href = 'admin.html';
-      } else {
-        window.location.href = 'index.html';
+  // Check if session exists on login page only (never auto-redirect away from registration)
+  if (isLoginPage) {
+    const session = await getSupabaseSession();
+    if (session && session.access_token) {
+      try {
+        const myProfile = await api.get('/members/me');
+        if (myProfile && myProfile.society_role) {
+          if (myProfile.society_role === 'founder') {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'index.html';
+          }
+          return;
+        }
+      } catch (e) {
+        // Stale or invalid session: clear it completely so no bounce happens
+        console.warn('Session verification failed on login page, clearing stale session.');
+        localStorage.removeItem(CONFIG.STORAGE_KEYS.SESSION);
+        if (supabaseClient) {
+          try { await supabaseClient.auth.signOut(); } catch (_) {}
+        }
       }
-      return;
-    } catch (e) {
-      // Stay on page if session expired
     }
   }
 

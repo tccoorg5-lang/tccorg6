@@ -22,6 +22,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Setup Action Handlers (Invite Modal, Challenge Modal, etc.)
   setupAdminModals();
+
+  // Bind Admin Logout
+  const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+  if (adminLogoutBtn) {
+    adminLogoutBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      localStorage.removeItem('pulse_session');
+      if (supabaseClient) {
+        try { await supabaseClient.auth.signOut(); } catch (_) {}
+      }
+      window.location.href = 'login.html';
+    });
+  }
 });
 
 /**
