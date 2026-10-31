@@ -149,18 +149,9 @@
             <div class="society-card-header">
               <h3 class="society-card-title">Institutional Directives</h3>
             </div>
-            <div class="society-card-body">
-              <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div style="border-left: 3px solid var(--antique-gold); padding-left: 14px;">
-                  <div style="font-family: var(--font-formal); font-size: 0.95rem; color: var(--imperial-gold);">Project Veritas: Public Accountability Scan</div>
-                  <div style="font-size: 0.82rem; color: var(--ivory-muted); margin-top: 2px;">Comprehensive audit of institutional compliance and lawful disclosures.</div>
-                  <div style="font-size: 0.72rem; color: var(--antique-gold); margin-top: 4px;">PRIORITY: HIGH • WORKING GROUP ALPHA</div>
-                </div>
-                <div style="border-left: 3px solid var(--deep-burgundy); padding-left: 14px;">
-                  <div style="font-family: var(--font-formal); font-size: 0.95rem; color: var(--imperial-gold);">Round Table Discourse IV: AI Governance</div>
-                  <div style="font-size: 0.82rem; color: var(--ivory-muted); margin-top: 2px;">Senior member symposium on ethical intelligence deployment frameworks.</div>
-                  <div style="font-size: 0.72rem; color: var(--muted-grey); margin-top: 4px;">CONVENING: UPCOMING SATURDAY</div>
-                </div>
+            <div class="society-card-body" id="directivesContainer">
+              <div style="color: var(--muted-grey); font-size: 0.85rem; padding: 18px 0; text-align: center;">
+                No active operations commissioned yet. Institutional directives will appear here once authorized.
               </div>
             </div>
           </div>
@@ -224,35 +215,11 @@
           <p style="color: var(--ivory-muted); font-size: 0.9rem; margin: 0;">Active investigative directives and intellectual challenges assigned to Fellows.</p>
         </div>
 
-        <div class="challenges-grid">
-          <div class="challenge-card">
-            <div>
-              <div class="challenge-badge-row">
-                <span class="rank-badge">Investigation</span>
-                <span style="font-family: monospace; color: var(--imperial-gold); font-size: 0.8rem;">500 PTS</span>
-              </div>
-              <h4 class="challenge-title">The Sovereign Ledger</h4>
-              <p class="challenge-desc">Analyze regional procurement patterns from publicly accessible filings to identify potential fiscal discrepancies.</p>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--charcoal-border); padding-top: 12px;">
-              <span style="font-size: 0.74rem; color: var(--muted-grey);">Difficulty: Senior Fellow</span>
-              <span class="status-pill active">Active</span>
-            </div>
-          </div>
-
-          <div class="challenge-card">
-            <div>
-              <div class="challenge-badge-row">
-                <span class="rank-badge">Research</span>
-                <span style="font-family: monospace; color: var(--imperial-gold); font-size: 0.8rem;">350 PTS</span>
-              </div>
-              <h4 class="challenge-title">The Archival Codex</h4>
-              <p class="challenge-desc">Translate and contextualize classical epigraphic records regarding institutional governance and civic oversight.</p>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--charcoal-border); padding-top: 12px;">
-              <span style="font-size: 0.74rem; color: var(--muted-grey);">Difficulty: Intermediate</span>
-              <span class="status-pill active">Active</span>
-            </div>
+        <div class="challenges-grid" id="challengesContainer">
+          <div class="society-card" style="padding: 24px; text-align: center; grid-column: 1 / -1;">
+            <p style="color: var(--muted-grey); font-size: 0.88rem; margin: 0;">
+              No challenge protocols currently commissioned. Challenges created by the Founder will appear here for Fellows.
+            </p>
           </div>
         </div>
       </section>

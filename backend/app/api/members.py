@@ -23,3 +23,21 @@ async def get_society_roster(
     Founder-Only: Returns complete society roster ordered by merit standings.
     """
     return MemberService.get_all_members(current_founder["id"])
+
+@router.get("/metrics")
+async def get_central_metrics(
+    current_founder: dict = Depends(require_founder)
+):
+    """
+    Founder-Only: Returns live database metrics for Central Command.
+    """
+    return MemberService.get_central_metrics(current_founder["id"])
+
+@router.get("/audit-logs")
+async def get_audit_logs(
+    current_founder: dict = Depends(require_founder)
+):
+    """
+    Founder-Only: Returns tamper-evident audit log records.
+    """
+    return MemberService.get_audit_logs(current_founder["id"])

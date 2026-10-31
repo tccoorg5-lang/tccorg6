@@ -109,20 +109,16 @@ function setupAdminSections() {
  */
 async function loadCentralCommandMetrics() {
   try {
-    const roster = await api.get('/members/roster');
-    const members = roster || [];
-
-    const totalCount = members.length;
-    const activeCount = members.filter(m => m.is_active).length;
-    const legendsCount = members.filter(m => m.is_hall_of_legends).length;
+    const data = await api.get('/members/metrics');
+    if (!data) return;
 
     const elTotal = document.getElementById('kpiTotalMembers');
     const elActive = document.getElementById('kpiActiveMembers');
     const elLegends = document.getElementById('kpiLegendsCount');
 
-    if (elTotal) elTotal.textContent = totalCount;
-    if (elActive) elActive.textContent = activeCount;
-    if (elLegends) elLegends.textContent = legendsCount;
+    if (elTotal) elTotal.textContent = data.total_members ?? 0;
+    if (elActive) elActive.textContent = data.active_members ?? 0;
+    if (elLegends) elLegends.textContent = data.legends_count ?? 0;
   } catch (err) {
     console.warn('Metrics load error:', err);
   }
@@ -174,23 +170,30 @@ async function loadAuditLogs() {
   const container = document.getElementById('auditLogStream');
   if (!container) return;
 
-  // Render recent audit log records
-  container.innerHTML = `
-    <div class="audit-log-item">
-      <span class="audit-action-tag">FOUNDER_PROVISIONED</span>
-      <div>
-        <div style="color: var(--ivory);">Primary Founder authenticated into Central Command.</div>
-        <div class="audit-meta">Sovereign • System Vault Initialization</div>
-      </div>
-    </div>
-    <div class="audit-log-item">
-      <span class="audit-action-tag">SECURITY_POLICY_ACTIVE</span>
-      <div>
-        <div style="color: var(--ivory);">Row-Level Security & Cryptographic Single-Use Invites enforced.</div>
-        <div class="audit-meta">PostgreSQL Stored Procedure • Tamper-Evident Logging</div>
-      </div>
-    </div>
-  `;
+  try {
+    const logs = await api.get('/members/audit-logs');
+    if (!logs || logs.length === 0) {
+      container.innerHTML = '<div style="color: var(--muted-grey); padding: 12px; text-align: center;">No administrative events recorded yet</div>';
+      return;
+    }
+
+    container.innerHTML = logs.map(l => {
+      const date = l.created_at ? new Date(l.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+      const details = l.details ? Object.entries(l.details).map(([k, v]) => `${k}: ${v}`).join(' • ') : '';
+      return `
+        <div class="audit-log-item">
+          <span class="audit-action-tag">${l.action || 'EVENT'}</span>
+          <div>
+            <div style="color: var(--ivory);">${l.target_resource ? l.target_resource.toUpperCase() : 'VAULT'}: ${details || 'Logged event'}</div>
+            <div class="audit-meta">${date}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    console.warn('Audit logs load error:', err);
+    container.innerHTML = '<div style="color: var(--muted-grey); padding: 12px; text-align: center;">Audit logs streaming unavailable</div>';
+  }
 }
 
 /**

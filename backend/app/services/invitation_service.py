@@ -96,10 +96,14 @@ class InvitationService:
     @staticmethod
     def verify_invitation(token: str) -> InvitationVerifyResponse:
         admin_client = get_supabase_admin_client()
-        token_hash = hash_token(token)
+        clean_token = token.strip()
+        token_hash = hash_token(clean_token)
 
         try:
-            res = admin_client.from_("invitations").select("*").eq("invitation_token_hash", token_hash).execute()
+            # Match by SHA-256 hash OR directly by custom manually-typed invite code
+            res = admin_client.from_("invitations").select("*").or_(
+                f"invitation_token_hash.eq.{token_hash},invitation_token_hash.eq.{clean_token},invitation_token_hash.ilike.{clean_token}"
+            ).execute()
             if not res.data or len(res.data) == 0:
                 return InvitationVerifyResponse(
                     valid=False,
@@ -145,10 +149,13 @@ class InvitationService:
     def redeem_invitation(data: InvitationRedeemRequest, client_ip: str = "") -> Dict[str, Any]:
         admin_client = get_supabase_admin_client()
         clean_email = data.email.strip().lower()
-        token_hash = hash_token(data.token)
+        clean_token = data.token.strip()
+        token_hash = hash_token(clean_token)
 
-        # 1. Pre-check invitation
-        inv_res = admin_client.from_("invitations").select("*").eq("invitation_token_hash", token_hash).execute()
+        # 1. Pre-check invitation (supports both hashed tokens and manually-typed invite codes)
+        inv_res = admin_client.from_("invitations").select("*").or_(
+            f"invitation_token_hash.eq.{token_hash},invitation_token_hash.eq.{clean_token},invitation_token_hash.ilike.{clean_token}"
+        ).execute()
         if not inv_res.data or len(inv_res.data) == 0:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -214,7 +221,7 @@ class InvitationService:
             v_member_number = f"SOC-{int(datetime.now().timestamp()) % 10000:04d}"
             try:
                 rpc_res = admin_client.rpc("redeem_invitation_atomic", {
-                    "p_token_hash": token_hash,
+                    "p_token_hash": inv["invitation_token_hash"],
                     "p_user_id": user_id,
                     "p_email": clean_email
                 }).execute()

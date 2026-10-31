@@ -1,0 +1,599 @@
+{
+  "timestamp": "20261031_125556",
+  "tables": {
+    "profiles": [
+      {
+        "id": "5a736f01-8f88-4da1-b1b4-1d9ca442e48f",
+        "username": "alice_pulse",
+        "email": "alice_pulse_chat@gmail.com",
+        "avatar_url": "",
+        "created_at": "2026-10-31T03:12:04.247492+00:00",
+        "updated_at": "2026-10-31T03:12:04.247492+00:00",
+        "codename": null,
+        "member_number": null,
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "5968743f-7503-45ea-a450-6c93eace9637",
+        "username": "bob_pulse",
+        "email": "bob_pulse_chat@gmail.com",
+        "avatar_url": "",
+        "created_at": "2026-10-31T03:12:06.780782+00:00",
+        "updated_at": "2026-10-31T03:12:06.780782+00:00",
+        "codename": null,
+        "member_number": null,
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "b3e689e3-4db0-44b6-a04f-eaf14bfa9e47",
+        "username": "rate_limit_test",
+        "email": "rate_limit_test_user@gmail.com",
+        "avatar_url": "",
+        "created_at": "2026-10-31T03:43:58.39885+00:00",
+        "updated_at": "2026-10-31T03:43:58.39885+00:00",
+        "codename": null,
+        "member_number": null,
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "bb15719e-1eb0-4905-b6fc-fc6eb9f4053e",
+        "username": "org",
+        "email": "tccoorg5@gmail.com",
+        "avatar_url": "",
+        "created_at": "2026-10-31T10:17:19.769053+00:00",
+        "updated_at": "2026-10-31T10:17:20.1499+00:00",
+        "codename": null,
+        "member_number": null,
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "username": "Parth",
+        "email": "bhardwajparth185@gmail.com",
+        "avatar_url": "",
+        "created_at": "2026-10-31T10:22:17.22782+00:00",
+        "updated_at": "2026-10-31T10:22:17.49999+00:00",
+        "codename": null,
+        "member_number": null,
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "username": "Sovereign",
+        "email": "founder@society.internal",
+        "avatar_url": "",
+        "created_at": "2026-10-31T11:20:38.090188+00:00",
+        "updated_at": "2026-10-31T11:20:38.090188+00:00",
+        "codename": "Sovereign",
+        "member_number": "SOC-0001",
+        "society_role": "founder",
+        "society_rank": "Founder",
+        "designation": "Founder & Chancellor",
+        "points": 10000,
+        "progression_level": 7,
+        "is_hall_of_legends": true,
+        "induction_date": null,
+        "is_active": true
+      },
+      {
+        "id": "c509438d-afa0-4765-8dbb-be14ad3680af",
+        "username": "arthur_5998",
+        "email": "arthur_5998@pulse.chat",
+        "avatar_url": "",
+        "created_at": "2026-10-31T11:26:38.798887+00:00",
+        "updated_at": "2026-10-31T11:26:38.864644+00:00",
+        "codename": "Vanguard5998",
+        "member_number": "SOC-0008",
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": "2026-10-31T11:26:38.864644+00:00",
+        "is_active": true
+      },
+      {
+        "id": "aaf0c636-71a5-438a-a3a2-5f17b5d00848",
+        "username": "arthur_6028",
+        "email": "arthur_6028@pulse.chat",
+        "avatar_url": "",
+        "created_at": "2026-10-31T11:27:09.270208+00:00",
+        "updated_at": "2026-10-31T11:27:09.413483+00:00",
+        "codename": "Vanguard6028",
+        "member_number": "SOC-0009",
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": "2026-10-31T11:27:09.413483+00:00",
+        "is_active": true
+      },
+      {
+        "id": "2a906cf5-5811-4a80-8d44-dab4d3a1c42b",
+        "username": "arthur_6096",
+        "email": "arthur_6096@pulse.chat",
+        "avatar_url": "",
+        "created_at": "2026-10-31T11:28:17.306672+00:00",
+        "updated_at": "2026-10-31T11:28:17.363233+00:00",
+        "codename": "Vanguard6096",
+        "member_number": "SOC-0010",
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": "2026-10-31T11:28:17.363233+00:00",
+        "is_active": true
+      },
+      {
+        "id": "50e1051f-4c62-4e37-8ce1-4301da0a97f5",
+        "username": "arthur_0002",
+        "email": "arthur_0002@pulse.chat",
+        "avatar_url": "",
+        "created_at": "2026-10-31T12:33:27.835957+00:00",
+        "updated_at": "2026-10-31T12:33:28.321295+00:00",
+        "codename": "Vanguard0002",
+        "member_number": "SOC-0011",
+        "society_role": "member",
+        "society_rank": "Initiate",
+        "designation": "Society Member",
+        "points": 0,
+        "progression_level": 1,
+        "is_hall_of_legends": false,
+        "induction_date": "2026-10-31T12:33:28.321295+00:00",
+        "is_active": true
+      }
+    ],
+    "conversations": [
+      {
+        "id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "created_at": "2026-10-31T03:14:08.330092+00:00",
+        "updated_at": "2026-10-31T03:34:28.240738+00:00"
+      },
+      {
+        "id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "created_at": "2026-10-31T10:22:29.573725+00:00",
+        "updated_at": "2026-10-31T10:39:23.357298+00:00"
+      }
+    ],
+    "conversation_participants": [
+      {
+        "id": "2c870709-25ab-4cce-9916-be888447192f",
+        "conversation_id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "user_id": "5a736f01-8f88-4da1-b1b4-1d9ca442e48f",
+        "joined_at": "2026-10-31T03:14:08.668038+00:00"
+      },
+      {
+        "id": "686ac3c1-bbb5-4134-80d6-7e652e3d41c6",
+        "conversation_id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "user_id": "5968743f-7503-45ea-a450-6c93eace9637",
+        "joined_at": "2026-10-31T03:14:08.668038+00:00"
+      },
+      {
+        "id": "af80465e-8426-48f6-9bc9-479cbd1c354e",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "user_id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "joined_at": "2026-10-31T10:22:29.666533+00:00"
+      },
+      {
+        "id": "fabc074b-08eb-4fe7-802e-1f0a1038f710",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "user_id": "bb15719e-1eb0-4905-b6fc-fc6eb9f4053e",
+        "joined_at": "2026-10-31T10:22:29.666533+00:00"
+      }
+    ],
+    "messages": [
+      {
+        "id": "92542f3b-a1d5-4765-889a-2e88a24c0998",
+        "conversation_id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "sender_id": "5a736f01-8f88-4da1-b1b4-1d9ca442e48f",
+        "content": "Hello Bob! This is real-time Pulse Chat!",
+        "created_at": "2026-10-31T03:14:09.813425+00:00",
+        "is_read": true
+      },
+      {
+        "id": "84b01a6a-151a-4cc5-b278-caac6c50c4f8",
+        "conversation_id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "sender_id": "5a736f01-8f88-4da1-b1b4-1d9ca442e48f",
+        "content": "Live Render Deployment Verification Message! Testing 1-2-3.",
+        "created_at": "2026-10-31T03:34:28.106996+00:00",
+        "is_read": false
+      },
+      {
+        "id": "9508cefe-0473-49c3-a02d-9b514d1d8891",
+        "conversation_id": "f651e5ab-d746-4e63-ad6c-2da094193fa1",
+        "sender_id": "5968743f-7503-45ea-a450-6c93eace9637",
+        "content": "Hey Alice! Real-time messaging is working flawlessly!",
+        "created_at": "2026-10-31T03:14:11.075094+00:00",
+        "is_read": true
+      },
+      {
+        "id": "446fae8f-0d12-4be4-aa23-0112aeeb27d1",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "content": "Hiiii",
+        "created_at": "2026-10-31T10:22:35.008192+00:00",
+        "is_read": true
+      },
+      {
+        "id": "dcb41431-288c-45fc-9dec-bf3ecd03c040",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "content": "Hi",
+        "created_at": "2026-10-31T10:23:05.075546+00:00",
+        "is_read": true
+      },
+      {
+        "id": "9023a38a-044c-47f7-88c2-e17d4e627f7b",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "bb15719e-1eb0-4905-b6fc-fc6eb9f4053e",
+        "content": "Hello",
+        "created_at": "2026-10-31T10:23:00.864607+00:00",
+        "is_read": true
+      },
+      {
+        "id": "f7adfaea-ec1b-4e07-aaa7-dc521a3faba1",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "content": "Hiiii",
+        "created_at": "2026-10-31T10:38:27.210516+00:00",
+        "is_read": true
+      },
+      {
+        "id": "a05b9eab-da29-4c8d-af8b-e586c6876144",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "bb15719e-1eb0-4905-b6fc-fc6eb9f4053e",
+        "content": "hello",
+        "created_at": "2026-10-31T10:38:35.724044+00:00",
+        "is_read": false
+      },
+      {
+        "id": "e6f8b38b-2df4-4b85-a271-800249bf89b8",
+        "conversation_id": "2c9d3582-3b55-4a7c-affd-75e60011a827",
+        "sender_id": "6cb06e3c-ff11-4624-b12e-d5ce0d70ccb5",
+        "content": "Parth jeree",
+        "created_at": "2026-10-31T10:39:23.275523+00:00",
+        "is_read": true
+      }
+    ],
+    "invitations": [
+      {
+        "id": "11ceba7c-4d24-421a-af38-e5e1fec736fa",
+        "invitation_token_hash": "c0d0520a2ec0a5f172dfbae34131855cfb0a8a0322c62e3b7c73ee25db89c0f8",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur@pulse.chat",
+        "assigned_codename": "Vanguard",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "pending",
+        "expires_at": "2026-11-07T11:25:25.272786+00:00",
+        "created_at": "2026-10-31T11:25:24.577923+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": null,
+        "redeemed_by": null
+      },
+      {
+        "id": "3ad83145-21e4-42cb-818a-7d69d1184988",
+        "invitation_token_hash": "25f046258c15c570d098e47889ef7ae18707e7fcbe71605f5d0cb98745654c04",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur_5963@pulse.chat",
+        "assigned_codename": "Vanguard5963",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "pending",
+        "expires_at": "2026-11-07T11:26:04.187354+00:00",
+        "created_at": "2026-10-31T11:26:03.470055+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": null,
+        "redeemed_by": null
+      },
+      {
+        "id": "c874b0a3-0c30-4c58-9085-92bb9208b8f7",
+        "invitation_token_hash": "b8df69ed6991fe537ade55f6bcb0d7a32d1e66b369024f7b524cfda5a3ca9c18",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur_5998@pulse.chat",
+        "assigned_codename": "Vanguard5998",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "redeemed",
+        "expires_at": "2026-11-07T11:26:38.692153+00:00",
+        "created_at": "2026-10-31T11:26:37.972917+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": "2026-10-31T11:26:38.864644+00:00",
+        "redeemed_by": "c509438d-afa0-4765-8dbb-be14ad3680af"
+      },
+      {
+        "id": "c528802a-d4a4-44a1-9772-ed51b76c7d1a",
+        "invitation_token_hash": "d298c4d1f6f0c9d587c5ea84225fd41a04eca2642d24ba9c9be496cf7e284627",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur_6028@pulse.chat",
+        "assigned_codename": "Vanguard6028",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "redeemed",
+        "expires_at": "2026-11-07T11:27:08.765345+00:00",
+        "created_at": "2026-10-31T11:27:08.046559+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": "2026-10-31T11:27:09.413483+00:00",
+        "redeemed_by": "aaf0c636-71a5-438a-a3a2-5f17b5d00848"
+      },
+      {
+        "id": "df951ab4-9d71-4d08-8e2f-ffd32e4737f0",
+        "invitation_token_hash": "bda6c540c0993edb8e9582af532112c05052bafa454e24243f17b092e03c88b1",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur_6096@pulse.chat",
+        "assigned_codename": "Vanguard6096",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "redeemed",
+        "expires_at": "2026-11-07T11:28:16.927377+00:00",
+        "created_at": "2026-10-31T11:28:16.239374+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": "2026-10-31T11:28:17.363233+00:00",
+        "redeemed_by": "2a906cf5-5811-4a80-8d44-dab4d3a1c42b"
+      },
+      {
+        "id": "fee12acb-c3e7-425d-85ae-ca6886bab4bb",
+        "invitation_token_hash": "857669d815b04adc409729672238c84190f669ef3181aa1440f92e77d1036531",
+        "intended_name": "Arthur Pendelton",
+        "intended_email": "arthur_0002@pulse.chat",
+        "assigned_codename": "Vanguard0002",
+        "assigned_role": "member",
+        "assigned_rank": "Initiate",
+        "invitation_status": "redeemed",
+        "expires_at": "2026-11-07T12:33:25.553982+00:00",
+        "created_at": "2026-10-31T12:33:24.993996+00:00",
+        "created_by": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "redeemed_at": "2026-10-31T12:33:28.321295+00:00",
+        "redeemed_by": "50e1051f-4c62-4e37-8ce1-4301da0a97f5"
+      }
+    ],
+    "member_private_records": [
+      {
+        "id": "7ad79519-a729-4965-a4e1-202a0288402f",
+        "member_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "real_name": "Founder",
+        "contact_email": "founder@society.internal",
+        "notes": "Primary Society Founder",
+        "created_at": "2026-10-31T11:20:39.243528+00:00",
+        "updated_at": "2026-10-31T11:20:39.243528+00:00"
+      },
+      {
+        "id": "236f871f-079a-49d8-9fdf-8eac5f6eb070",
+        "member_id": "c509438d-afa0-4765-8dbb-be14ad3680af",
+        "real_name": "Arthur Pendelton",
+        "contact_email": "arthur_5998@pulse.chat",
+        "notes": "Redeemed via token hash b8df69ed...",
+        "created_at": "2026-10-31T11:26:38.864644+00:00",
+        "updated_at": "2026-10-31T11:26:38.864644+00:00"
+      },
+      {
+        "id": "a5b10e2b-1e26-4547-ae84-e2cac2ab66e9",
+        "member_id": "aaf0c636-71a5-438a-a3a2-5f17b5d00848",
+        "real_name": "Arthur Pendelton",
+        "contact_email": "arthur_6028@pulse.chat",
+        "notes": "Redeemed via token hash d298c4d1...",
+        "created_at": "2026-10-31T11:27:09.413483+00:00",
+        "updated_at": "2026-10-31T11:27:09.413483+00:00"
+      },
+      {
+        "id": "fc9e4944-197d-4fe4-94e4-03f5dea1379b",
+        "member_id": "2a906cf5-5811-4a80-8d44-dab4d3a1c42b",
+        "real_name": "Arthur Pendelton",
+        "contact_email": "arthur_6096@pulse.chat",
+        "notes": "Redeemed via token hash bda6c540...",
+        "created_at": "2026-10-31T11:28:17.363233+00:00",
+        "updated_at": "2026-10-31T11:28:17.363233+00:00"
+      },
+      {
+        "id": "9c76ba6b-7c8d-4ab3-8f85-d59c02240e53",
+        "member_id": "50e1051f-4c62-4e37-8ce1-4301da0a97f5",
+        "real_name": "Arthur Pendelton",
+        "contact_email": "arthur_0002@pulse.chat",
+        "notes": "Redeemed via token hash 857669d8...",
+        "created_at": "2026-10-31T12:33:28.321295+00:00",
+        "updated_at": "2026-10-31T12:33:28.321295+00:00"
+      }
+    ],
+    "administrative_audit_logs": [
+      {
+        "id": "1368e6f4-160d-4c94-9fac-60a569617b55",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "FOUNDER_PROVISIONED",
+        "target_resource": "profiles",
+        "target_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "details": {
+          "email": "founder@society.internal",
+          "codename": "Sovereign"
+        },
+        "ip_address": null,
+        "created_at": "2026-10-31T11:20:39.499944+00:00"
+      },
+      {
+        "id": "3ba9a070-3d68-4788-92b0-3dafb5b44b0b",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "11ceba7c-4d24-421a-af38-e5e1fec736fa",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur@pulse.chat",
+          "assigned_codename": "Vanguard"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T11:25:24.658973+00:00"
+      },
+      {
+        "id": "4b242ce9-a9fe-48d4-91a8-efe95cb4f97e",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "3ad83145-21e4-42cb-818a-7d69d1184988",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur_5963@pulse.chat",
+          "assigned_codename": "Vanguard5963"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T11:26:03.575614+00:00"
+      },
+      {
+        "id": "a45fc5e6-252d-41ce-9f64-e2e57befef75",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "c874b0a3-0c30-4c58-9085-92bb9208b8f7",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur_5998@pulse.chat",
+          "assigned_codename": "Vanguard5998"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T11:26:38.018889+00:00"
+      },
+      {
+        "id": "9c9b30c9-7bfb-4b3e-9768-ed34de012130",
+        "actor_id": "c509438d-afa0-4765-8dbb-be14ad3680af",
+        "action": "INVITATION_REDEEMED",
+        "target_resource": "invitations",
+        "target_id": "c874b0a3-0c30-4c58-9085-92bb9208b8f7",
+        "details": {
+          "role": "member",
+          "codename": "Vanguard5998",
+          "member_number": "SOC-0008"
+        },
+        "ip_address": null,
+        "created_at": "2026-10-31T11:26:38.864644+00:00"
+      },
+      {
+        "id": "497e7e74-bcbb-4d04-9dc5-7ab2351660fe",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "c528802a-d4a4-44a1-9772-ed51b76c7d1a",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur_6028@pulse.chat",
+          "assigned_codename": "Vanguard6028"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T11:27:08.098156+00:00"
+      },
+      {
+        "id": "53e4cb5f-cf3b-4edc-bc48-9fd6c0df39a5",
+        "actor_id": "aaf0c636-71a5-438a-a3a2-5f17b5d00848",
+        "action": "INVITATION_REDEEMED",
+        "target_resource": "invitations",
+        "target_id": "c528802a-d4a4-44a1-9772-ed51b76c7d1a",
+        "details": {
+          "role": "member",
+          "codename": "Vanguard6028",
+          "member_number": "SOC-0009"
+        },
+        "ip_address": null,
+        "created_at": "2026-10-31T11:27:09.413483+00:00"
+      },
+      {
+        "id": "d2fa363d-c58f-4a87-a080-621b926f8e7a",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "df951ab4-9d71-4d08-8e2f-ffd32e4737f0",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur_6096@pulse.chat",
+          "assigned_codename": "Vanguard6096"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T11:28:16.303971+00:00"
+      },
+      {
+        "id": "c9570f19-a5b8-4be1-aa1f-cb81f9ef79ac",
+        "actor_id": "2a906cf5-5811-4a80-8d44-dab4d3a1c42b",
+        "action": "INVITATION_REDEEMED",
+        "target_resource": "invitations",
+        "target_id": "df951ab4-9d71-4d08-8e2f-ffd32e4737f0",
+        "details": {
+          "role": "member",
+          "codename": "Vanguard6096",
+          "member_number": "SOC-0010"
+        },
+        "ip_address": null,
+        "created_at": "2026-10-31T11:28:17.363233+00:00"
+      },
+      {
+        "id": "25b65b6f-a754-44ed-a3ed-19e869a3777a",
+        "actor_id": "d959d86d-02c1-48d7-8f34-2173da4ab1ac",
+        "action": "INVITATION_ISSUED",
+        "target_resource": "invitations",
+        "target_id": "fee12acb-c3e7-425d-85ae-ca6886bab4bb",
+        "details": {
+          "assigned_rank": "Initiate",
+          "assigned_role": "member",
+          "intended_email": "arthur_0002@pulse.chat",
+          "assigned_codename": "Vanguard0002"
+        },
+        "ip_address": "testclient",
+        "created_at": "2026-10-31T12:33:25.210982+00:00"
+      },
+      {
+        "id": "b362b9e0-ac6c-4112-8f09-e3564d5f5780",
+        "actor_id": "50e1051f-4c62-4e37-8ce1-4301da0a97f5",
+        "action": "INVITATION_REDEEMED",
+        "target_resource": "invitations",
+        "target_id": "fee12acb-c3e7-425d-85ae-ca6886bab4bb",
+        "details": {
+          "role": "member",
+          "codename": "Vanguard0002",
+          "member_number": "SOC-0011"
+        },
+        "ip_address": null,
+        "created_at": "2026-10-31T12:33:28.321295+00:00"
+      }
+    ]
+  }
+}
