@@ -1,5 +1,10 @@
 from typing import Optional, Dict, Any
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
+
+try:
+    from pydantic import EmailStr
+except ImportError:
+    EmailStr = str
 
 class UserRegisterRequest(BaseModel):
     email: EmailStr
