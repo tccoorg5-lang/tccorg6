@@ -1,8 +1,9 @@
 import logging
+import httpx
 from typing import Dict, Any
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from app.core.supabase import get_supabase_client, get_supabase_admin_client
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 security_bearer = HTTPBearer(auto_error=False)
@@ -22,23 +23,28 @@ async def get_current_user(
         )
 
     token = credentials.credentials
-    client = get_supabase_client()
+    url = f"{settings.SUPABASE_URL}/auth/v1/user"
+    headers = {
+        "apikey": settings.SUPABASE_KEY,
+        "Authorization": f"Bearer {token}"
+    }
 
     try:
-        # Validate access token directly with Supabase Auth
-        user_response = client.auth.get_user(token)
-        if not user_response or not user_response.user:
+        with httpx.Client(timeout=15.0, http2=False) as http_client:
+            resp = http_client.get(url, headers=headers)
+
+        if resp.status_code != 200:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid or expired token",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-        
-        user = user_response.user
+
+        user_data = resp.json()
         return {
-            "id": user.id,
-            "email": user.email,
-            "user_metadata": user.user_metadata or {},
+            "id": user_data.get("id"),
+            "email": user_data.get("email"),
+            "user_metadata": user_data.get("user_metadata") or {},
             "access_token": token
         }
     except HTTPException:

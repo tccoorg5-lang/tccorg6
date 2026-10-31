@@ -1,15 +1,16 @@
 import logging
+import httpx
 from typing import Dict, Any
 from fastapi import HTTPException, status
-from app.core.supabase import get_supabase_client, get_supabase_admin_client
-from app.schemas.auth import UserRegisterRequest, UserLoginRequest, AuthResponse, AuthUserResponse
+from app.core.config import settings
+from app.core.supabase import get_supabase_admin_client
+from app.schemas.auth import UserRegisterRequest, UserLoginRequest
 
 logger = logging.getLogger(__name__)
 
 class AuthService:
     @staticmethod
     def register(data: UserRegisterRequest) -> Dict[str, Any]:
-        client = get_supabase_client()
         admin_client = get_supabase_admin_client()
 
         # Check if username is already taken
@@ -25,46 +26,53 @@ class AuthService:
         except Exception as e:
             logger.warning(f"Could not verify username uniqueness directly: {e}")
 
+        # Sign up via Supabase Auth REST endpoint (rock-solid HTTP/1.1 transport)
+        url = f"{settings.SUPABASE_URL}/auth/v1/signup"
+        headers = {
+            "apikey": settings.SUPABASE_KEY,
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "email": data.email,
+            "password": data.password,
+            "data": {
+                "username": data.username
+            }
+        }
+
         try:
-            # Sign up via Supabase Auth
-            auth_res = client.auth.sign_up({
-                "email": data.email,
-                "password": data.password,
-                "options": {
-                    "data": {
-                        "username": data.username
-                    }
-                }
-            })
+            with httpx.Client(timeout=20.0, http2=False) as http_client:
+                resp = http_client.post(url, headers=headers, json=payload)
+                resp_data = resp.json()
 
-            if not auth_res.user:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Registration failed"
-                )
+            if resp.status_code >= 400:
+                error_msg = resp_data.get("msg") or resp_data.get("message") or resp_data.get("error_description") or "Registration failed"
+                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_msg)
 
-            user = auth_res.user
+            user = resp_data.get("user") or resp_data
+            user_id = user.get("id")
 
-            # Ensure profile record exists
-            try:
-                admin_client.from_("profiles").upsert({
-                    "id": user.id,
-                    "username": data.username,
-                    "email": data.email,
-                    "avatar_url": "",
-                    "updated_at": "now()"
-                }).execute()
-            except Exception as pe:
-                logger.warning(f"Profile upsert trigger handled or logged: {pe}")
+            # Guarantee profile record exists
+            if user_id:
+                try:
+                    admin_client.from_("profiles").upsert({
+                        "id": user_id,
+                        "username": data.username,
+                        "email": data.email,
+                        "avatar_url": "",
+                        "updated_at": "now()"
+                    }).execute()
+                except Exception as pe:
+                    logger.warning(f"Profile upsert notice: {pe}")
 
             return {
                 "message": "User registered successfully",
                 "user": {
-                    "id": user.id,
-                    "email": user.email,
+                    "id": user_id,
+                    "email": data.email,
                     "username": data.username
                 },
-                "session": auth_res.session
+                "session": resp_data.get("session")
             }
 
         except HTTPException:
@@ -78,32 +86,45 @@ class AuthService:
 
     @staticmethod
     def login(data: UserLoginRequest) -> Dict[str, Any]:
-        client = get_supabase_client()
         admin_client = get_supabase_admin_client()
 
-        try:
-            res = client.auth.sign_in_with_password({
-                "email": data.email,
-                "password": data.password
-            })
+        url = f"{settings.SUPABASE_URL}/auth/v1/token?grant_type=password"
+        headers = {
+            "apikey": settings.SUPABASE_KEY,
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "email": data.email,
+            "password": data.password
+        }
 
-            if not res.session or not res.user:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Invalid email or password"
-                )
+        try:
+            with httpx.Client(timeout=20.0, http2=False) as http_client:
+                resp = http_client.post(url, headers=headers, json=payload)
+                resp_data = resp.json()
+
+            if resp.status_code >= 400:
+                error_msg = resp_data.get("error_description") or resp_data.get("msg") or "Invalid email or password"
+                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=error_msg)
+
+            access_token = resp_data.get("access_token")
+            user_data = resp_data.get("user", {})
+            user_id = user_data.get("id")
+
+            if not access_token or not user_id:
+                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid login credentials")
 
             # Retrieve profile details
-            prof_res = admin_client.from_("profiles").select("*").eq("id", res.user.id).single().execute()
+            prof_res = admin_client.from_("profiles").select("*").eq("id", user_id).single().execute()
             profile = prof_res.data if prof_res else {}
 
             return {
-                "access_token": res.session.access_token,
+                "access_token": access_token,
                 "token_type": "bearer",
                 "user": {
-                    "id": res.user.id,
-                    "email": res.user.email,
-                    "username": profile.get("username", res.user.email.split("@")[0]),
+                    "id": user_id,
+                    "email": user_data.get("email", data.email),
+                    "username": profile.get("username", data.email.split("@")[0]),
                     "avatar_url": profile.get("avatar_url", "")
                 }
             }
