@@ -1,55 +1,57 @@
 /* ====================================================================
-   PULSE CHAT - GLOBAL STYLES & DESIGN TOKENS
-   Modern, Clean, Responsive Real-time Messaging
+   THE SOCIETY - GLOBAL STYLES & DESIGN TOKENS
+   Institutional Dark Aesthetic: Midnight, Obsidian, Charcoal & Antique Gold
    ==================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Color Palette - Light Mode */
+  /* Institutional Palette - Default Dark */
   --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-formal: 'Cinzel', serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
   
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
-  --bg-hover: #e2e8f0;
-  --bg-active: #e2e8f0;
+  --bg-primary: #080A0E;
+  --bg-secondary: #0F1218;
+  --bg-tertiary: #161A22;
+  --bg-hover: #1B2029;
+  --bg-active: #1B2029;
 
-  --border-color: #e2e8f0;
-  --border-subtle: #edf2f7;
+  --border-color: #262C3A;
+  --border-subtle: #1E232E;
 
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
+  --text-primary: #E9E2D3;
+  --text-secondary: #B5B5BC;
+  --text-muted: #858995;
+  --text-inverse: #080A0E;
 
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-subtle: #e0e7ff;
-  --primary-glow: rgba(79, 70, 229, 0.15);
+  --primary: #C5A059;
+  --primary-hover: #D8B26E;
+  --primary-subtle: rgba(197, 160, 89, 0.15);
+  --primary-glow: rgba(197, 160, 89, 0.25);
 
-  --message-outgoing: #4f46e5;
-  --message-outgoing-text: #ffffff;
-  --message-incoming: #ffffff;
-  --message-incoming-text: #0f172a;
-  --message-incoming-border: #e2e8f0;
+  --message-outgoing: #1B2029;
+  --message-outgoing-text: #E9E2D3;
+  --message-incoming: #161A22;
+  --message-incoming-text: #E9E2D3;
+  --message-incoming-border: #262C3A;
 
-  --accent-online: #10b981;
-  --accent-danger: #ef4444;
-  --accent-warning: #f59e0b;
+  --accent-online: #4ADE80;
+  --accent-danger: #EF4444;
+  --accent-warning: #F59E0B;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
 
-  --sidebar-width: 380px;
+  --sidebar-width: 320px;
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

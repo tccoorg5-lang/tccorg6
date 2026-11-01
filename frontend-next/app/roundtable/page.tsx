@@ -53,7 +53,7 @@ export default function RoundTablePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
       <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="High Council Conclave Chamber" badgeVariant="gold" />
@@ -61,7 +61,7 @@ export default function RoundTablePage() {
         {/* Heading */}
         <div className="text-center space-y-3">
           <SocietySeal size={72} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
+          <h1 className="font-serif-formal text-2xl sm:text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
             The Round Table
           </h1>
           <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">

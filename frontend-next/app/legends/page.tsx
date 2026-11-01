@@ -40,7 +40,7 @@ export default function LegendsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
       <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="Honoris Causa • Permanent Roll" badgeVariant="gold" />
@@ -48,16 +48,16 @@ export default function LegendsPage() {
         {/* Monumental Header */}
         <div className="text-center space-y-3">
           <SocietySeal size={80} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
+          <h1 className="font-serif-formal text-2xl sm:text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
             Hall of Legends
           </h1>
-          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-xs sm:text-sm md:text-base text-[#B5B5BC] italic">
             Permanent Roll of Honour &bull; Distinguished Fellows & Historic Benefactors
           </p>
         </div>
 
         {/* Preamble Card */}
-        <div className="p-8 rounded-[8px] bg-gradient-to-br from-[#161A22] via-[#0F1218] to-[#1B2029] border border-[rgba(197,160,89,0.35)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] text-center relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+        <div className="p-5 sm:p-8 rounded-[8px] bg-gradient-to-br from-[#161A22] via-[#0F1218] to-[#1B2029] border border-[rgba(197,160,89,0.35)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] text-center relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
           <p className="font-serif-editorial text-base md:text-xl text-[#E9E2D3] italic max-w-2xl mx-auto leading-relaxed">
             &ldquo;To those whose intellect, courage, and unyielding rectitude advanced the public welfare when all conventional avenues stood barred.&rdquo;
           </p>

@@ -450,9 +450,9 @@
        MODAL 2: USER PROFILE & SETTINGS
        ================================================================ -->
   <div class="modal-overlay" id="profileModal">
-    <div class="modal-box society-card" style="max-width: 440px;">
+    <div class="modal-box society-card" style="max-width: 440px; border-color: rgba(197, 160, 89, 0.35);">
       <div class="modal-header">
-        <h3 class="modal-title" style="font-family: var(--font-formal); color: var(--imperial-gold);">Fellow Settings</h3>
+        <h3 class="modal-title" style="font-family: var(--font-formal); color: var(--imperial-gold);">Official Fellow Credential</h3>
         <button id="closeProfileModalBtn" class="icon-btn modal-close-btn" aria-label="Close modal">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -460,34 +460,37 @@
           </svg>
         </button>
       </div>
-      <form id="profileForm">
-        <div class="modal-body">
-          <div class="profile-avatar-section">
-            <div class="profile-avatar-wrapper" id="profileAvatarWrapper" title="Change Avatar">
-              <div class="avatar-container lg" id="profileModalAvatar">
-                <span id="profileModalAvatarText">U</span>
-              </div>
-            </div>
-            <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+      <div class="modal-body" style="padding: 20px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="avatar-container lg" id="profileModalAvatar" style="margin: 0 auto; width: 64px; height: 64px; border: 2px solid var(--antique-gold); font-family: var(--font-formal); font-size: 1.5rem; color: var(--imperial-gold); background: #161A22;">
+            <span id="profileModalAvatarText">F</span>
           </div>
+          <div style="font-family: var(--font-formal); font-size: 1.2rem; color: var(--imperial-gold); margin-top: 10px;" id="modalDisplayCodename">Fellow</div>
+          <div style="font-family: monospace; font-size: 0.75rem; color: var(--antique-gold);" id="modalDisplayNumber">SOC-0000</div>
+        </div>
 
-          <div class="society-form-group">
-            <label class="society-label" for="profileUsernameInput">Public Username</label>
-            <input type="text" id="profileUsernameInput" class="society-input" required>
+        <div style="background: #0F1218; border: 1px solid var(--charcoal-border); border-radius: var(--radius-xs); padding: 14px; space-y: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; border-bottom: 1px solid #1E232E; padding-bottom: 6px;">
+            <span style="color: var(--muted-grey);">Official Status:</span>
+            <span style="color: #4ADE80; font-weight: 600;">Active &bull; In Good Standing</span>
           </div>
-
-          <div class="society-form-group">
-            <label class="society-label" for="profileEmailInput">Vault Contact</label>
-            <input type="email" id="profileEmailInput" class="society-input" disabled style="opacity: 0.6; cursor: not-allowed;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; border-bottom: 1px solid #1E232E; padding-bottom: 6px; padding-top: 6px;">
+            <span style="color: var(--muted-grey);">Security Clearance:</span>
+            <span style="color: var(--antique-gold); font-family: monospace;">CLASS IV &bull; VERIFIED</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; padding-top: 6px;">
+            <span style="color: var(--muted-grey);">Identity Protection:</span>
+            <span style="color: var(--ivory);">Zero-Knowledge Pseudonym</span>
           </div>
         </div>
-        <div class="modal-footer" style="padding: 16px 20px; border-top: 1px solid var(--charcoal-border); display: flex; justify-content: flex-end; gap: 10px;">
-          <button type="button" id="cancelProfileBtn" class="society-btn-secondary">Cancel</button>
-          <button type="submit" id="saveProfileBtn" class="society-btn-primary" style="width: auto;">
-            <span>Save</span>
-          </button>
-        </div>
-      </form>
+
+        <p style="font-size: 0.72rem; color: var(--muted-grey); text-align: center; margin-top: 16px; margin-bottom: 0;">
+          Official identity attributes are immutable and conferred exclusively under the Charter of The Society.
+        </p>
+      </div>
+      <div class="modal-footer" style="padding: 14px 20px; border-top: 1px solid var(--charcoal-border); display: flex; justify-content: flex-end;">
+        <button type="button" id="cancelProfileBtn" class="society-btn-primary" style="width: auto; padding: 6px 18px; font-size: 0.78rem;">Close Credential</button>
+      </div>
     </div>
   </div>
 

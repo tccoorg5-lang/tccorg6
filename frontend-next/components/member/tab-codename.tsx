@@ -38,7 +38,7 @@ export function TabCodename({ profile }: TabCodenameProps) {
       </div>
 
       {/* 2. Visual Digital Identity Dossier Card */}
-      <div className="rounded-[10px] bg-gradient-to-br from-[#1B2029] via-[#0F1218] to-[#161A22] border border-[rgba(197,160,89,0.45)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] p-8 relative overflow-hidden space-y-6 before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+      <div className="rounded-[10px] bg-gradient-to-br from-[#1B2029] via-[#0F1218] to-[#161A22] border border-[rgba(197,160,89,0.45)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] p-4 sm:p-6 lg:p-8 relative overflow-hidden space-y-6 before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
         <div className="absolute -right-12 -bottom-12 opacity-5 pointer-events-none">
           <SocietySeal size={320} />
         </div>

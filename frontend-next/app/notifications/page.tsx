@@ -91,7 +91,7 @@ export default function NotificationCentrePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Navigation Bar */}
         <div className="flex items-center justify-between border-b border-[#262C3A]/70 pb-4">

@@ -314,7 +314,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
   );
 
   return (
-    <div className="flex h-[calc(100vh-4.5rem)] rounded-[8px] border border-[#262C3A] bg-[#0F1218] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.85)] relative select-none">
+    <div className="flex h-[calc(100vh-3.5rem)] lg:h-[calc(100vh-4.5rem)] rounded-none lg:rounded-[8px] border-0 lg:border border-[#262C3A] bg-[#0F1218] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.85)] relative select-none w-full">
       {/* ======================================================== */}
       {/* MIDDLE PANEL: Dispatches Directory & Chambers List       */}
       {/* ======================================================== */}
@@ -663,7 +663,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
             </div>
 
             {/* Exceptional Dispatch Composer Dock */}
-            <div className="p-4 border-t border-[#262C3A] bg-[#0F1218]">
+            <div className="p-2.5 sm:p-4 border-t border-[#262C3A] bg-[#0F1218] sticky bottom-0 z-20">
               <form onSubmit={handleSendMessage} className="space-y-2">
                 <div className="flex items-center gap-2 p-1.5 bg-[#161A22] border border-[#262C3A] rounded-[6px] focus-within:border-[#C5A059] focus-within:ring-1 focus-within:ring-[#C5A059] transition-all">
                   {/* Attachment Button */}

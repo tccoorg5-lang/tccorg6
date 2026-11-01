@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { api, getStoredToken, setStoredProfile } from '@/lib/api';
 import { FounderNavRail, FounderSection } from '@/components/navigation/founder-nav-rail';
+import { MobileHeader } from '@/components/navigation/mobile-header';
+import { MobileFounderNav } from '@/components/navigation/mobile-founder-nav';
 import { SectionCommand } from '@/components/founder/section-command';
 import { SectionIntelligence } from '@/components/founder/section-intelligence';
 import { SectionOperations } from '@/components/founder/section-operations';
@@ -69,28 +71,55 @@ export default function FounderPortalPage() {
     );
   }
 
+  const sectionTitles: Record<FounderSection, string> = {
+    command: 'Central Command',
+    intelligence: 'Membership Roster',
+    operations: 'Operations & Challenges',
+    communications: 'Communications Control',
+    governance: 'Governance & Legacy',
+  };
+
   return (
     <div className="flex h-screen bg-[var(--midnight-black)] text-[var(--ivory)] overflow-hidden">
-      {/* 5-Section Command Navigation Rail */}
-      <FounderNavRail
-        profile={profile || null}
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-      />
+      {/* 5-Section Command Navigation Rail (Desktop & Large Tablet Landscape) */}
+      <div className="hidden lg:flex shrink-0">
+        <FounderNavRail
+          profile={profile || null}
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+        />
+      </div>
 
       {/* Main Command Workspace */}
-      <main className="flex-1 overflow-y-auto p-8 bg-[var(--midnight-black)]">
-        {activeSection === 'command' && (
-          <SectionCommand
-            metrics={metrics || null}
-            onOpenInviteModal={() => setActiveSection('intelligence')}
-          />
-        )}
-        {activeSection === 'intelligence' && <SectionIntelligence />}
-        {activeSection === 'operations' && <SectionOperations />}
-        {activeSection === 'communications' && <SectionCommunications />}
-        {activeSection === 'governance' && <SectionGovernance />}
-      </main>
+      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+        {/* Mobile Header (Hidden on lg+) */}
+        <MobileHeader
+          title="CENTRAL COMMAND"
+          subtitle="Founder Authority"
+          profile={profile || null}
+          activeSectionName={sectionTitles[activeSection]}
+        />
+
+        {/* Section View Workspace */}
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-6 lg:p-8 pb-20 lg:pb-8 bg-[var(--midnight-black)]">
+          {activeSection === 'command' && (
+            <SectionCommand
+              metrics={metrics || null}
+              onOpenInviteModal={() => setActiveSection('intelligence')}
+            />
+          )}
+          {activeSection === 'intelligence' && <SectionIntelligence />}
+          {activeSection === 'operations' && <SectionOperations />}
+          {activeSection === 'communications' && <SectionCommunications />}
+          {activeSection === 'governance' && <SectionGovernance />}
+        </main>
+
+        {/* Mobile Founder Navigation (Hidden on lg+) */}
+        <MobileFounderNav
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+        />
+      </div>
     </div>
   );
 }

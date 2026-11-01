@@ -19,6 +19,7 @@ import {
   Eye,
   FileText,
   SlidersHorizontal,
+  Loader2,
 } from 'lucide-react';
 import { api } from '@/lib/api';
 import { MemberProfile } from '@/types/society';
@@ -192,8 +193,87 @@ export function SectionIntelligence() {
         </div>
       </div>
 
-      {/* Roster Table */}
-      <div className="rounded-[6px] bg-[#0F1218] border border-[#262C3A] overflow-hidden shadow-lg">
+      {/* Mobile Responsive Roster Cards (Visible on screens < 768px) */}
+      <div className="md:hidden space-y-3">
+        {isLoading ? (
+          <div className="p-8 text-center text-xs text-[#858995] flex items-center justify-center gap-2">
+            <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
+            <span>Scanning intelligence registry...</span>
+          </div>
+        ) : filteredRoster.length === 0 ? (
+          <div className="p-8 text-center text-xs text-[#858995] bg-[#0F1218] rounded-[6px] border border-[#262C3A]">
+            No fellows match the designated query.
+          </div>
+        ) : (
+          filteredRoster.map((m) => (
+            <div
+              key={m.id}
+              className="p-4 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-3"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-center font-serif-formal text-xs font-bold text-[#C5A059]">
+                    {(m.codename || 'F')[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <span className="font-serif-formal text-sm font-bold text-[#E9E2D3] block">
+                      {m.codename || 'Unknown'}
+                    </span>
+                    <span className="font-mono text-[0.625rem] text-[#858995]">
+                      {m.member_number || 'SOC-PENDING'}
+                    </span>
+                  </div>
+                </div>
+                <Badge variant="gold">{m.society_rank || 'Initiate'}</Badge>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-[#262C3A]/60">
+                <div>
+                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">Constitutional Role</span>
+                  <span className="text-[#B5B5BC] capitalize text-xs">{m.society_role}</span>
+                </div>
+                <div>
+                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">Merit Score</span>
+                  <span className="font-mono font-bold text-[#D8B26E] text-xs">{m.points.toLocaleString()} PTS</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/60 text-xs">
+                <span className="font-mono text-[0.6875rem] text-[#858995]">
+                  {formatInductionDate(m.induction_date)}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
+                  Active
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2 border-t border-[#262C3A]/60">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setSelectedMember(m)}
+                  className="w-full text-xs"
+                >
+                  <span>Dossier</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPersonalRecordsMember(m)}
+                  title="Restricted Personal Records"
+                  className="px-2.5"
+                >
+                  <Lock className="w-3.5 h-3.5" />
+                </Button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop & Tablet Data Table (Hidden on screens < 768px) */}
+      <div className="hidden md:block rounded-[6px] bg-[#0F1218] border border-[#262C3A] overflow-x-auto shadow-lg">
         <Table>
           <TableHeader>
             <TableRow>

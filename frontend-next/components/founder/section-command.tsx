@@ -105,7 +105,7 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
             </span>
             <Badge variant="gold">Founder Authority Active</Badge>
           </div>
-          <h1 className="font-serif-formal text-2xl lg:text-3xl font-bold tracking-wider text-[#D8B26E] uppercase">
+          <h1 className="font-serif-formal text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider text-[#D8B26E] uppercase">
             Central Command & Executive Telemetry
           </h1>
           <p className="font-serif-editorial text-xs lg:text-sm text-[#B5B5BC] italic">
@@ -119,7 +119,7 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
             <span>{currentDate}</span>
           </div>
 
-          <Button variant="gold" size="md" onClick={onOpenInviteModal}>
+          <Button variant="gold" size="md" onClick={onOpenInviteModal} className="w-full sm:w-auto">
             <KeyRound className="w-4 h-4" />
             <span>Issue Cryptographic Invitation</span>
           </Button>

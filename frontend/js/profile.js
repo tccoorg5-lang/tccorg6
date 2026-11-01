@@ -73,16 +73,15 @@ function updateProfileUI(profile) {
     }
   }
 
-  // Profile Modal fields
-  const modalAvatar = document.getElementById('profileModalAvatar');
-  const usernameInput = document.getElementById('profileUsernameInput');
-  const emailInput = document.getElementById('profileEmailInput');
+  // Profile Modal fields (Immutable Institutional Credential)
+  const modalAvatar = document.getElementById('profileModalAvatarText');
+  const modalCodename = document.getElementById('modalDisplayCodename');
+  const modalNum = document.getElementById('modalDisplayNumber');
 
-  if (usernameInput) usernameInput.value = displayName;
-  if (emailInput) emailInput.value = profile.email || '';
-  if (modalAvatar) {
-    if (avatarUrl) {
-      modalAvatar.innerHTML = `<img src="${avatarUrl}" alt="${displayName}">`;
+  const codename = profile.codename || profile.username || 'FELLOW';
+  if (modalAvatar) modalAvatar.textContent = codename[0].toUpperCase();
+  if (modalCodename) modalCodename.textContent = codename;
+  if (modalNum) modalNum.textContent = profile.member_number || 'SOC-ACTIVE';
     } else {
       modalAvatar.innerHTML = `<span>${displayName.charAt(0).toUpperCase()}</span>`;
     }
@@ -115,7 +114,12 @@ function setupProfileModal() {
   };
 
   if (openBtn) openBtn.addEventListener('click', openModal);
-  if (badgeBtn) badgeBtn.addEventListener('click', openModal);
+  if (badgeBtn) {
+    badgeBtn.addEventListener('click', () => {
+      const profileTabBtn = document.querySelector('.society-nav-item[data-tab="tabProfile"]');
+      if (profileTabBtn) profileTabBtn.click();
+    });
+  }
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
