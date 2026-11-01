@@ -13,13 +13,18 @@
 
   <div class="dossier-view-wrapper" style="max-width: 920px; padding: 48px 24px;">
     <!-- Navigation Back -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-      <a href="index.html" class="society-btn-secondary" style="width: auto;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        <span>Return to Vault</span>
-      </a>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; gap: 12px; align-items: center;" id="returnNavGroup">
+        <a href="index.html" id="returnToVaultBtn" class="society-btn-secondary" style="width: auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span id="returnBtnLabel">Return to Vault</span>
+        </a>
+        <a href="admin.html" id="founderCommandBtn" class="society-btn-primary" style="display: none; width: auto; padding: 8px 16px; font-size: 0.78rem;">
+          <span>Central Command &rarr;</span>
+        </a>
+      </div>
       <span class="rank-badge">Constitutional Document</span>
     </div>
 
@@ -68,5 +73,34 @@
     </div>
   </div>
 
+  <script>
+    (function() {
+      try {
+        const role = localStorage.getItem('society_user_role');
+        const rawProfile = localStorage.getItem('society_user_profile');
+        const profile = rawProfile ? JSON.parse(rawProfile) : null;
+        const isFounder = role === 'founder' || profile?.society_role === 'founder' || (document.referrer && document.referrer.includes('admin.html'));
+
+        const returnBtn = document.getElementById('returnToVaultBtn');
+        const returnLabel = document.getElementById('returnBtnLabel');
+        const founderBtn = document.getElementById('founderCommandBtn');
+
+        if (isFounder) {
+          if (returnBtn && returnLabel) {
+            returnBtn.href = 'admin.html';
+            returnLabel.textContent = 'Return to Central Command';
+          }
+          if (founderBtn) {
+            founderBtn.style.display = 'inline-flex';
+            founderBtn.href = 'index.html';
+            founderBtn.querySelector('span').textContent = 'Switch to Member View';
+            founderBtn.className = 'society-btn-secondary';
+          }
+        }
+      } catch (e) {
+        console.warn('Navigation state check:', e);
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -18,6 +18,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { useToast } from '@/components/ui/toast';
+import { isFounderSession } from '@/lib/api';
 
 interface NotificationItem {
   id: string;
@@ -94,10 +95,10 @@ export default function NotificationCentrePage() {
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Navigation Bar */}
         <div className="flex items-center justify-between border-b border-[#262C3A]/70 pb-4">
-          <Link href="/member">
+          <Link href={isFounderSession() ? '/founder' : '/member'}>
             <Button variant="secondary" size="sm">
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Return to Chambers</span>
+              <span>{isFounderSession() ? 'Return to Central Command' : 'Return to Chambers'}</span>
             </Button>
           </Link>
 

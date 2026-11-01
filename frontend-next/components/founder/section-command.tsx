@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import {
   Users,
   Activity,
@@ -87,8 +88,9 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
       value: legendsCount,
       sub: 'Monuments Bestowed',
       icon: Trophy,
-      badge: 'Highest Honor',
+      badge: 'Enter Chamber →',
       color: 'text-[#D8B26E]',
+      href: '/legends',
     },
   ];
 
@@ -128,13 +130,16 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {kpis.map((kpi, idx) => {
           const Icon = kpi.icon;
-          return (
+          const cardContent = (
             <div
-              key={idx}
-              className="p-5 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-3 relative overflow-hidden transition-all hover:border-[rgba(197,160,89,0.35)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.06)]"
+              className={`p-5 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-3 relative overflow-hidden transition-all h-full ${
+                kpi.href
+                  ? 'hover:border-[#D8B26E] hover:shadow-[0_4px_24px_rgba(216,178,110,0.15)] group cursor-pointer'
+                  : 'hover:border-[rgba(197,160,89,0.35)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.06)]'
+              }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-[0.625rem] font-serif-formal tracking-wider uppercase text-[#858995] font-semibold truncate">
+                <span className="text-[0.625rem] font-serif-formal tracking-wider uppercase text-[#858995] font-semibold truncate group-hover:text-[#D8B26E] transition-colors">
                   {kpi.label}
                 </span>
                 <Icon className={`w-4 h-4 ${kpi.color} shrink-0`} />
@@ -144,11 +149,62 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
               </div>
               <div className="flex items-center justify-between text-[0.625rem] pt-1 border-t border-[#262C3A]/50">
                 <span className="text-[#858995] font-mono truncate">{kpi.sub}</span>
-                <span className="text-[#C5A059] font-mono">{kpi.badge}</span>
+                <span className={`font-mono ${kpi.href ? 'text-[#D8B26E] font-semibold' : 'text-[#C5A059]'}`}>{kpi.badge}</span>
               </div>
             </div>
           );
+
+          return kpi.href ? (
+            <Link key={idx} href={kpi.href} className="block">
+              {cardContent}
+            </Link>
+          ) : (
+            <div key={idx}>{cardContent}</div>
+          );
         })}
+      </div>
+
+      {/* 2b. High Chambers & Deliberative Councils Quick-Access Bar */}
+      <div className="p-4 rounded-[6px] bg-gradient-to-r from-[#161A22] via-[#0F1218] to-[#161A22] border border-[#C5A059]/30 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-[#D8B26E]" />
+              <span className="font-serif-formal text-xs font-bold uppercase tracking-wider text-[#D8B26E]">
+                High Chambers & Sovereign Rolls
+              </span>
+            </div>
+            <p className="text-[0.75rem] text-[#858995]">
+              Direct sovereign access to monument halls, high council chambers, and constitutional archives.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link href="/legends">
+              <Button variant="gold" size="sm" className="gap-1.5 shadow-[0_0_12px_rgba(197,160,89,0.2)]">
+                <Trophy className="w-3.5 h-3.5" />
+                <span>Hall of Legends</span>
+              </Button>
+            </Link>
+            <Link href="/roundtable">
+              <Button variant="secondary" size="sm" className="gap-1.5">
+                <Users className="w-3.5 h-3.5 text-[#C5A059]" />
+                <span>The Round Table</span>
+              </Button>
+            </Link>
+            <Link href="/charter">
+              <Button variant="secondary" size="sm" className="gap-1.5">
+                <FileCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                <span>Charter</span>
+              </Button>
+            </Link>
+            <Link href="/archives">
+              <Button variant="secondary" size="sm" className="gap-1.5">
+                <Database className="w-3.5 h-3.5 text-[#C5A059]" />
+                <span>Archives</span>
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* 3. Operational Timeline & Directives Matrix */}

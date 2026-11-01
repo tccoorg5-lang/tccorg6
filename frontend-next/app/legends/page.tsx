@@ -1,11 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { SocietySeal } from '@/components/brand/society-seal';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Trophy, Sparkles, Star, Award, Shield } from 'lucide-react';
+import { ChamberHeader } from '@/components/navigation/chamber-header';
 
 export default function LegendsPage() {
   const legends = [
@@ -44,16 +42,8 @@ export default function LegendsPage() {
   return (
     <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-6 md:p-12 select-none">
       <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
-        {/* Navigation Bar */}
-        <div className="flex items-center justify-between border-b border-[#262C3A]/70 pb-4">
-          <Link href="/member">
-            <Button variant="secondary" size="sm">
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Return to Vault</span>
-            </Button>
-          </Link>
-          <Badge variant="gold">Honoris Causa &bull; Permanent Roll</Badge>
-        </div>
+        {/* Intelligent Chamber Navigation Header */}
+        <ChamberHeader badgeText="Honoris Causa • Permanent Roll" badgeVariant="gold" />
 
         {/* Monumental Header */}
         <div className="text-center space-y-3">

@@ -2,8 +2,18 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { User, MessageSquare, Shield, ShieldAlert, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import {
+  User,
+  MessageSquare,
+  Shield,
+  ShieldAlert,
+  LogOut,
+  Trophy,
+  Landmark,
+  Scroll,
+  BookOpen,
+} from 'lucide-react';
 import { SocietySeal } from '@/components/brand/society-seal';
 import { MemberProfile } from '@/types/society';
 import { clearStoredSession } from '@/lib/api';
@@ -30,8 +40,15 @@ export function MemberNavRail({
 
   const isFounder = profile?.society_role === 'founder';
 
+  const dedicatedChambers = [
+    { href: '/legends', label: 'Hall of Legends', icon: Trophy },
+    { href: '/roundtable', label: 'The Round Table', icon: Landmark },
+    { href: '/charter', label: 'Founding Charter', icon: Scroll },
+    { href: '/archives', label: 'Archives', icon: BookOpen },
+  ];
+
   return (
-    <aside className="w-64 bg-[var(--obsidian)] border-r border-[var(--charcoal-border)] flex flex-col justify-between shrink-0 h-screen select-none">
+    <aside className="w-64 bg-[var(--obsidian)] border-r border-[var(--charcoal-border)] flex flex-col justify-between shrink-0 h-screen select-none overflow-y-auto">
       <div>
         {/* Institutional Emblem & Brand Header */}
         <div className="p-5 border-b border-[var(--charcoal-border)] flex items-center gap-3">
@@ -107,6 +124,28 @@ export function MemberNavRail({
             </div>
           )}
         </nav>
+
+        {/* Dedicated Chambers & Rolls */}
+        <div className="p-3 border-t border-[var(--charcoal-border)]">
+          <div className="text-[0.625rem] font-serif-formal tracking-widest uppercase text-[var(--muted-grey)] px-3 mb-2">
+            Chambers & Rolls
+          </div>
+          <nav className="space-y-0.5">
+            {dedicatedChambers.map((ch) => {
+              const Icon = ch.icon;
+              return (
+                <Link
+                  key={ch.href}
+                  href={ch.href}
+                  className="flex items-center gap-3 px-3 py-2 rounded-[var(--radius-sm)] text-[0.75rem] font-medium text-[var(--ivory-muted)] hover:bg-[var(--charcoal)] hover:text-[var(--antique-gold)] transition-colors"
+                >
+                  <Icon className="w-3.5 h-3.5 shrink-0 text-[var(--antique-gold)]" />
+                  <span>{ch.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
       </div>
 
       {/* Rail Footer (Member Pill & Logout) */}

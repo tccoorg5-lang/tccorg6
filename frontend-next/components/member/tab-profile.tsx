@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import {
   Shield,
   Award,
@@ -94,9 +95,11 @@ export function TabProfile({ profile }: TabProfileProps) {
                   </span>
                 </div>
               </div>
-              <Badge variant={isLegends ? 'gold' : 'neutral'}>
-                {isLegends ? 'Hall of Legends' : 'Sovereign Roll'}
-              </Badge>
+              <Link href="/legends">
+                <Badge variant={isLegends ? 'gold' : 'neutral'} className="cursor-pointer hover:border-[#D8B26E] transition-colors">
+                  {isLegends ? 'Hall of Legends ↗' : 'Sovereign Roll ↗'}
+                </Badge>
+              </Link>
             </div>
 
             {/* Card Center: Member Name & Number */}
@@ -228,18 +231,24 @@ export function TabProfile({ profile }: TabProfileProps) {
               <div className="text-[0.625rem] text-[#858995]">Encrypted Stream</div>
             </div>
 
-            <div className="p-4 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-1">
-              <div className="flex items-center gap-1.5 text-[#C5A059]">
-                <Star className="w-3.5 h-3.5 text-[#D8B26E]" />
-                <span className="font-serif-formal text-[0.625rem] uppercase tracking-wider text-[#858995]">
-                  Standing
-                </span>
+            <Link
+              href="/legends"
+              className="p-4 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-1 block hover:border-[#D8B26E] hover:shadow-[0_4px_16px_rgba(216,178,110,0.1)] transition-all cursor-pointer group"
+            >
+              <div className="flex items-center justify-between text-[#C5A059]">
+                <div className="flex items-center gap-1.5">
+                  <Star className="w-3.5 h-3.5 text-[#D8B26E]" />
+                  <span className="font-serif-formal text-[0.625rem] uppercase tracking-wider text-[#858995] group-hover:text-[#D8B26E] transition-colors">
+                    Hall of Legends
+                  </span>
+                </div>
+                <span className="text-[0.625rem] text-[#C5A059] opacity-0 group-hover:opacity-100 transition-opacity">→</span>
               </div>
               <div className="font-serif-formal text-base font-bold text-[#D8B26E]">
-                {isLegends ? 'Legend' : 'Fellow'}
+                {isLegends ? 'Legend' : 'Roll of Honour'}
               </div>
-              <div className="text-[0.625rem] text-[#858995]">General Conclave</div>
-            </div>
+              <div className="text-[0.625rem] text-[#858995]">View Monuments →</div>
+            </Link>
           </div>
         </div>
       </div>

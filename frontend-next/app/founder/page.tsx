@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { api, getStoredToken } from '@/lib/api';
+import { api, getStoredToken, setStoredProfile } from '@/lib/api';
 import { FounderNavRail, FounderSection } from '@/components/navigation/founder-nav-rail';
 import { SectionCommand } from '@/components/founder/section-command';
 import { SectionIntelligence } from '@/components/founder/section-intelligence';
@@ -40,11 +40,14 @@ export default function FounderPortalPage() {
     refetchInterval: 10000,
   });
 
-  // Strict Founder clearance check
+  // Strict Founder clearance check and profile cache
   useEffect(() => {
-    if (profile && profile.society_role !== 'founder') {
-      alert('Access Restricted: Founder Credentials Required');
-      router.push('/member');
+    if (profile) {
+      setStoredProfile(profile);
+      if (profile.society_role !== 'founder') {
+        alert('Access Restricted: Founder Credentials Required');
+        router.push('/member');
+      }
     }
   }, [profile, router]);
 

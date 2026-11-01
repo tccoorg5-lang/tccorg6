@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { api, getStoredToken } from '@/lib/api';
+import { api, getStoredToken, setStoredProfile } from '@/lib/api';
 import { MemberNavRail } from '@/components/navigation/member-nav-rail';
 import { TabProfile } from '@/components/member/tab-profile';
 import { TabCommunications } from '@/components/member/tab-communications';
@@ -29,6 +29,13 @@ export default function MemberPortalPage() {
     queryFn: () => api.get<MemberProfile>('/members/me'),
     retry: false,
   });
+
+  // Cache profile in localStorage for seamless chamber navigation
+  useEffect(() => {
+    if (profile) {
+      setStoredProfile(profile);
+    }
+  }, [profile]);
 
   if (error) {
     router.push('/login');

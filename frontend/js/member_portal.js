@@ -115,6 +115,12 @@ async function loadMemberDossier() {
     if (railMemberNum) railMemberNum.textContent = profile.member_number || 'SOC-0000';
     if (railAvatar) railAvatar.textContent = (profile.codename || 'M')[0].toUpperCase();
 
+    // Persist profile and role for seamless chamber navigation
+    try {
+      localStorage.setItem('society_user_profile', JSON.stringify(profile));
+      localStorage.setItem('society_user_role', profile.society_role || 'member');
+    } catch (_) {}
+
     // Show Founder Portal link if user possesses Founder role
     if (founderLink && profile.society_role === 'founder') {
       founderLink.style.display = 'flex';

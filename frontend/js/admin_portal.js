@@ -51,6 +51,12 @@ async function verifyFounderSession() {
 
     const adminCodename = document.getElementById('founderCodenameBadge');
     if (adminCodename) adminCodename.textContent = profile.codename || 'SOVEREIGN';
+
+    // Persist profile and role for seamless chamber navigation
+    try {
+      localStorage.setItem('society_user_profile', JSON.stringify(profile));
+      localStorage.setItem('society_user_role', profile.society_role || 'founder');
+    } catch (_) {}
   } catch (err) {
     console.error('Founder auth check failed:', err);
     window.location.href = 'login.html';

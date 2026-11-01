@@ -58,6 +58,47 @@
               <span>Codename</span>
             </a>
           </li>
+          <!-- Dedicated Chambers Navigation -->
+          <li style="margin-top: 14px; border-top: 1px solid var(--charcoal-border); padding-top: 8px;">
+            <div style="padding: 6px 12px; font-size: 0.65rem; font-family: var(--font-formal); letter-spacing: 1.5px; color: var(--muted-grey); text-transform: uppercase;">
+              Chambers
+            </div>
+          </li>
+          <li>
+            <a href="legends.html" class="society-nav-item" title="Hall of Legends">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span>Hall of Legends</span>
+            </a>
+          </li>
+          <li>
+            <a href="roundtable.html" class="society-nav-item" title="The Round Table">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="4"></circle>
+              </svg>
+              <span>The Round Table</span>
+            </a>
+          </li>
+          <li>
+            <a href="charter.html" class="society-nav-item" title="Founding Charter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>Founding Charter</span>
+            </a>
+          </li>
+          <li>
+            <a href="archives.html" class="society-nav-item" title="Society Archives">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <span>Society Archives</span>
+            </a>
+          </li>
           <!-- Founder Central Command Shortcut (Revealed if user is founder) -->
           <li id="founderPortalLink" style="display: none; margin-top: 10px; border-top: 1px solid var(--charcoal-border); padding-top: 8px;">
             <a href="admin.html" class="society-nav-item" style="color: var(--antique-gold);">
@@ -124,9 +165,9 @@
               <div class="dossier-meta-aside">
                 <span class="rank-badge" id="dossierRank">Initiate</span>
                 <span class="status-pill active" id="dossierStatusPill">In Good Standing</span>
-                <span id="legendsBadge" class="rank-badge" style="display:none; border-color: var(--imperial-gold); background: rgba(216,178,110,0.2);">
-                  Hall of Legends
-                </span>
+                <a href="legends.html" id="legendsBadge" class="rank-badge" style="display:none; text-decoration: none; border-color: var(--imperial-gold); background: rgba(216,178,110,0.2); cursor: pointer;" title="View in Hall of Legends">
+                  Hall of Legends &rarr;
+                </a>
               </div>
             </div>
           </div>
@@ -173,11 +214,14 @@
               <div class="stat-value" style="color: #4ADE80;">CLASS IV</div>
               <div class="stat-sub">Encrypted Dispatch Enabled</div>
             </div>
-            <div class="stat-tile">
-              <div class="stat-label">Hall of Legends</div>
-              <div class="stat-value" id="legendsStatusText" style="font-size: 1.1rem;">Nomination Track</div>
-              <div class="stat-sub">Annual Council Review</div>
-            </div>
+            <a href="legends.html" class="stat-tile" style="text-decoration: none; color: inherit; cursor: pointer;" title="Inspect Hall of Legends">
+              <div class="stat-label" style="display: flex; justify-content: space-between;">
+                <span>Hall of Legends</span>
+                <span style="color: var(--antique-gold);">&rarr;</span>
+              </div>
+              <div class="stat-value" id="legendsStatusText" style="font-size: 1.1rem; color: var(--imperial-gold);">Roll of Honour</div>
+              <div class="stat-sub">View Bestowed Monuments</div>
+            </a>
           </div>
         </div>
       </div>

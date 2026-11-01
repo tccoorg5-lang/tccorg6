@@ -78,6 +78,48 @@
             </a>
           </li>
         </ul>
+
+        <!-- Dedicated Chambers & Historic Councils -->
+        <div style="padding: 16px 16px 6px; font-size: 0.65rem; font-family: var(--font-formal); letter-spacing: 1.5px; color: var(--antique-gold); text-transform: uppercase;">
+          Chambers & Rolls
+        </div>
+        <ul class="society-nav-menu" style="margin-bottom: 8px;">
+          <li>
+            <a href="legends.html" class="society-nav-item" title="Hall of Legends">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span class="nav-text">Hall of Legends</span>
+            </a>
+          </li>
+          <li>
+            <a href="roundtable.html" class="society-nav-item" title="The Round Table">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="4"></circle>
+              </svg>
+              <span class="nav-text">The Round Table</span>
+            </a>
+          </li>
+          <li>
+            <a href="charter.html" class="society-nav-item" title="Founding Charter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span class="nav-text">Founding Charter</span>
+            </a>
+          </li>
+          <li>
+            <a href="archives.html" class="society-nav-item" title="Society Archives">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <span class="nav-text">Society Archives</span>
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div class="society-rail-footer">
@@ -131,11 +173,14 @@
             <div class="kpi-value" id="kpiActiveMembers">--</div>
             <div class="kpi-sub">Good Standing</div>
           </div>
-          <div class="kpi-tile">
-            <div class="kpi-label">Hall of Legends</div>
-            <div class="kpi-value" id="kpiLegendsCount">--</div>
-            <div class="kpi-sub">Honoured Fellows</div>
-          </div>
+          <a href="legends.html" class="kpi-tile" style="text-decoration: none; color: inherit; cursor: pointer; display: block; border-color: rgba(197, 160, 89, 0.35); background: linear-gradient(135deg, #0F1218 0%, #161A22 100%); transition: all 0.2s ease;" title="Inspect Hall of Legends">
+            <div class="kpi-label" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Hall of Legends</span>
+              <span style="color: var(--antique-gold); font-size: 0.72rem; letter-spacing: 1px;">ENTER &rarr;</span>
+            </div>
+            <div class="kpi-value" id="kpiLegendsCount" style="color: var(--imperial-gold);">--</div>
+            <div class="kpi-sub" style="color: var(--antique-gold);">Permanent Roll of Honour</div>
+          </a>
           <div class="kpi-tile">
             <div class="kpi-label">Vault Security</div>
             <div class="kpi-value" style="color: #4ADE80; font-size: 1.5rem;">OPTIMAL</div>
@@ -143,7 +188,40 @@
           </div>
         </div>
 
-        <!-- Operations & Activity Overview -->
+        <!-- High Chambers & Institutional Councils Strip -->
+        <div class="society-card" style="margin-bottom: 24px; padding: 18px 24px; border-color: rgba(197, 160, 89, 0.25); background: linear-gradient(180deg, #161A22 0%, #0F1218 100%);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <div style="font-family: var(--font-formal); font-size: 0.95rem; color: var(--imperial-gold); font-weight: 700; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--antique-gold);">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span>HIGH CHAMBERS & INSTITUTIONAL COUNCILS</span>
+              </div>
+              <div style="font-size: 0.78rem; color: var(--muted-grey); margin-top: 3px;">
+                Direct sovereign access to monumental chambers, roll of honour, and constitutional archives.
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="legends.html" class="society-btn-secondary" style="width: auto; padding: 8px 14px; font-size: 0.78rem; border-color: var(--antique-gold); color: var(--imperial-gold);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>Hall of Legends</span>
+              </a>
+              <a href="roundtable.html" class="society-btn-secondary" style="width: auto; padding: 8px 14px; font-size: 0.78rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+                <span>The Round Table</span>
+              </a>
+              <a href="charter.html" class="society-btn-secondary" style="width: auto; padding: 8px 14px; font-size: 0.78rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                <span>Charter</span>
+              </a>
+              <a href="archives.html" class="society-btn-secondary" style="width: auto; padding: 8px 14px; font-size: 0.78rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path></svg>
+                <span>Archives</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
           <div class="society-card">
             <div class="society-card-header">
@@ -267,6 +345,26 @@
               <li><strong>Separation of Identity:</strong> Codename identities shield Fellows from external retaliation while maintaining internal integrity.</li>
             </ol>
           </div>
+        </div>
+
+        <!-- Dedicated Institutional Chambers Matrix -->
+        <div class="challenges-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          <a href="legends.html" class="society-card" style="text-decoration: none; padding: 20px; border-color: rgba(197, 160, 89, 0.35); transition: border-color 0.2s;">
+            <div style="font-family: var(--font-formal); font-size: 1.05rem; color: var(--imperial-gold); margin-bottom: 6px;">Hall of Legends &rarr;</div>
+            <p style="font-size: 0.8rem; color: var(--ivory-muted); line-height: 1.5; margin: 0;">Permanent roll of honour commemorating distinguished Fellows and historic benefactors.</p>
+          </a>
+          <a href="roundtable.html" class="society-card" style="text-decoration: none; padding: 20px; transition: border-color 0.2s;">
+            <div style="font-family: var(--font-formal); font-size: 1.05rem; color: var(--imperial-gold); margin-bottom: 6px;">The Round Table &rarr;</div>
+            <p style="font-size: 0.8rem; color: var(--ivory-muted); line-height: 1.5; margin: 0;">High Council deliberative chamber for parliamentary quorum and strategic resolutions.</p>
+          </a>
+          <a href="charter.html" class="society-card" style="text-decoration: none; padding: 20px; transition: border-color 0.2s;">
+            <div style="font-family: var(--font-formal); font-size: 1.05rem; color: var(--imperial-gold); margin-bottom: 6px;">Founding Charter &rarr;</div>
+            <p style="font-size: 0.8rem; color: var(--ivory-muted); line-height: 1.5; margin: 0;">Full text of the constitutional statutes, code of conduct, and lawful covenants.</p>
+          </a>
+          <a href="archives.html" class="society-card" style="text-decoration: none; padding: 20px; transition: border-color 0.2s;">
+            <div style="font-family: var(--font-formal); font-size: 1.05rem; color: var(--imperial-gold); margin-bottom: 6px;">Society Archives &rarr;</div>
+            <p style="font-size: 0.8rem; color: var(--ivory-muted); line-height: 1.5; margin: 0;">Repository of historical communiqués, declassified research briefs, and foundational decrees.</p>
+          </a>
         </div>
       </section>
     </main>
