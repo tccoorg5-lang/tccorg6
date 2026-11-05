@@ -19,6 +19,8 @@ import {
   AlertTriangle,
   Smartphone,
   Laptop,
+  CheckCircle2,
+  Fingerprint,
 } from 'lucide-react';
 
 export default function SecurityCentrePage() {
@@ -40,12 +42,12 @@ export default function SecurityCentrePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none society-grid-bg">
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Navigation Bar */}
         <div className="flex items-center justify-between border-b border-[#262C3A]/70 pb-4">
           <Link href="/founder">
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" className="gap-1.5">
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Return to Central Command</span>
             </Button>
@@ -58,11 +60,11 @@ export default function SecurityCentrePage() {
 
         {/* Heading */}
         <div className="text-center space-y-2">
-          <SocietySeal size={68} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-2xl md:text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
+          <SocietySeal size={76} glow className="mx-auto" />
+          <h1 className="font-serif-formal text-2xl sm:text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
             Administrative Security Centre
           </h1>
-          <p className="font-serif-editorial text-xs md:text-sm text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-xs md:text-sm text-[#D5CEBF] italic">
             Cryptographic Vault Controls, Active Session Revocation & Threat Defense
           </p>
         </div>
@@ -80,13 +82,13 @@ export default function SecurityCentrePage() {
                 <Badge variant="active">Enforced</Badge>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3 text-xs">
-              <p className="text-[#858995] leading-relaxed">
+            <CardContent className="space-y-3.5 text-xs">
+              <p className="text-[#8993A3] leading-relaxed">
                 Founder accounts require dual-channel authentication using RFC 6238 TOTP authenticators or FIDO2/WebAuthn hardware keys.
               </p>
               <div className="p-3 bg-[#161A22] rounded-[4px] border border-[#262C3A] font-mono text-[0.6875rem] text-[#4ADE80] flex items-center justify-between">
                 <span>HARDWARE ANCHOR: YubiKey 5 NFC</span>
-                <span>VERIFIED</span>
+                <span className="font-bold">VERIFIED</span>
               </div>
               <div className="pt-2">
                 <Button
@@ -107,7 +109,7 @@ export default function SecurityCentrePage() {
           </Card>
 
           {/* Emergency Revocation Card */}
-          <Card variant="default">
+          <Card variant="burgundy">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-red-400">
@@ -117,11 +119,11 @@ export default function SecurityCentrePage() {
                 <Badge variant="revoked">Class I Action</Badge>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3 text-xs">
-              <p className="text-[#858995] leading-relaxed">
+            <CardContent className="space-y-3.5 text-xs">
+              <p className="text-[#8993A3] leading-relaxed">
                 Instantly terminates every active JWT Bearer access token across all devices and resets session clearance in case of suspected token leak.
               </p>
-              <div className="p-3 bg-[#991B1B]/15 border border-[#991B1B]/30 rounded-[4px] text-red-300 text-[0.6875rem] leading-relaxed">
+              <div className="p-3 bg-[#991B1B]/15 border border-[#991B1B]/40 rounded-[4px] text-red-300 text-[0.6875rem] leading-relaxed">
                 <strong>Warning:</strong> This immediately kicks all non-founder members to the Login Gate and resets Supabase Realtime channels.
               </div>
               <div className="pt-2">
@@ -146,24 +148,24 @@ export default function SecurityCentrePage() {
                 <Server className="w-4 h-4 text-[#C5A059]" />
                 <CardTitle>Active Concurrent Sovereign Sessions</CardTitle>
               </div>
-              <span className="font-mono text-xs text-[#858995]">1 Active Founder Session</span>
+              <span className="font-mono text-xs text-[#8993A3]">1 Active Founder Session</span>
             </div>
           </CardHeader>
           <CardContent className="space-y-3 text-xs">
-            <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between">
+            <div className="p-4 rounded-[6px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Laptop className="w-5 h-5 text-[#C5A059]" />
+                <Laptop className="w-5 h-5 text-[#D8B26E]" />
                 <div>
                   <div className="font-serif-formal font-bold text-[#E9E2D3]">
-                    Current Workstation &bull; Windows NT 10.0
+                    Current Workstation &bull; Authenticated Operating System
                   </div>
-                  <div className="text-[0.625rem] text-[#858995] font-mono">
-                    SESSION ID: auth_sess_9a8f... &bull; Initiated Today 20:50 UTC
+                  <div className="text-[0.625rem] text-[#8993A3] font-mono mt-0.5">
+                    SESSION ID: auth_sess_9a8f... &bull; Initiated Today &bull; Zero-Trust Verified
                   </div>
                 </div>
               </div>
               <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-pulse" />
                 Current Device
               </span>
             </div>

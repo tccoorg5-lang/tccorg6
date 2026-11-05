@@ -53,18 +53,18 @@ export default function RoundTablePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none society-grid-bg">
       <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="High Council Conclave Chamber" badgeVariant="gold" />
 
         {/* Heading */}
         <div className="text-center space-y-3">
-          <SocietySeal size={72} glow className="mx-auto" />
+          <SocietySeal size={76} glow className="mx-auto" />
           <h1 className="font-serif-formal text-2xl sm:text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
             The Round Table
           </h1>
-          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-sm md:text-base text-[#D5CEBF] italic">
             Parliamentary Governance, Quorum Standing & Constitutional Resolutions
           </p>
         </div>
@@ -74,7 +74,7 @@ export default function RoundTablePage() {
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="text-[0.625rem] font-serif-formal uppercase tracking-widest text-[#C5A059] block">
+                <span className="text-[0.625rem] font-serif-formal uppercase tracking-widest text-[#C5A059] block font-semibold">
                   Active Parliamentary Session
                 </span>
                 <CardTitle className="mt-1">
@@ -95,19 +95,19 @@ export default function RoundTablePage() {
             <div className="p-4 rounded-[6px] bg-[#161A22] border border-[#262C3A] space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Vote className="w-4 h-4 text-[#C5A059]" />
+                  <Vote className="w-4 h-4 text-[#D8B26E]" />
                   <span className="font-serif-formal text-xs font-bold text-[#E9E2D3] uppercase">
                     Resolution 2026-IV &bull; Open-Source Audit Standards
                   </span>
                 </div>
-                <span className="text-[0.625rem] font-mono text-[#858995]">Voting Open</span>
+                <span className="text-[0.625rem] font-mono text-[#D8B26E] font-bold">Voting Open</span>
               </div>
-              <p className="text-xs text-[#858995] leading-relaxed">
+              <p className="text-xs text-[#8993A3] leading-relaxed">
                 Proposal to formalize reproducible cryptographic hashing requirements across all public-interest data dossiers submitted by Fellows.
               </p>
 
               <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/60">
-                <span className="text-[0.6875rem] text-[#858995] font-mono">
+                <span className="text-[0.6875rem] text-[#8993A3] font-mono">
                   Current Tally: 4 Ayes &bull; 0 Nays
                 </span>
                 {!hasVoted ? (
@@ -145,21 +145,21 @@ export default function RoundTablePage() {
             <h3 className="font-serif-formal text-sm font-bold text-[#D8B26E] uppercase tracking-wider">
               High Council Seats (Septemvirate)
             </h3>
-            <span className="text-[0.625rem] font-mono text-[#858995]">5 Occupied &bull; 2 Vacant</span>
+            <span className="text-[0.625rem] font-mono text-[#8993A3]">5 Occupied &bull; 2 Vacant</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {COUNCIL_SEATS.map((seat) => (
               <div
                 key={seat.seatNumber}
-                className={`p-4 rounded-[6px] border flex flex-col justify-between space-y-3 ${
+                className={`p-5 rounded-[8px] border flex flex-col justify-between space-y-3 transition-all relative overflow-hidden ${
                   seat.status === 'Occupied'
-                    ? 'bg-[#0F1218] border-[#262C3A] hover:border-[rgba(197,160,89,0.35)]'
+                    ? 'bg-[#0F1218] border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] shadow-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent'
                     : 'bg-[#080A0E] border-dashed border-[#262C3A]/60 opacity-60'
                 }`}
               >
                 <div className="flex items-start justify-between">
-                  <span className="font-mono text-[0.625rem] text-[#C5A059] font-bold">
+                  <span className="font-mono text-[0.625rem] text-[#D8B26E] font-bold">
                     SEAT #{seat.seatNumber}
                   </span>
                   <Badge variant={seat.status === 'Occupied' ? 'gold' : 'neutral'}>
@@ -171,12 +171,12 @@ export default function RoundTablePage() {
                   <h4 className="font-serif-formal text-sm font-bold text-[#E9E2D3]">
                     {seat.codename}
                   </h4>
-                  <p className="text-[0.6875rem] text-[#858995] font-serif-editorial italic">
+                  <p className="text-[0.6875rem] text-[#8993A3] font-serif-editorial italic">
                     {seat.role}
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-[#262C3A]/60 text-[0.625rem] font-mono text-[#858995]">
+                <div className="pt-2 border-t border-[#262C3A]/60 text-[0.625rem] font-mono text-[#8993A3]">
                   <span>{seat.rank}</span>
                 </div>
               </div>

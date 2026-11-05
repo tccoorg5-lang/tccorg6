@@ -76,18 +76,18 @@ export default function ArchivesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none society-grid-bg">
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="Society Historical Archives" badgeVariant="gold" />
 
         {/* Heading */}
         <div className="text-center space-y-3">
-          <SocietySeal size={72} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
+          <SocietySeal size={76} glow className="mx-auto" />
+          <h1 className="font-serif-formal text-2xl sm:text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
             Society Archives & Vault
           </h1>
-          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-sm md:text-base text-[#D5CEBF] italic">
             Historical Resolutions, Founding Decrees & The Lexicon of Codenames
           </p>
         </div>
@@ -106,14 +106,14 @@ export default function ArchivesPage() {
           {filtered.map((doc) => (
             <div
               key={doc.ref}
-              className="p-6 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.35)] transition-all space-y-3 shadow-md"
+              className="p-6 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] transition-all space-y-3 shadow-md relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)]"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#262C3A]/60 pb-3">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-[#C5A059]" />
-                  <span className="font-mono text-xs font-bold text-[#C5A059]">{doc.ref}</span>
-                  <span className="text-[#858995] text-xs">&bull;</span>
-                  <span className="font-serif-formal text-xs text-[#858995] uppercase tracking-wider">
+                  <FileText className="w-4 h-4 text-[#D8B26E]" />
+                  <span className="font-mono text-xs font-bold text-[#D8B26E]">{doc.ref}</span>
+                  <span className="text-[#8993A3] text-xs">&bull;</span>
+                  <span className="font-serif-formal text-xs text-[#8993A3] uppercase tracking-wider font-semibold">
                     {doc.category}
                   </span>
                 </div>
@@ -124,11 +124,11 @@ export default function ArchivesPage() {
                 {doc.title}
               </h3>
 
-              <p className="font-serif-editorial text-xs md:text-sm text-[#858995] leading-relaxed italic">
+              <p className="font-serif-editorial text-xs md:text-sm text-[#D5CEBF] leading-relaxed italic">
                 {doc.summary}
               </p>
 
-              <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/50 text-xs text-[#858995]">
+              <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/50 text-xs text-[#8993A3]">
                 <span className="font-mono text-[0.625rem]">Date Ratified: {doc.date}</span>
                 <Button
                   variant="outline"
