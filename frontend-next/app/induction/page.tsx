@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { SocietySeal } from '@/components/brand/society-seal';
+import { SecurityLattice } from '@/components/brand/security-lattice';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -12,7 +13,6 @@ import { api, setStoredSession } from '@/lib/api';
 import { getSupabaseClient } from '@/lib/supabase';
 import {
   KeyRound,
-  Mail,
   Lock,
   CheckCircle,
   AlertCircle,
@@ -143,24 +143,23 @@ export default function InductionPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-6 bg-[#080A0E] relative overflow-hidden select-none">
-      {/* Background Crest Watermark */}
-      <div className="absolute opacity-[0.03] pointer-events-none -right-28 -bottom-28">
-        <SocietySeal size={650} />
+    <div className="min-h-screen flex flex-col justify-between p-4 sm:p-6 md:p-8 bg-[#080A0E] relative overflow-hidden select-none society-grid-bg">
+      {/* Background Security Reticle & Geometric Lattice */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-25">
+        <SecurityLattice size={800} />
       </div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C5A059]/5 via-transparent to-transparent pointer-events-none" />
 
       {/* Header */}
-      <header className="relative z-10 max-w-6xl mx-auto w-full flex items-center justify-between py-2 text-xs border-b border-[#262C3A]/40">
-        <div className="flex items-center gap-2 text-[#858995]">
-          <span className="w-2 h-2 rounded-full bg-[#C5A059]/70 animate-pulse" />
-          <span className="font-serif-formal tracking-wider uppercase text-[0.6875rem]">
-            Gate of Induction &bull; Candidate Enrollment
+      <header className="relative z-10 max-w-5xl mx-auto w-full flex items-center justify-between py-3 text-xs border-b border-[#262C3A]/60">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
+          <span className="font-serif-formal tracking-wider uppercase text-[0.6875rem] text-[#D8B26E] font-semibold">
+            Gate of Induction &bull; Candidate Enrollment Protocol
           </span>
         </div>
         <Link
           href="/login"
-          className="inline-flex items-center gap-1.5 text-xs text-[#858995] hover:text-[#C5A059] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-[#8993A3] hover:text-[#D8B26E] transition-colors font-serif-formal uppercase tracking-wider"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Return to Access Gate</span>
@@ -169,14 +168,14 @@ export default function InductionPage() {
 
       {/* Main Container */}
       <main className="relative z-10 max-w-xl w-full mx-auto my-auto py-8">
-        <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.35)] shadow-[0_16px_64px_rgba(0,0,0,0.85)] p-8 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+        <div className="rounded-[10px] bg-[#0F1218]/95 backdrop-blur-md border border-[rgba(197,160,89,0.35)] shadow-[0_24px_80px_rgba(0,0,0,0.9),0_0_32px_rgba(197,160,89,0.08)] p-6 sm:p-8 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
           {/* Header Title & Seal */}
           <div className="text-center space-y-2 mb-6">
-            <SocietySeal size={68} glow className="mx-auto" />
+            <SocietySeal size={72} glow className="mx-auto" />
             <h1 className="font-serif-formal text-xl font-bold tracking-[0.16em] text-[#D8B26E] uppercase">
               {step === 3 ? 'Credential Bestowed' : 'Fellow Induction Gate'}
             </h1>
-            <p className="font-serif-editorial text-xs text-[#B5B5BC] italic">
+            <p className="font-serif-editorial text-xs text-[#D5CEBF] italic">
               {step === 1 && 'Step 1: Cryptographic Token Pre-Verification'}
               {step === 2 && 'Step 2: Credential Provisioning & Solemn Oath'}
               {step === 3 && 'Induction Ratified & Recorded in Institutional Archives'}
@@ -186,24 +185,24 @@ export default function InductionPage() {
             <div className="flex items-center justify-center gap-2 pt-2">
               <span
                 className={`w-8 h-1 rounded-full transition-all ${
-                  step >= 1 ? 'bg-[#C5A059]' : 'bg-[#262C3A]'
+                  step >= 1 ? 'bg-[#D8B26E]' : 'bg-[#262C3A]'
                 }`}
               />
               <span
                 className={`w-8 h-1 rounded-full transition-all ${
-                  step >= 2 ? 'bg-[#C5A059]' : 'bg-[#262C3A]'
+                  step >= 2 ? 'bg-[#D8B26E]' : 'bg-[#262C3A]'
                 }`}
               />
               <span
                 className={`w-8 h-1 rounded-full transition-all ${
-                  step >= 3 ? 'bg-[#C5A059]' : 'bg-[#262C3A]'
+                  step >= 3 ? 'bg-[#D8B26E]' : 'bg-[#262C3A]'
                 }`}
               />
             </div>
           </div>
 
           {error && (
-            <div className="mb-5 p-3 rounded-[4px] bg-[#991B1B]/15 border border-[#991B1B]/50 text-xs text-red-300 flex items-start gap-2.5">
+            <div className="mb-5 p-3 rounded-[4px] bg-[#991B1B]/15 border border-[#991B1B]/50 text-xs text-red-300 flex items-start gap-2.5 animate-in fade-in">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-400" />
               <span className="leading-relaxed">{error}</span>
             </div>
@@ -217,7 +216,7 @@ export default function InductionPage() {
                 placeholder="ps_..."
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
-                hint="Provided directly by the Founder. Single-use, time-limited token."
+                hint="Provided directly by Founder authority. Single-use, time-limited token."
                 required
                 className="font-mono text-xs tracking-wider"
               />
@@ -226,7 +225,7 @@ export default function InductionPage() {
                 type="submit"
                 variant="gold"
                 size="lg"
-                className="w-full mt-3"
+                className="w-full mt-3 py-3"
                 isLoading={isVerifying}
               >
                 <span>Verify Token Authority</span>
@@ -239,17 +238,17 @@ export default function InductionPage() {
           {step === 2 && tokenVerification && (
             <form onSubmit={handleRedeem} className="space-y-5">
               {/* Confirmed Token Dossier Banner */}
-              <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.3)] space-y-2">
+              <div className="p-4 rounded-[6px] bg-[#161A22] border border-[rgba(197,160,89,0.35)] space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-[#4ADE80] text-xs font-serif-formal font-bold">
-                    <CheckCircle className="w-3.5 h-3.5" />
-                    <span>Token Verified & Valid</span>
+                    <CheckCircle className="w-4 h-4" />
+                    <span>Cryptographic Token Verified</span>
                   </div>
                   <Badge variant="gold">{tokenVerification.assigned_rank}</Badge>
                 </div>
-                <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-[#262C3A]">
+                <div className="grid grid-cols-2 gap-3 text-xs pt-2.5 border-t border-[#262C3A]">
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Conferred Codename
                     </span>
                     <span className="font-serif-formal text-sm text-[#D8B26E] font-bold">
@@ -257,11 +256,11 @@ export default function InductionPage() {
                     </span>
                   </div>
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Bound Recipient
                     </span>
                     <span className="font-mono text-xs text-[#E9E2D3]">
-                      {tokenVerification.masked_email || 'Person-Specific'}
+                      {tokenVerification.masked_email || 'Candidate-Specific'}
                     </span>
                   </div>
                 </div>
@@ -300,15 +299,15 @@ export default function InductionPage() {
               </div>
 
               {/* Solemn Discretion Oath */}
-              <div className="p-4 rounded-[4px] bg-[#080A0E] border border-[#262C3A] space-y-3">
-                <div className="flex items-center gap-2 text-[#C5A059] font-serif-formal text-xs font-bold uppercase tracking-wider">
+              <div className="p-4 rounded-[6px] bg-[#080A0E] border border-[#262C3A] space-y-3">
+                <div className="flex items-center gap-2 text-[#D8B26E] font-serif-formal text-xs font-bold uppercase tracking-wider">
                   <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
                   <span>The Solemn Discretion Oath</span>
                 </div>
-                <p className="font-serif-editorial text-xs text-[#B5B5BC] italic leading-relaxed">
+                <p className="font-serif-editorial text-xs text-[#D5CEBF] italic leading-relaxed">
                   &ldquo;I hereby solemnly affirm upon my personal honour to observe utmost discretion, safeguard the confidentiality of all dispatches, and dedicate my intellect and character to public welfare, research, and meritocratic service under The Society.&rdquo;
                 </p>
-                <div className="space-y-2 pt-1 border-t border-[#262C3A]/60">
+                <div className="space-y-2 pt-2 border-t border-[#262C3A]/60">
                   <label className="flex items-start gap-2.5 text-xs text-[#E9E2D3] cursor-pointer">
                     <input
                       type="checkbox"
@@ -316,7 +315,7 @@ export default function InductionPage() {
                       onChange={(e) => setHasAffirmedOath(e.target.checked)}
                       className="mt-0.5 accent-[#C5A059] rounded"
                     />
-                    <span>I affirm the Solemn Discretion Oath in its entirety.</span>
+                    <span>I solemnly affirm the Discretion Oath in its entirety.</span>
                   </label>
                   <label className="flex items-start gap-2.5 text-xs text-[#E9E2D3] cursor-pointer">
                     <input
@@ -330,7 +329,7 @@ export default function InductionPage() {
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-3 pt-1">
                 <Button
                   type="button"
                   variant="ghost"
@@ -343,7 +342,7 @@ export default function InductionPage() {
                   type="submit"
                   variant="gold"
                   size="lg"
-                  className="flex-1"
+                  className="flex-1 py-3"
                   isLoading={isRedeeming}
                 >
                   <FileCheck className="w-4 h-4" />
@@ -357,54 +356,54 @@ export default function InductionPage() {
           {step === 3 && (
             <div className="space-y-6 text-center animate-in fade-in zoom-in-95 duration-300">
               {/* Physical Institutional Member Dossier Card */}
-              <div className="p-6 rounded-[8px] bg-gradient-to-br from-[#161A22] via-[#0F1218] to-[#1B2029] border border-[rgba(197,160,89,0.5)] shadow-[0_8px_32px_rgba(197,160,89,0.15)] text-left relative overflow-hidden space-y-4">
+              <div className="p-6 rounded-[8px] bg-gradient-to-br from-[#1B2029] via-[#0F1218] to-[#161A22] border border-[rgba(197,160,89,0.5)] shadow-[0_16px_48px_rgba(197,160,89,0.15)] text-left relative overflow-hidden space-y-4 before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
                 <div className="flex items-start justify-between border-b border-[#262C3A] pb-3">
                   <div>
                     <span className="font-serif-formal text-[0.625rem] font-bold text-[#C5A059] uppercase tracking-widest block">
                       The Society &bull; Sovereign Roll
                     </span>
-                    <h3 className="font-serif-formal text-lg font-bold text-[#D8B26E] tracking-wider">
+                    <h3 className="font-serif-formal text-lg font-bold text-[#D8B26E] tracking-wider uppercase mt-0.5">
                       {inductedMember?.codename}
                     </h3>
                   </div>
-                  <SocietySeal size={40} glow />
+                  <SocietySeal size={44} glow />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 text-xs">
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Conferred Rank
                     </span>
                     <Badge variant="gold">{inductedMember?.rank || 'Initiate'}</Badge>
                   </div>
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Induction Status
                     </span>
                     <Badge variant="active">Full Standing</Badge>
                   </div>
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Authentication
                     </span>
                     <span className="font-mono text-[0.6875rem] text-[#E9E2D3]">Ed25519 Verified</span>
                   </div>
                   <div>
-                    <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                    <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">
                       Council Standing
                     </span>
                     <span className="font-serif-formal text-xs text-[#E9E2D3]">General Assembly</span>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-[#262C3A]/60 flex items-center justify-between text-[0.625rem] text-[#858995] font-mono">
+                <div className="pt-2 border-t border-[#262C3A]/60 flex items-center justify-between text-[0.625rem] text-[#8993A3] font-mono">
                   <span>DISCRETION &bull; INTEGRITY &bull; MERIT</span>
                   <span>SOC-2026</span>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <p className="text-xs text-[#858995]">
+                <p className="text-xs text-[#8993A3]">
                   Your credentials have been securely registered. Proceed to your Member Chambers.
                 </p>
                 <Button
@@ -423,7 +422,7 @@ export default function InductionPage() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 max-w-6xl mx-auto w-full text-center py-4 border-t border-[#262C3A]/40 text-[0.6875rem] text-[#858995]">
+      <footer className="relative z-10 max-w-5xl mx-auto w-full text-center py-4 border-t border-[#262C3A]/60 text-[0.6875rem] text-[#8993A3]">
         <p>The Society &bull; Cryptographic Enrollment Protocol &bull; Strictly Invitation-Only</p>
       </footer>
     </div>
