@@ -16,8 +16,10 @@ import {
   ShieldCheck,
   UserCheck,
   LogOut,
+  Fingerprint,
 } from 'lucide-react';
 import { SocietySeal } from '@/components/brand/society-seal';
+import { TelemetryPill } from '@/components/brand/telemetry-pill';
 import { MemberProfile } from '@/types/society';
 import { clearStoredSession } from '@/lib/api';
 
@@ -89,16 +91,17 @@ export function FounderNavRail({
   ];
 
   return (
-    <aside className="w-64 bg-[var(--obsidian)] border-r border-[var(--charcoal-border)] flex flex-col justify-between shrink-0 h-screen select-none overflow-y-auto">
+    <aside className="w-64 bg-[#0F1218] border-r border-[#262C3A] flex flex-col justify-between shrink-0 h-screen select-none overflow-y-auto relative z-20">
       <div>
         {/* Header */}
-        <div className="p-5 border-b border-[var(--charcoal-border)] flex items-center gap-3">
-          <SocietySeal size={38} glow />
+        <div className="p-5 border-b border-[#262C3A] flex items-center gap-3 bg-[#080A0E]/50">
+          <SocietySeal size={40} glow />
           <div className="flex flex-col">
-            <span className="font-serif-formal text-[0.875rem] font-bold tracking-widest text-[var(--imperial-gold)]">
-              CENTRAL COMMAND
+            <span className="font-serif-formal text-[0.875rem] font-bold tracking-[0.14em] text-[#D8B26E] uppercase">
+              Central Command
             </span>
-            <span className="text-[0.6875rem] tracking-wider text-[var(--antique-gold)] uppercase font-semibold">
+            <span className="text-[0.625rem] font-mono tracking-wider text-[#C5A059] uppercase flex items-center gap-1.5 mt-0.5 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5C161D] border border-[#D8B26E] animate-pulse" />
               Founder Authority
             </span>
           </div>
@@ -106,7 +109,7 @@ export function FounderNavRail({
 
         {/* 5 Primary Sections */}
         <div className="p-3">
-          <div className="text-[0.625rem] font-serif-formal tracking-widest uppercase text-[var(--muted-grey)] px-3 mb-2">
+          <div className="text-[0.625rem] font-serif-formal tracking-widest uppercase text-[#8993A3] px-3 mb-2 font-semibold">
             Command Modules
           </div>
           <nav className="space-y-1">
@@ -118,13 +121,13 @@ export function FounderNavRail({
                   key={sec.id}
                   type="button"
                   onClick={() => onSectionChange(sec.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-sm)] text-[0.8125rem] font-medium transition-all text-left ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-[4px] text-[0.8125rem] font-medium transition-all text-left ${
                     isActive
-                      ? 'bg-[rgba(197,160,89,0.12)] text-[var(--imperial-gold)] border border-[var(--gold-border)] shadow-[0_2px_12px_rgba(197,160,89,0.1)]'
-                      : 'text-[var(--ivory-muted)] hover:bg-[var(--charcoal)] hover:text-[var(--ivory)]'
+                      ? 'bg-gradient-to-r from-[rgba(197,160,89,0.2)] to-[rgba(197,160,89,0.06)] text-[#D8B26E] border-l-2 border-[#D8B26E] shadow-[0_2px_16px_rgba(197,160,89,0.12)]'
+                      : 'text-[#E9E2D3] hover:bg-[#161A22] hover:text-[#D8B26E]'
                   }`}
                 >
-                  <Icon className="w-4 h-4 shrink-0 text-[var(--antique-gold)]" />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#D8B26E]' : 'text-[#8993A3]'}`} />
                   <span className="font-serif-formal tracking-wider">{sec.label}</span>
                 </button>
               );
@@ -133,8 +136,8 @@ export function FounderNavRail({
         </div>
 
         {/* Dedicated Chambers */}
-        <div className="p-3 border-t border-[var(--charcoal-border)]">
-          <div className="text-[0.625rem] font-serif-formal tracking-widest uppercase text-[var(--muted-grey)] px-3 mb-2">
+        <div className="p-3 border-t border-[#262C3A]">
+          <div className="text-[0.625rem] font-serif-formal tracking-widest uppercase text-[#8993A3] px-3 mb-2 font-semibold">
             Dedicated Chambers
           </div>
           <nav className="space-y-0.5">
@@ -144,30 +147,35 @@ export function FounderNavRail({
                 <Link
                   key={page.href}
                   href={page.href}
-                  className="flex items-center gap-3 px-3 py-2 rounded-[var(--radius-sm)] text-[0.75rem] font-medium text-[var(--ivory-muted)] hover:bg-[var(--charcoal)] hover:text-[var(--antique-gold)] transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 rounded-[4px] text-[0.75rem] font-medium text-[#8993A3] hover:bg-[#161A22] hover:text-[#D8B26E] transition-colors"
                 >
-                  <Icon className="w-3.5 h-3.5 shrink-0 text-[var(--dim-grey)]" />
+                  <Icon className="w-3.5 h-3.5 shrink-0 text-[#C5A059]" />
                   <span>{page.label}</span>
                 </Link>
               );
             })}
           </nav>
         </div>
+
+        {/* Live Enclave Telemetry */}
+        <div className="px-4 py-2">
+          <TelemetryPill variant="compact" className="w-full justify-center" />
+        </div>
       </div>
 
       {/* Footer (Switch to Member View & Logout) */}
-      <div className="p-3 border-t border-[var(--charcoal-border)] flex items-center justify-between gap-2">
+      <div className="p-3 border-t border-[#262C3A] bg-[#080A0E]/50 flex items-center justify-between gap-2">
         <Link
           href="/member"
-          className="flex items-center gap-2 px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-[var(--charcoal)] border border-[var(--charcoal-border)] hover:border-[var(--antique-gold)] text-[0.75rem] font-medium text-[var(--ivory)] transition-all overflow-hidden"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] hover:border-[#D8B26E] text-[0.75rem] font-medium text-[#E9E2D3] transition-all overflow-hidden"
           title="Switch to Member View"
         >
-          <UserCheck className="w-3.5 h-3.5 text-[var(--antique-gold)] shrink-0" />
+          <UserCheck className="w-3.5 h-3.5 text-[#D8B26E] shrink-0" />
           <div className="flex flex-col min-w-0">
-            <span className="text-[0.6875rem] font-serif-formal text-[var(--imperial-gold)] leading-tight">
+            <span className="text-[0.6875rem] font-serif-formal text-[#D8B26E] leading-tight font-semibold">
               {profile?.codename || 'SOVEREIGN'}
             </span>
-            <span className="text-[0.5625rem] text-[var(--muted-grey)] leading-tight">Member View</span>
+            <span className="text-[0.5625rem] font-mono text-[#8993A3] leading-tight">Member Chambers &rarr;</span>
           </div>
         </Link>
 
@@ -176,7 +184,7 @@ export function FounderNavRail({
           onClick={handleLogout}
           title="Lock Vault"
           aria-label="Lock Vault"
-          className="p-2 text-[var(--muted-grey)] hover:text-[var(--antique-gold)] transition-colors rounded hover:bg-[var(--charcoal)]"
+          className="p-2 text-[#8993A3] hover:text-[#EF4444] hover:bg-[#161A22] transition-colors rounded-[4px]"
         >
           <LogOut className="w-4 h-4" />
         </button>

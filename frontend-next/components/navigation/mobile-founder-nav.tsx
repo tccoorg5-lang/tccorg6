@@ -51,20 +51,20 @@ export function MobileFounderNav({
       {/* Slide-up Chambers Modal Sheet for Founder */}
       {isChambersOpen && (
         <div className="lg:hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex flex-col justify-end animate-in fade-in duration-200">
-          <div className="bg-[#0F1218] border-t border-[#C5A059]/40 rounded-t-[12px] p-5 pb-8 space-y-4 max-h-[75vh] overflow-y-auto">
+          <div className="bg-[#0F1218] border-t border-[#C5A059]/40 rounded-t-[14px] p-5 pb-8 space-y-4 max-h-[75vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div>
                 <h3 className="font-serif-formal text-sm font-bold text-[#D8B26E] uppercase tracking-wider">
                   Sovereign Chambers & Directives
                 </h3>
-                <span className="text-[0.6875rem] text-[#858995]">
+                <span className="text-[0.6875rem] text-[#8993A3]">
                   High councils, rolls of honour, and cryptographic controls
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setIsChambersOpen(false)}
-                className="p-1.5 text-[#858995] hover:text-[#E9E2D3]"
+                className="p-1.5 text-[#8993A3] hover:text-[#E9E2D3]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -109,7 +109,7 @@ export function MobileFounderNav({
               className={`flex flex-col items-center justify-center min-w-[56px] py-1 px-1.5 rounded-[4px] transition-all min-h-[48px] ${
                 isActive
                   ? 'text-[#D8B26E]'
-                  : 'text-[#858995] hover:text-[#E9E2D3]'
+                  : 'text-[#8993A3] hover:text-[#E9E2D3]'
               }`}
             >
               <Icon className="w-4 h-4 mb-0.5" />
@@ -127,7 +127,7 @@ export function MobileFounderNav({
         <button
           type="button"
           onClick={() => setIsChambersOpen(true)}
-          className="flex flex-col items-center justify-center min-w-[56px] py-1 px-1.5 rounded-[4px] text-[#858995] hover:text-[#C5A059] transition-all min-h-[48px]"
+          className="flex flex-col items-center justify-center min-w-[56px] py-1 px-1.5 rounded-[4px] text-[#8993A3] hover:text-[#C5A059] transition-all min-h-[48px]"
         >
           <Compass className="w-4 h-4 mb-0.5 text-[#C5A059]" />
           <span className="text-[0.5625rem] font-serif-formal font-semibold tracking-wider text-[#C5A059]">

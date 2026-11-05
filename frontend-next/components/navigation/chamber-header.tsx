@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge, BadgeProps } from '@/components/ui/badge';
 import { isFounderSession } from '@/lib/api';
@@ -28,22 +28,22 @@ export function ChamberHeader({
         {isFounder ? (
           <>
             <Link href="/founder">
-              <Button variant="gold" size="sm">
+              <Button variant="gold" size="sm" className="gap-1.5">
                 <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Return to Central Command</span>
+                <span>Central Command</span>
               </Button>
             </Link>
             <Link href="/member">
               <Button variant="secondary" size="sm">
-                <span>Member View</span>
+                <span>Member Chambers</span>
               </Button>
             </Link>
           </>
         ) : (
           <Link href="/member">
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" className="gap-1.5">
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Return to Vault</span>
+              <span>Return to Chambers</span>
             </Button>
           </Link>
         )}

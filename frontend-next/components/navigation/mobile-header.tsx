@@ -34,7 +34,7 @@ export function MobileHeader({
     <header className="lg:hidden h-14 bg-[#0F1218] border-b border-[#262C3A] px-4 flex items-center justify-between shrink-0 select-none z-30">
       {/* Left: Emblem + Brand */}
       <div className="flex items-center gap-2.5">
-        <SocietySeal size={28} glow />
+        <SocietySeal size={32} glow />
         <div className="flex flex-col">
           <span className="font-serif-formal text-xs font-bold tracking-widest text-[#D8B26E] leading-tight">
             {title}
@@ -51,7 +51,7 @@ export function MobileHeader({
         {isFounder && (
           <Link
             href="/founder"
-            className="p-1.5 rounded-[4px] bg-[rgba(92,22,29,0.3)] border border-[rgba(197,160,89,0.3)] text-[#D8B26E]"
+            className="p-1.5 rounded-[4px] bg-[#5C161D]/30 border border-[#8C232D]/70 text-[#D8B26E]"
             title="Central Command"
           >
             <ShieldAlert className="w-4 h-4" />
@@ -61,23 +61,24 @@ export function MobileHeader({
         {/* Notifications Shortcut */}
         <Link
           href="/notifications"
-          className="p-1.5 rounded-[4px] text-[#858995] hover:text-[#C5A059] transition-colors"
+          className="p-1.5 rounded-[4px] text-[#8993A3] hover:text-[#D8B26E] transition-colors relative"
           title="Notifications"
         >
           <Bell className="w-4 h-4" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D8B26E] absolute top-1 right-1 animate-pulse" />
         </Link>
 
         {/* Codename Pill */}
-        <div className="flex items-center gap-1.5 px-2 py-1 rounded-[4px] bg-[#161A22] border border-[#262C3A] text-[0.6875rem] font-serif-formal text-[#E9E2D3]">
-          <span className="w-2 h-2 rounded-full bg-[#4ADE80]" />
-          <span className="truncate max-w-[80px]">{profile?.codename || 'Fellow'}</span>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#161A22] border border-[#262C3A] text-[0.6875rem] font-serif-formal text-[#E9E2D3]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
+          <span className="truncate max-w-[80px] font-semibold">{profile?.codename || 'Fellow'}</span>
         </div>
 
         {/* Logout */}
         <button
           type="button"
           onClick={handleLogout}
-          className="p-1.5 text-[#858995] hover:text-[#EF4444] transition-colors"
+          className="p-1.5 text-[#8993A3] hover:text-[#EF4444] transition-colors"
           title="Exit Vault"
           aria-label="Exit Vault"
         >
