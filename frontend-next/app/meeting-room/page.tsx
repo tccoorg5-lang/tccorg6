@@ -57,39 +57,44 @@ export default function MeetingRoomPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none society-grid-bg">
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="Synchronous Conclave Chamber" badgeVariant="gold" />
 
         {/* Heading */}
         <div className="text-center space-y-2">
-          <SocietySeal size={72} glow className="mx-auto" />
-          <h1 className="font-serif-formal text-3xl font-bold tracking-widest text-[#D8B26E] uppercase">
+          <SocietySeal size={76} glow className="mx-auto" />
+          <h1 className="font-serif-formal text-2xl sm:text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
             Meeting Room & Conclave
           </h1>
-          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-sm md:text-base text-[#D5CEBF] italic">
             Synchronous Deliberations & Encrypted Audio-Visual Symposia
           </p>
         </div>
 
         {/* Central Standby Screen */}
-        <div className="p-8 md:p-12 rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.35)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] text-center space-y-6 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
-          <div className="w-16 h-16 rounded-full bg-[#161A22] border border-[rgba(197,160,89,0.4)] flex items-center justify-center mx-auto text-[#C5A059] shadow-[0_0_20px_rgba(197,160,89,0.15)]">
-            <Radio className="w-8 h-8 animate-pulse text-[#D8B26E]" />
+        <div className="p-8 md:p-12 rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(197,160,89,0.1)] text-center space-y-6 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
+          {/* Subtle Radar Standby Motif */}
+          <div className="relative w-24 h-24 mx-auto flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border border-[#262C3A]" />
+            <div className="absolute inset-2 rounded-full border border-[#C5A059]/30 border-dashed" />
+            <div className="w-16 h-16 rounded-full bg-[#161A22] border border-[rgba(197,160,89,0.45)] flex items-center justify-center text-[#D8B26E] shadow-[0_0_24px_rgba(197,160,89,0.2)]">
+              <Radio className="w-8 h-8 animate-pulse text-[#D8B26E]" />
+            </div>
           </div>
 
           <div className="space-y-2 max-w-lg mx-auto">
             <h2 className="font-serif-formal text-xl font-bold text-[#E9E2D3] uppercase tracking-wider">
               {joined ? 'Conclave Chamber Active' : 'Chamber in Standby Mode'}
             </h2>
-            <p className="font-serif-editorial text-sm text-[#858995] italic leading-relaxed">
+            <p className="font-serif-editorial text-sm text-[#8993A3] italic leading-relaxed">
               Synchronous conclaves convene upon official summons from the Founder or High Council. All media streams are transmitted via encrypted peer channels with human-verified minutes.
             </p>
           </div>
 
           {/* Media Hardware Toggles */}
-          <div className="flex items-center justify-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <Button
               variant={micEnabled ? 'gold' : 'secondary'}
               size="md"
@@ -125,14 +130,14 @@ export default function MeetingRoomPage() {
           </div>
 
           {/* Security Protocols Footer */}
-          <div className="pt-6 border-t border-[#262C3A]/60 flex flex-wrap items-center justify-center gap-6 text-xs text-[#858995] font-mono">
+          <div className="pt-6 border-t border-[#262C3A]/60 flex flex-wrap items-center justify-center gap-6 text-xs text-[#8993A3] font-mono">
             <span>Next Conclave: Conclave IV</span>
             <span>&bull;</span>
             <span>Quorum Requirement: 5 Fellows</span>
             <span>&bull;</span>
             <span className="text-[#4ADE80] flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Direct Encrypted Protocol</span>
+              <span>Direct Peer Protocol</span>
             </span>
           </div>
         </div>

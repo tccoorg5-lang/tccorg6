@@ -10,6 +10,7 @@ import { MobileMemberBottomNav } from '@/components/navigation/mobile-member-bot
 import { TabProfile } from '@/components/member/tab-profile';
 import { TabCommunications } from '@/components/member/tab-communications';
 import { TabCodename } from '@/components/member/tab-codename';
+import { SocietySeal } from '@/components/brand/society-seal';
 import { MemberProfile } from '@/types/society';
 import { Loader2 } from 'lucide-react';
 
@@ -46,12 +47,15 @@ export default function MemberPortalPage() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-[var(--midnight-black)] text-[var(--antique-gold)]">
+      <div className="flex h-screen w-screen items-center justify-center bg-[#080A0E] text-[#D8B26E]">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin" />
-          <span className="font-serif-formal text-sm tracking-widest uppercase">
-            Accessing Vault Records...
-          </span>
+          <SocietySeal size={64} glow />
+          <div className="flex items-center gap-2 mt-2">
+            <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
+            <span className="font-serif-formal text-xs tracking-widest uppercase">
+              Accessing Vault Records...
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -65,7 +69,7 @@ export default function MemberPortalPage() {
       : 'Codename Dossier';
 
   return (
-    <div className="flex h-screen bg-[var(--midnight-black)] text-[var(--ivory)] overflow-hidden">
+    <div className="flex h-screen bg-[#080A0E] text-[#E9E2D3] overflow-hidden">
       {/* 3-Tab Vertical Navigation Rail (Desktop & Large Tablet Landscape) */}
       <div className="hidden lg:flex shrink-0">
         <MemberNavRail
@@ -87,7 +91,7 @@ export default function MemberPortalPage() {
 
         {/* Tab Panel Content Area */}
         <main
-          className={`flex-1 overflow-y-auto bg-[var(--midnight-black)] ${
+          className={`flex-1 overflow-y-auto bg-[#080A0E] ${
             activeTab === 'communications'
               ? 'p-0 pb-16 lg:pb-0'
               : 'p-3.5 sm:p-6 lg:p-8 pb-20 lg:pb-8'

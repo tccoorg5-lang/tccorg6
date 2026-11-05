@@ -95,7 +95,7 @@ export function SectionGovernance() {
           <h1 className="font-serif-formal text-2xl font-bold tracking-wider text-[#D8B26E] mt-1 uppercase">
             Governance, Legacy & Audit Ledger
           </h1>
-          <p className="text-xs text-[#858995] mt-0.5">
+          <p className="text-xs text-[#8993A3] mt-0.5">
             Institutional Chambers, Meritocratic Elevation & Immutable Security Audit Trail
           </p>
         </div>
@@ -107,7 +107,7 @@ export function SectionGovernance() {
           <span className="font-serif-formal text-xs font-bold text-[#D8B26E] uppercase tracking-wider">
             Dedicated Institutional Chambers
           </span>
-          <span className="text-[0.625rem] text-[#858995] font-mono">2026 ARCHITECTURE</span>
+          <span className="text-[0.625rem] text-[#8993A3] font-mono">2026 ARCHITECTURE</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -117,7 +117,7 @@ export function SectionGovernance() {
               <Link
                 key={ch.href}
                 href={ch.href}
-                className="p-5 rounded-[6px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.1)] transition-all flex flex-col justify-between space-y-4 group"
+                className="p-5 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] hover:shadow-[0_8px_32px_rgba(197,160,89,0.12)] transition-all flex flex-col justify-between space-y-4 group before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent relative overflow-hidden"
               >
                 <div className="flex items-start justify-between">
                   <div className="w-10 h-10 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-[#C5A059] group-hover:text-[#D8B26E] transition-colors">
@@ -130,7 +130,7 @@ export function SectionGovernance() {
                   <h3 className="font-serif-formal text-sm font-bold text-[#E9E2D3] group-hover:text-[#D8B26E] transition-colors">
                     {ch.title}
                   </h3>
-                  <p className="text-xs text-[#858995] leading-relaxed">
+                  <p className="text-xs text-[#8993A3] leading-relaxed">
                     {ch.subtitle}
                   </p>
                 </div>
@@ -172,13 +172,13 @@ export function SectionGovernance() {
                 <TableBody>
                   {topFellows.map((f, idx) => (
                     <TableRow key={f.id}>
-                      <TableCell className="font-mono text-xs font-bold text-[#C5A059]">
+                      <TableCell className="font-mono text-xs font-bold text-[#D8B26E]">
                         #{idx + 1}
                       </TableCell>
                       <TableCell className="font-serif-formal text-xs font-bold text-[#E9E2D3]">
                         {f.codename}
                       </TableCell>
-                      <TableCell className="font-mono text-xs text-[#858995]">
+                      <TableCell className="font-mono text-xs text-[#8993A3]">
                         {f.member_number || 'SOC-PENDING'}
                       </TableCell>
                       <TableCell>
@@ -204,7 +204,7 @@ export function SectionGovernance() {
               <History className="w-4 h-4 text-[#C5A059]" />
               <CardTitle>Tamper-Evident Security Audit Ledger</CardTitle>
             </div>
-            <span className="font-mono text-xs text-[#858995]">
+            <span className="font-mono text-xs text-[#8993A3]">
               {auditLogs.length} Verified Records
             </span>
           </div>
@@ -223,20 +223,20 @@ export function SectionGovernance() {
             <TableBody>
               {isLoadingLogs ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="py-8 text-center text-[#858995]">
+                  <TableCell colSpan={5} className="py-8 text-center text-[#8993A3]">
                     Scanning ledger blocks...
                   </TableCell>
                 </TableRow>
               ) : auditLogs.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="py-8 text-center text-[#858995]">
+                  <TableCell colSpan={5} className="py-8 text-center text-[#8993A3]">
                     No administrative actions registered in this epoch.
                   </TableCell>
                 </TableRow>
               ) : (
                 auditLogs.map((log) => (
                   <TableRow key={log.id} className="font-mono text-xs">
-                    <TableCell className="text-[#858995]">
+                    <TableCell className="text-[#8993A3]">
                       {new Date(log.created_at).toLocaleString('en-GB')}
                     </TableCell>
                     <TableCell className="text-[#D8B26E] font-bold">
@@ -248,7 +248,7 @@ export function SectionGovernance() {
                     <TableCell className="text-[#C5A059]">
                       {log.actor_id ? `${log.actor_id.slice(0, 8)}...` : 'Sovereign Root'}
                     </TableCell>
-                    <TableCell className="text-[#858995] truncate max-w-xs">
+                    <TableCell className="text-[#8993A3] truncate max-w-xs">
                       {JSON.stringify(log.details || {})}
                     </TableCell>
                   </TableRow>

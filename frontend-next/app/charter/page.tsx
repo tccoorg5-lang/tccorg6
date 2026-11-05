@@ -35,18 +35,18 @@ export default function CharterPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none">
+    <div className="min-h-screen bg-[#080A0E] text-[#E9E2D3] p-4 sm:p-6 md:p-12 select-none society-grid-bg">
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
         {/* Intelligent Chamber Navigation Header */}
         <ChamberHeader badgeText="Constitutional Charter of 2026" badgeVariant="gold" />
 
         {/* Heading & Seal */}
         <div className="text-center space-y-3">
-          <SocietySeal size={76} glow className="mx-auto" />
+          <SocietySeal size={80} glow className="mx-auto" />
           <h1 className="font-serif-formal text-3xl md:text-4xl font-bold tracking-widest text-[#D8B26E] uppercase">
             The Founding Charter
           </h1>
-          <p className="font-serif-editorial text-sm md:text-base text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-sm md:text-base text-[#D5CEBF] italic">
             Constitutional Precedents, Discretion Oaths & Sovereign Doctrine
           </p>
         </div>
@@ -58,10 +58,10 @@ export default function CharterPage() {
             return (
               <div
                 key={art.roman}
-                className="p-6 md:p-8 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.35)] transition-all space-y-3 shadow-md"
+                className="p-6 md:p-8 rounded-[8px] bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] transition-all space-y-3 shadow-md relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)]"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.3)] flex items-center justify-center text-[#C5A059] shrink-0">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.35)] flex items-center justify-center text-[#D8B26E] shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -73,7 +73,7 @@ export default function CharterPage() {
                     </h2>
                   </div>
                 </div>
-                <p className="font-serif-editorial text-sm md:text-base leading-relaxed text-[#D5CEBF] pl-12 italic">
+                <p className="font-serif-editorial text-sm md:text-base leading-relaxed text-[#D5CEBF] pl-13 italic">
                   {art.body}
                 </p>
               </div>
@@ -82,7 +82,7 @@ export default function CharterPage() {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-[0.6875rem] font-mono text-[#858995] tracking-widest pt-4 border-t border-[#262C3A]/40 space-y-1">
+        <div className="text-center text-[0.6875rem] font-mono text-[#8993A3] tracking-widest pt-4 border-t border-[#262C3A]/60 space-y-1">
           <p>RATIFIED BY SOVEREIGN FOUNDING DECREE &bull; REPOSITORY STRICTLY AUTHENTICATED</p>
           <p className="opacity-60">All rights reserved under the 2026 Charter Protocol.</p>
         </div>

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { QueryProvider } from '@/components/providers/query-provider';
 
+export const dynamic = 'force-dynamic';
+
 export const viewport: Viewport = {
   themeColor: '#080A0E',
   width: 'device-width',
@@ -11,8 +13,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'The Society — Private Digital Institution',
-  description: 'An invitation-only institutional fellowship dedicated to public welfare, research, and meritocratic progression.',
+  title: 'THE SOCIETY — Private Cybersecurity & Intelligence Institution',
+  description: 'An invitation-only institutional fellowship dedicated to public welfare, research, and meritocratic progression under sovereign cryptographic governance.',
   manifest: '/manifest.json',
   icons: {
     icon: '/icons/icon-192.svg',
@@ -49,7 +51,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <script
@@ -64,7 +66,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[var(--midnight-black)] text-[var(--ivory)] antialiased min-h-screen">
+      <body className="bg-[#080A0E] text-[#E9E2D3] antialiased min-h-screen selection:bg-[#C5A059]/30 selection:text-[#E9E2D3]">
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

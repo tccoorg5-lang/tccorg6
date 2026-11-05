@@ -2,26 +2,32 @@
 
 @layer base {
   :root {
-    --midnight-black: #080A0E;
+    --midnight: #080A0E;
     --obsidian: #0F1218;
     --charcoal: #161A22;
     --charcoal-light: #202632;
     --charcoal-border: #262C3A;
+    --elevated: #1B2029;
 
     --antique-gold: #C5A059;
     --imperial-gold: #D8B26E;
     --burnished-gold: #8C6D2D;
-    --gold-glow: rgba(197, 160, 89, 0.15);
+    --gold-glow: rgba(197, 160, 89, 0.18);
     --gold-border: rgba(197, 160, 89, 0.35);
+    --gold-border-glow: rgba(216, 178, 110, 0.45);
 
     --deep-burgundy: #5C161D;
     --burgundy-hover: #751C25;
     --burgundy-glow: rgba(92, 22, 29, 0.35);
 
+    --platinum: #C7CED8;
+    --muted-silver: #8993A3;
     --ivory: #E9E2D3;
     --ivory-muted: #D5CEBF;
-    --muted-grey: #92939A;
-    --dim-grey: #5C5F68;
+
+    --electric-cyan: #06B6D4;
+    --cyan-glow: rgba(6, 182, 212, 0.18);
+    --cyan-border: rgba(6, 182, 212, 0.3);
 
     --status-active: #2E7D32;
     --status-pending: #D8B26E;
@@ -30,15 +36,16 @@
     --radius-sm: 4px;
     --radius-md: 6px;
     --radius-lg: 8px;
+    --radius-xl: 12px;
   }
 
   * {
-    border-color: var(--charcoal-border);
+    border-color: #262C3A;
     box-sizing: border-box;
   }
 
   body {
-    background-color: var(--midnight-black);
+    background-color: var(--midnight);
     color: var(--ivory);
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -56,99 +63,154 @@
     font-family: 'Cormorant Garamond', Georgia, serif;
   }
 
+  .font-mono, .font-mono-code {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: 0.03em;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--midnight-black);
+    background: #080A0E;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--charcoal-border);
+    background: #262C3A;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--antique-gold);
+    background: #C5A059;
   }
 }
 
+/* Subtle Architectural Grid Background */
+.society-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(199, 206, 216, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(199, 206, 216, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Luxury Obsidian Surface with Fine Gold Bevel Highlight */
 .society-card {
-  background: var(--obsidian);
-  border: 1px solid var(--charcoal-border);
+  background: #0F1218;
+  border: 1px solid #262C3A;
   border-radius: var(--radius-md);
   position: relative;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.society-card:hover {
-  border-color: var(--gold-border);
-  box-shadow: 0 4px 20px -2px var(--gold-glow);
+.society-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(197, 160, 89, 0.35) 50%, transparent 100%);
+  pointer-events: none;
 }
 
+.society-card:hover {
+  border-color: rgba(197, 160, 89, 0.4);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.8), 0 0 20px -2px rgba(197, 160, 89, 0.1);
+}
+
+/* High-Clearance Titanium/Burgundy Card */
+.society-card-founder {
+  background: #0F1218;
+  border: 1px solid rgba(92, 22, 29, 0.5);
+  border-radius: var(--radius-md);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-card-founder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #8C232D 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Gold Gradient Text */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #E6CA85 0%, #C5A059 50%, #8C6D2D 100%);
+  background: linear-gradient(135deg, #F0DBA5 0%, #D8B26E 40%, #C5A059 70%, #8C6D2D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.society-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #C5A059 0%, #8C6D2D 100%);
-  color: var(--midnight-black);
-  font-family: 'Cinzel', Georgia, serif;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 0.625rem 1.25rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid #E6CA85;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  text-transform: uppercase;
+/* Platinum Cyan Gradient Text */
+.cyan-gradient-text {
+  background: linear-gradient(135deg, #E0F2FE 0%, #38BDF8 60%, #0284C7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.society-btn-primary:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 0 15px var(--gold-glow);
+/* Keyframes for subtle reticle rotation and radar sweep */
+@keyframes reticle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.society-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: var(--charcoal);
-  color: var(--ivory);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  padding: 0.625rem 1.25rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--charcoal-border);
-  transition: all 0.2s ease;
-  cursor: pointer;
+@keyframes reticle-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 
-.society-btn-secondary:hover {
-  background: var(--charcoal-light);
-  border-color: var(--antique-gold);
-  color: var(--antique-gold);
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.society-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.625rem;
-  font-family: 'Cinzel', Georgia, serif;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--gold-border);
-  background: rgba(197, 160, 89, 0.08);
-  color: var(--antique-gold);
-  text-transform: uppercase;
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-reticle {
+  animation: reticle-spin 48s linear infinite;
+}
+
+.animate-reticle-reverse {
+  animation: reticle-spin-reverse 64s linear infinite;
+}
+
+.animate-radar {
+  animation: radar-sweep 6s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

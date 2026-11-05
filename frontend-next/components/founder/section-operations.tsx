@@ -142,7 +142,7 @@ export function SectionOperations() {
           <h1 className="font-serif-formal text-2xl font-bold tracking-wider text-[#D8B26E] mt-1 uppercase">
             Operations & Challenges
           </h1>
-          <p className="text-xs text-[#858995] mt-0.5">
+          <p className="text-xs text-[#8993A3] mt-0.5">
             Commission Public Welfare Inquiries, Strategic Challenges & Ratify Submissions
           </p>
         </div>
@@ -160,8 +160,8 @@ export function SectionOperations() {
           onClick={() => setActiveTab('all')}
           className={`px-3 py-1.5 rounded-[3px] transition-colors ${
             activeTab === 'all'
-              ? 'bg-[#C5A059] text-[#080A0E] font-bold'
-              : 'text-[#858995] hover:text-[#E9E2D3]'
+              ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E] font-bold'
+              : 'text-[#8993A3] hover:text-[#E9E2D3]'
           }`}
         >
           All Operations ({directives.length})
@@ -171,8 +171,8 @@ export function SectionOperations() {
           onClick={() => setActiveTab('active')}
           className={`px-3 py-1.5 rounded-[3px] transition-colors ${
             activeTab === 'active'
-              ? 'bg-[#C5A059] text-[#080A0E] font-bold'
-              : 'text-[#858995] hover:text-[#E9E2D3]'
+              ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E] font-bold'
+              : 'text-[#8993A3] hover:text-[#E9E2D3]'
           }`}
         >
           Active
@@ -182,8 +182,8 @@ export function SectionOperations() {
           onClick={() => setActiveTab('review')}
           className={`px-3 py-1.5 rounded-[3px] transition-colors ${
             activeTab === 'review'
-              ? 'bg-[#C5A059] text-[#080A0E] font-bold'
-              : 'text-[#858995] hover:text-[#E9E2D3]'
+              ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E] font-bold'
+              : 'text-[#8993A3] hover:text-[#E9E2D3]'
           }`}
         >
           Under Review
@@ -193,8 +193,8 @@ export function SectionOperations() {
           onClick={() => setActiveTab('completed')}
           className={`px-3 py-1.5 rounded-[3px] transition-colors ${
             activeTab === 'completed'
-              ? 'bg-[#C5A059] text-[#080A0E] font-bold'
-              : 'text-[#858995] hover:text-[#E9E2D3]'
+              ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E] font-bold'
+              : 'text-[#8993A3] hover:text-[#E9E2D3]'
           }`}
         >
           Completed
@@ -206,11 +206,11 @@ export function SectionOperations() {
         {filteredDirectives.map((d) => (
           <div
             key={d.code}
-            className="p-5 rounded-[6px] bg-[#0F1218] border border-[#262C3A] flex flex-col justify-between space-y-4 hover:border-[rgba(197,160,89,0.35)] transition-all shadow-md relative overflow-hidden"
+            className="p-5 rounded-[8px] bg-[#0F1218] border border-[#262C3A] flex flex-col justify-between space-y-4 hover:border-[rgba(197,160,89,0.4)] transition-all shadow-md relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent"
           >
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#C5A059] font-bold tracking-wider">
+                <span className="font-mono text-xs text-[#D8B26E] font-bold tracking-wider">
                   {d.code}
                 </span>
                 <Badge
@@ -230,17 +230,17 @@ export function SectionOperations() {
                 {d.title}
               </h3>
 
-              <div className="text-[0.6875rem] text-[#C5A059] font-serif-formal uppercase tracking-wider">
+              <div className="text-[0.6875rem] text-[#C5A059] font-serif-formal uppercase tracking-wider font-semibold">
                 {d.category}
               </div>
 
-              <p className="text-xs text-[#858995] leading-relaxed line-clamp-3">
+              <p className="text-xs text-[#8993A3] leading-relaxed line-clamp-3">
                 {d.description}
               </p>
             </div>
 
             <div className="space-y-3 pt-3 border-t border-[#262C3A]/70 text-xs">
-              <div className="flex items-center justify-between text-[#858995] font-mono text-[0.6875rem]">
+              <div className="flex items-center justify-between text-[#8993A3] font-mono text-[0.6875rem]">
                 <span>CLEARANCE: {d.clearance}</span>
                 <span>DEADLINE: {d.deadline}</span>
               </div>
@@ -269,7 +269,7 @@ export function SectionOperations() {
       {/* ======================================================== */}
       {isCommissionModalOpen && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_24px_80px_rgba(0,0,0,0.9)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div className="flex items-center gap-2">
                 <Target className="w-4 h-4 text-[#C5A059]" />
@@ -280,7 +280,7 @@ export function SectionOperations() {
               <button
                 type="button"
                 onClick={() => setIsCommissionModalOpen(false)}
-                className="text-[#858995] hover:text-[#E9E2D3] p-1"
+                className="text-[#8993A3] hover:text-[#E9E2D3] p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -381,7 +381,7 @@ export function SectionOperations() {
       {/* ======================================================== */}
       {reviewingDirective && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] max-w-lg w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_24px_80px_rgba(0,0,0,0.9)] max-w-lg w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div>
                 <span className="font-mono text-[0.625rem] text-[#C5A059]">
@@ -394,7 +394,7 @@ export function SectionOperations() {
               <button
                 type="button"
                 onClick={() => setReviewingDirective(null)}
-                className="text-[#858995] hover:text-[#E9E2D3]"
+                className="text-[#8993A3] hover:text-[#E9E2D3]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -411,11 +411,11 @@ export function SectionOperations() {
                   </div>
                   <Badge variant="pending">Awaiting Review</Badge>
                 </div>
-                <p className="text-[0.6875rem] text-[#858995] leading-relaxed">
+                <p className="text-[0.6875rem] text-[#8993A3] leading-relaxed">
                   Comprehensive 18-page dossier detailing municipal procurement discrepancy records and verifiable ledger anomalies.
                 </p>
                 <div className="flex justify-between items-center pt-2 border-t border-[#262C3A]/60">
-                  <span className="font-mono text-[0.625rem] text-[#858995]">
+                  <span className="font-mono text-[0.625rem] text-[#8993A3]">
                     DOC-HASH: 8f2b...39e1
                   </span>
                   <div className="flex gap-2">

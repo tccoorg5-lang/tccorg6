@@ -12,6 +12,7 @@ import { SectionIntelligence } from '@/components/founder/section-intelligence';
 import { SectionOperations } from '@/components/founder/section-operations';
 import { SectionCommunications } from '@/components/founder/section-communications';
 import { SectionGovernance } from '@/components/founder/section-governance';
+import { SocietySeal } from '@/components/brand/society-seal';
 import { MemberProfile, CentralCommandMetrics } from '@/types/society';
 import { Loader2 } from 'lucide-react';
 
@@ -60,12 +61,15 @@ export default function FounderPortalPage() {
 
   if (isProfileLoading) {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-[var(--midnight-black)] text-[var(--antique-gold)]">
+      <div className="flex h-screen w-screen items-center justify-center bg-[#080A0E] text-[#D8B26E]">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin" />
-          <span className="font-serif-formal text-sm tracking-widest uppercase">
-            Verifying Sovereign Clearance...
-          </span>
+          <SocietySeal size={64} glow />
+          <div className="flex items-center gap-2 mt-2">
+            <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
+            <span className="font-serif-formal text-xs tracking-widest uppercase">
+              Verifying Sovereign Clearance...
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -80,7 +84,7 @@ export default function FounderPortalPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[var(--midnight-black)] text-[var(--ivory)] overflow-hidden">
+    <div className="flex h-screen bg-[#080A0E] text-[#E9E2D3] overflow-hidden">
       {/* 5-Section Command Navigation Rail (Desktop & Large Tablet Landscape) */}
       <div className="hidden lg:flex shrink-0">
         <FounderNavRail
@@ -101,7 +105,7 @@ export default function FounderPortalPage() {
         />
 
         {/* Section View Workspace */}
-        <main className="flex-1 overflow-y-auto p-3.5 sm:p-6 lg:p-8 pb-20 lg:pb-8 bg-[var(--midnight-black)]">
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-6 lg:p-8 pb-20 lg:pb-8 bg-[#080A0E]">
           {activeSection === 'command' && (
             <SectionCommand
               metrics={metrics || null}
