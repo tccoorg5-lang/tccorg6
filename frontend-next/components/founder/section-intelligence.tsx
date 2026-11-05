@@ -129,7 +129,7 @@ export function SectionIntelligence() {
           <h1 className="font-serif-formal text-2xl font-bold tracking-wider text-[#D8B26E] mt-1 uppercase">
             Membership Intelligence
           </h1>
-          <p className="text-xs text-[#858995] mt-0.5">
+          <p className="text-xs text-[#8993A3] mt-0.5">
             Cryptographic Token Issuance, Dossiers & Sovereign Merit Standings
           </p>
         </div>
@@ -159,7 +159,7 @@ export function SectionIntelligence() {
 
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <div className="flex items-center gap-2">
-            <span className="text-[0.625rem] font-serif-formal uppercase text-[#858995]">Rank:</span>
+            <span className="text-[0.625rem] font-serif-formal uppercase text-[#8993A3] font-semibold">Rank:</span>
             <select
               value={selectedRank}
               onChange={(e) => setSelectedRank(e.target.value)}
@@ -175,7 +175,7 @@ export function SectionIntelligence() {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[0.625rem] font-serif-formal uppercase text-[#858995]">Role:</span>
+            <span className="text-[0.625rem] font-serif-formal uppercase text-[#8993A3] font-semibold">Role:</span>
             <select
               value={selectedRole}
               onChange={(e) => setSelectedRole(e.target.value)}
@@ -187,7 +187,7 @@ export function SectionIntelligence() {
             </select>
           </div>
 
-          <span className="text-xs text-[#858995] font-mono ml-auto">
+          <span className="text-xs text-[#8993A3] font-mono ml-auto">
             {filteredRoster.length} of {roster.length} Records
           </span>
         </div>
@@ -196,12 +196,12 @@ export function SectionIntelligence() {
       {/* Mobile Responsive Roster Cards (Visible on screens < 768px) */}
       <div className="md:hidden space-y-3">
         {isLoading ? (
-          <div className="p-8 text-center text-xs text-[#858995] flex items-center justify-center gap-2">
+          <div className="p-8 text-center text-xs text-[#8993A3] flex items-center justify-center gap-2">
             <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
             <span>Scanning intelligence registry...</span>
           </div>
         ) : filteredRoster.length === 0 ? (
-          <div className="p-8 text-center text-xs text-[#858995] bg-[#0F1218] rounded-[6px] border border-[#262C3A]">
+          <div className="p-8 text-center text-xs text-[#8993A3] bg-[#0F1218] rounded-[6px] border border-[#262C3A]">
             No fellows match the designated query.
           </div>
         ) : (
@@ -212,14 +212,14 @@ export function SectionIntelligence() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-center font-serif-formal text-xs font-bold text-[#C5A059]">
+                  <div className="w-8 h-8 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-center font-serif-formal text-xs font-bold text-[#D8B26E]">
                     {(m.codename || 'F')[0].toUpperCase()}
                   </div>
                   <div>
                     <span className="font-serif-formal text-sm font-bold text-[#E9E2D3] block">
                       {m.codename || 'Unknown'}
                     </span>
-                    <span className="font-mono text-[0.625rem] text-[#858995]">
+                    <span className="font-mono text-[0.625rem] text-[#8993A3]">
                       {m.member_number || 'SOC-PENDING'}
                     </span>
                   </div>
@@ -229,20 +229,20 @@ export function SectionIntelligence() {
 
               <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-[#262C3A]/60">
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">Constitutional Role</span>
-                  <span className="text-[#B5B5BC] capitalize text-xs">{m.society_role}</span>
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">Constitutional Role</span>
+                  <span className="text-[#D5CEBF] capitalize text-xs">{m.society_role}</span>
                 </div>
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">Merit Score</span>
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal">Merit Score</span>
                   <span className="font-mono font-bold text-[#D8B26E] text-xs">{m.points.toLocaleString()} PTS</span>
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-2 border-t border-[#262C3A]/60 text-xs">
-                <span className="font-mono text-[0.6875rem] text-[#858995]">
+                <span className="font-mono text-[0.6875rem] text-[#8993A3]">
                   {formatInductionDate(m.induction_date)}
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80]">
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
                   Active
                 </span>
@@ -273,7 +273,7 @@ export function SectionIntelligence() {
       </div>
 
       {/* Desktop & Tablet Data Table (Hidden on screens < 768px) */}
-      <div className="hidden md:block rounded-[6px] bg-[#0F1218] border border-[#262C3A] overflow-x-auto shadow-lg">
+      <div className="hidden md:block rounded-[8px] bg-[#0F1218] border border-[#262C3A] overflow-x-auto shadow-lg">
         <Table>
           <TableHeader>
             <TableRow>
@@ -290,13 +290,13 @@ export function SectionIntelligence() {
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={8} className="py-12 text-center text-[#858995]">
+                <TableCell colSpan={8} className="py-12 text-center text-[#8993A3]">
                   Scanning intelligence registry...
                 </TableCell>
               </TableRow>
             ) : filteredRoster.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="py-12 text-center text-[#858995]">
+                <TableCell colSpan={8} className="py-12 text-center text-[#8993A3]">
                   No fellows match the designated query.
                 </TableCell>
               </TableRow>
@@ -305,7 +305,7 @@ export function SectionIntelligence() {
                 <TableRow key={m.id}>
                   <TableCell className="font-serif-formal text-xs font-bold text-[#D8B26E]">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-[3px] bg-[#161A22] border border-[rgba(197,160,89,0.3)] flex items-center justify-center font-bold text-xs text-[#C5A059]">
+                      <div className="w-7 h-7 rounded-[3px] bg-[#161A22] border border-[rgba(197,160,89,0.3)] flex items-center justify-center font-bold text-xs text-[#D8B26E]">
                         {(m.codename || 'F')[0].toUpperCase()}
                       </div>
                       <span>{m.codename || 'Unknown'}</span>
@@ -314,7 +314,7 @@ export function SectionIntelligence() {
                   <TableCell className="font-mono text-xs text-[#E9E2D3] font-semibold">
                     {m.member_number || 'SOC-PENDING'}
                   </TableCell>
-                  <TableCell className="uppercase text-[0.625rem] tracking-wider text-[#B5B5BC]">
+                  <TableCell className="uppercase text-[0.625rem] tracking-wider text-[#8993A3] font-mono">
                     {m.society_role}
                   </TableCell>
                   <TableCell>
@@ -323,11 +323,11 @@ export function SectionIntelligence() {
                   <TableCell className="font-mono text-right text-[#D8B26E] font-bold">
                     {m.points.toLocaleString()} PTS
                   </TableCell>
-                  <TableCell className="font-mono text-xs text-[#858995]">
+                  <TableCell className="font-mono text-xs text-[#8993A3]">
                     {formatInductionDate(m.induction_date)}
                   </TableCell>
                   <TableCell>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80]">
+                    <span className="inline-flex items-center gap-1.5 text-xs text-[#4ADE80] font-mono">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
                       Active
                     </span>
@@ -364,7 +364,7 @@ export function SectionIntelligence() {
       {/* ======================================================== */}
       {selectedMember && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_24px_80px_rgba(0,0,0,0.9)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div className="flex items-center gap-2.5">
                 <Shield className="w-4 h-4 text-[#C5A059]" />
@@ -375,7 +375,7 @@ export function SectionIntelligence() {
               <button
                 type="button"
                 onClick={() => setSelectedMember(null)}
-                className="text-[#858995] hover:text-[#E9E2D3] p-1"
+                className="text-[#8993A3] hover:text-[#E9E2D3] p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -384,7 +384,7 @@ export function SectionIntelligence() {
             <div className="p-4 rounded-[6px] bg-[#161A22] border border-[#262C3A] space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal font-semibold">
                     Conferred Codename
                   </span>
                   <span className="font-serif-formal font-bold text-[#D8B26E]">
@@ -392,7 +392,7 @@ export function SectionIntelligence() {
                   </span>
                 </div>
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal font-semibold">
                     Serial Identifier
                   </span>
                   <span className="font-mono text-[#E9E2D3]">
@@ -400,16 +400,16 @@ export function SectionIntelligence() {
                   </span>
                 </div>
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal font-semibold">
                     Current Rank
                   </span>
                   <Badge variant="gold">{selectedMember.society_rank}</Badge>
                 </div>
                 <div>
-                  <span className="text-[0.625rem] text-[#858995] uppercase block font-serif-formal">
+                  <span className="text-[0.625rem] text-[#8993A3] uppercase block font-serif-formal font-semibold">
                     Constitutional Role
                   </span>
-                  <span className="font-serif-formal uppercase text-[#E9E2D3]">
+                  <span className="font-serif-formal uppercase text-[#E9E2D3] font-bold">
                     {selectedMember.society_role}
                   </span>
                 </div>
@@ -469,7 +469,7 @@ export function SectionIntelligence() {
       {/* ======================================================== */}
       {personalRecordsMember && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[#991B1B]/70 shadow-[0_16px_48px_rgba(153,27,27,0.35)] max-w-md w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#991B1B] before:to-transparent">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[#991B1B]/70 shadow-[0_24px_80px_rgba(153,27,27,0.35)] max-w-md w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#991B1B] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div className="flex items-center gap-2 text-red-400">
                 <Lock className="w-4 h-4" />
@@ -480,7 +480,7 @@ export function SectionIntelligence() {
               <button
                 type="button"
                 onClick={() => setPersonalRecordsMember(null)}
-                className="text-[#858995] hover:text-[#E9E2D3]"
+                className="text-[#8993A3] hover:text-[#E9E2D3]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -492,19 +492,19 @@ export function SectionIntelligence() {
 
             <div className="space-y-2 text-xs bg-[#161A22] p-4 rounded-[4px] border border-[#262C3A]">
               <div className="flex justify-between py-1 border-b border-[#262C3A]/60">
-                <span className="text-[#858995]">Codename:</span>
+                <span className="text-[#8993A3]">Codename:</span>
                 <span className="font-serif-formal text-[#D8B26E] font-bold">
                   {personalRecordsMember.codename}
                 </span>
               </div>
               <div className="flex justify-between py-1 border-b border-[#262C3A]/60">
-                <span className="text-[#858995]">Vault Email:</span>
+                <span className="text-[#8993A3]">Vault Email:</span>
                 <span className="font-mono text-[#E9E2D3]">
                   {personalRecordsMember.username || 'vault-protected@society.org'}
                 </span>
               </div>
               <div className="flex justify-between py-1">
-                <span className="text-[#858995]">Audit Classification:</span>
+                <span className="text-[#8993A3]">Audit Classification:</span>
                 <span className="font-mono text-[#4ADE80]">Fully Verified</span>
               </div>
             </div>
@@ -523,7 +523,7 @@ export function SectionIntelligence() {
       {/* ======================================================== */}
       {isInviteModalOpen && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_24px_80px_rgba(0,0,0,0.9)] max-w-lg w-full p-6 space-y-5 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div className="flex items-center gap-2">
                 <KeyRound className="w-4 h-4 text-[#C5A059]" />
@@ -534,7 +534,7 @@ export function SectionIntelligence() {
               <button
                 type="button"
                 onClick={() => setIsInviteModalOpen(false)}
-                className="text-[#858995] hover:text-[#E9E2D3] p-1"
+                className="text-[#8993A3] hover:text-[#E9E2D3] p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -547,7 +547,7 @@ export function SectionIntelligence() {
                   <div className="font-bold flex items-center gap-1.5 font-serif-formal">
                     <Check className="w-4 h-4" /> Cryptographic Token Minted Successfully
                   </div>
-                  <p className="text-[#858995]">
+                  <p className="text-[#8993A3]">
                     Single-use, time-limited token bound to recipient email.
                   </p>
                 </div>
@@ -565,7 +565,7 @@ export function SectionIntelligence() {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-[4px] bg-[#991B1B]/15 border border-[#991B1B]/30 text-[0.6875rem] text-[#B5B5BC] flex items-start gap-2">
+                <div className="p-3 rounded-[4px] bg-[#991B1B]/15 border border-[#991B1B]/30 text-[0.6875rem] text-[#D5CEBF] flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                   <span>
                     <strong>Security Notice:</strong> Plaintext token is never stored in the database. Convey this token directly to the candidate.
@@ -620,7 +620,7 @@ export function SectionIntelligence() {
 
                 <Input
                   label="Conferred Codename"
-                  placeholder="e.g. Vanguard, Veritas, Sovereign"
+                  placeholder="e.g. VANGUARD, VERITAS, SOVEREIGN"
                   value={assignedCodename}
                   onChange={(e) => setAssignedCodename(e.target.value)}
                   hint="Permanent pseudonym conferred under the Founding Charter."

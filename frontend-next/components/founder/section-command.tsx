@@ -19,11 +19,15 @@ import {
   Database,
   Lock,
   Sparkles,
+  ShieldCheck,
+  Cpu,
+  Layers,
 } from 'lucide-react';
 import { CentralCommandMetrics } from '@/types/society';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { TelemetryPill } from '@/components/brand/telemetry-pill';
 
 interface SectionCommandProps {
   metrics: CentralCommandMetrics | null;
@@ -62,7 +66,7 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
     {
       label: 'Pending Invitations',
       value: 3,
-      sub: 'Time-Limited Tokens',
+      sub: 'Cryptographic Tokens',
       icon: KeyRound,
       badge: 'Single-Use',
       color: 'text-[#C5A059]',
@@ -103,19 +107,19 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
             <span className="text-[0.6875rem] font-serif-formal tracking-widest text-[#C5A059] uppercase font-semibold">
               Sovereign Command &bull; Section 01
             </span>
-            <Badge variant="gold">Founder Authority Active</Badge>
+            <Badge variant="burgundy">Founder Authority Active</Badge>
           </div>
           <h1 className="font-serif-formal text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider text-[#D8B26E] uppercase">
             Central Command & Executive Telemetry
           </h1>
-          <p className="font-serif-editorial text-xs lg:text-sm text-[#B5B5BC] italic">
+          <p className="font-serif-editorial text-xs lg:text-sm text-[#D5CEBF] italic">
             Institutional governance, real-time membership surveillance, and operational infrastructure.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 px-3.5 py-2 rounded-[4px] bg-[#161A22] border border-[#262C3A] text-xs font-mono text-[#C5A059]">
-            <Clock className="w-3.5 h-3.5 text-[#858995]" />
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-[4px] bg-[#161A22] border border-[#262C3A] text-xs font-mono text-[#D8B26E]">
+            <Clock className="w-3.5 h-3.5 text-[#8993A3]" />
             <span>{currentDate}</span>
           </div>
 
@@ -132,14 +136,14 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
           const Icon = kpi.icon;
           const cardContent = (
             <div
-              className={`p-5 rounded-[6px] bg-[#0F1218] border border-[#262C3A] space-y-3 relative overflow-hidden transition-all h-full ${
+              className={`p-5 rounded-[8px] bg-[#0F1218] border border-[#262C3A] space-y-3 relative overflow-hidden transition-all h-full ${
                 kpi.href
-                  ? 'hover:border-[#D8B26E] hover:shadow-[0_4px_24px_rgba(216,178,110,0.15)] group cursor-pointer'
-                  : 'hover:border-[rgba(197,160,89,0.35)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.06)]'
+                  ? 'hover:border-[#D8B26E] hover:shadow-[0_8px_32px_rgba(216,178,110,0.15)] group cursor-pointer'
+                  : 'hover:border-[rgba(197,160,89,0.4)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.7)]'
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-[0.625rem] font-serif-formal tracking-wider uppercase text-[#858995] font-semibold truncate group-hover:text-[#D8B26E] transition-colors">
+                <span className="text-[0.625rem] font-serif-formal tracking-wider uppercase text-[#8993A3] font-semibold truncate group-hover:text-[#D8B26E] transition-colors">
                   {kpi.label}
                 </span>
                 <Icon className={`w-4 h-4 ${kpi.color} shrink-0`} />
@@ -147,9 +151,9 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
               <div className="font-serif-formal text-3xl font-bold text-[#E9E2D3]">
                 {kpi.value}
               </div>
-              <div className="flex items-center justify-between text-[0.625rem] pt-1 border-t border-[#262C3A]/50">
-                <span className="text-[#858995] font-mono truncate">{kpi.sub}</span>
-                <span className={`font-mono ${kpi.href ? 'text-[#D8B26E] font-semibold' : 'text-[#C5A059]'}`}>{kpi.badge}</span>
+              <div className="flex items-center justify-between text-[0.625rem] pt-1.5 border-t border-[#262C3A]/60">
+                <span className="text-[#8993A3] font-mono truncate">{kpi.sub}</span>
+                <span className={`font-mono ${kpi.href ? 'text-[#D8B26E] font-bold' : 'text-[#C5A059]'}`}>{kpi.badge}</span>
               </div>
             </div>
           );
@@ -165,7 +169,7 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
       </div>
 
       {/* 2b. High Chambers & Deliberative Councils Quick-Access Bar */}
-      <div className="p-4 rounded-[6px] bg-gradient-to-r from-[#161A22] via-[#0F1218] to-[#161A22] border border-[#C5A059]/30 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+      <div className="p-4 sm:p-5 rounded-[8px] bg-gradient-to-r from-[#161A22] via-[#0F1218] to-[#161A22] border border-[#C5A059]/35 shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-0.5">
             <div className="flex items-center gap-2">
@@ -174,13 +178,13 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
                 High Chambers & Sovereign Rolls
               </span>
             </div>
-            <p className="text-[0.75rem] text-[#858995]">
+            <p className="text-[0.75rem] text-[#8993A3]">
               Direct sovereign access to monument halls, high council chambers, and constitutional archives.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/legends">
-              <Button variant="gold" size="sm" className="gap-1.5 shadow-[0_0_12px_rgba(197,160,89,0.2)]">
+              <Button variant="gold" size="sm" className="gap-1.5 shadow-[0_0_12px_rgba(197,160,89,0.25)]">
                 <Trophy className="w-3.5 h-3.5" />
                 <span>Hall of Legends</span>
               </Button>
@@ -223,31 +227,31 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#4ADE80] mt-1.5 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#4ADE80] mt-1.5 shrink-0 animate-pulse" />
                 <div className="flex-1 space-y-0.5">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-serif-formal font-bold text-[#D8B26E] uppercase">
                       Founder Clearance Session Authenticated
                     </span>
-                    <span className="font-mono text-[0.625rem] text-[#858995]">2 mins ago</span>
+                    <span className="font-mono text-[0.625rem] text-[#8993A3]">2 mins ago</span>
                   </div>
-                  <p className="text-[0.6875rem] text-[#858995]">
+                  <p className="text-[0.6875rem] text-[#8993A3]">
                     Master cryptographic token verified. Sovereign session initiated from secure hardware anchor.
                   </p>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#C5A059] mt-1.5 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#D8B26E] mt-1.5 shrink-0" />
                 <div className="flex-1 space-y-0.5">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-serif-formal font-bold text-[#E9E2D3] uppercase">
                       Cryptographic Invitation Minted
                     </span>
-                    <span className="font-mono text-[0.625rem] text-[#858995]">1 hour ago</span>
+                    <span className="font-mono text-[0.625rem] text-[#8993A3]">1 hour ago</span>
                   </div>
-                  <p className="text-[0.6875rem] text-[#858995]">
-                    Token <strong className="font-mono text-[#C5A059]">ps_...</strong> generated for intended candidate. Bound recipient and 7-day expiry registered.
+                  <p className="text-[0.6875rem] text-[#8993A3]">
+                    Token <strong className="font-mono text-[#D8B26E]">ps_...</strong> generated for intended candidate. Bound recipient and 7-day expiry registered.
                   </p>
                 </div>
               </div>
@@ -259,9 +263,9 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
                     <span className="font-serif-formal font-bold text-[#E9E2D3] uppercase">
                       Directive Submission Ratified
                     </span>
-                    <span className="font-mono text-[0.625rem] text-[#858995]">Yesterday</span>
+                    <span className="font-mono text-[0.625rem] text-[#8993A3]">Yesterday</span>
                   </div>
-                  <p className="text-[0.6875rem] text-[#858995]">
+                  <p className="text-[0.6875rem] text-[#8993A3]">
                     Candidate submission for Municipal Transparency Audit approved. 250 merit points credited.
                   </p>
                 </div>
@@ -280,33 +284,33 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
                 <Badge variant="neutral">Meritocratic Structure</Badge>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3.5">
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs font-serif-formal">
-                  <span className="text-[#858995] uppercase">Senior Fellows & Council</span>
-                  <span className="font-mono text-[#D8B26E]">3 Fellows (7%)</span>
+                  <span className="text-[#8993A3] uppercase font-semibold">Senior Fellows & Council</span>
+                  <span className="font-mono text-[#D8B26E] font-bold">3 Fellows (7%)</span>
                 </div>
-                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden">
-                  <div className="bg-[#C5A059] h-full rounded-full" style={{ width: '7%' }} />
+                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden border border-[#262C3A]">
+                  <div className="bg-[#D8B26E] h-full rounded-full shadow-[0_0_8px_rgba(216,178,110,0.5)]" style={{ width: '7%' }} />
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs font-serif-formal">
-                  <span className="text-[#858995] uppercase">Trusted Members & Associates</span>
-                  <span className="font-mono text-[#E9E2D3]">14 Fellows (33%)</span>
+                  <span className="text-[#8993A3] uppercase font-semibold">Trusted Members & Associates</span>
+                  <span className="font-mono text-[#E9E2D3] font-bold">14 Fellows (33%)</span>
                 </div>
-                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden">
+                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden border border-[#262C3A]">
                   <div className="bg-[#8C6D2D] h-full rounded-full" style={{ width: '33%' }} />
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs font-serif-formal">
-                  <span className="text-[#858995] uppercase">Initiates & Active Candidates</span>
-                  <span className="font-mono text-[#858995]">25 Fellows (60%)</span>
+                  <span className="text-[#8993A3] uppercase font-semibold">Initiates & Active Candidates</span>
+                  <span className="font-mono text-[#8993A3] font-bold">25 Fellows (60%)</span>
                 </div>
-                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden">
+                <div className="w-full bg-[#161A22] h-2 rounded-full overflow-hidden border border-[#262C3A]">
                   <div className="bg-[#262C3A] h-full rounded-full" style={{ width: '60%' }} />
                 </div>
               </div>
@@ -376,20 +380,20 @@ export function SectionCommand({ metrics, onOpenInviteModal }: SectionCommandPro
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="p-3 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between text-xs">
+              <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between text-xs">
                 <div>
                   <div className="font-serif-formal font-bold text-[#E9E2D3]">Vanguard &bull; Rank Elevation</div>
-                  <div className="text-[0.6875rem] text-[#858995]">Initiate &rarr; Associate Fellow</div>
+                  <div className="text-[0.6875rem] text-[#8993A3]">Initiate &rarr; Associate Fellow</div>
                 </div>
                 <Button variant="gold" size="sm">
                   Review
                 </Button>
               </div>
 
-              <div className="p-3 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between text-xs">
+              <div className="p-3.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-between text-xs">
                 <div>
                   <div className="font-serif-formal font-bold text-[#E9E2D3]">Directive #002 Submission</div>
-                  <div className="text-[0.6875rem] text-[#858995]">Open-Source Security Audit</div>
+                  <div className="text-[0.6875rem] text-[#8993A3]">Open-Source Security Audit</div>
                 </div>
                 <Button variant="gold" size="sm">
                   Review

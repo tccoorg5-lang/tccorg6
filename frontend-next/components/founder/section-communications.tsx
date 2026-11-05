@@ -118,7 +118,7 @@ export function SectionCommunications() {
           <h1 className="font-serif-formal text-2xl font-bold tracking-wider text-[#D8B26E] mt-1 uppercase">
             Communications Control
           </h1>
-          <p className="text-xs text-[#858995] mt-0.5">
+          <p className="text-xs text-[#8993A3] mt-0.5">
             Sovereign Communiqués, Restricted Chamber Access & Synchronous Assembly Governance
           </p>
         </div>
@@ -157,8 +157,8 @@ export function SectionCommunications() {
                 />
 
                 <div className="flex justify-between items-center pt-2 border-t border-[#262C3A]/60">
-                  <span className="text-[0.6875rem] text-[#858995] font-mono">
-                    Audience: All 42 Active Enrolled Fellows
+                  <span className="text-[0.6875rem] text-[#8993A3] font-mono">
+                    Audience: All Active Enrolled Fellows
                   </span>
                   <Button
                     type="submit"
@@ -257,10 +257,10 @@ export function SectionCommunications() {
                       {ch.status}
                     </Badge>
                   </div>
-                  <p className="text-[0.6875rem] text-[#858995] leading-relaxed">
+                  <p className="text-[0.6875rem] text-[#8993A3] leading-relaxed">
                     {ch.description}
                   </p>
-                  <div className="flex items-center justify-between pt-1 border-t border-[#262C3A]/50 text-[0.625rem] font-mono text-[#858995]">
+                  <div className="flex items-center justify-between pt-1 border-t border-[#262C3A]/50 text-[0.625rem] font-mono text-[#8993A3]">
                     <span>CLEARANCE: {ch.clearance}</span>
                     <span>{ch.participantsCount} Authorized</span>
                   </div>
