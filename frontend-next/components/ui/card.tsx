@@ -1,26 +1,39 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { variant?: 'default' | 'elevated' | 'gold' | 'interactive' }
->(({ className, variant = 'default', ...props }, ref) => {
-  const variantStyles = {
-    default: 'bg-[#0F1218] border border-[#262C3A]',
-    elevated: 'bg-[#1B2029] border border-[#262C3A] shadow-lg',
-    gold: 'bg-[#0F1218] border border-[rgba(197,160,89,0.35)] shadow-[0_4px_24px_rgba(197,160,89,0.08)]',
-    interactive:
-      'bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] hover:shadow-[0_4px_20px_rgba(197,160,89,0.12)] transition-all duration-200 cursor-pointer',
-  };
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'elevated' | 'gold' | 'interactive' | 'burgundy';
+}
 
-  return (
-    <div
-      ref={ref}
-      className={cn('rounded-[6px] relative overflow-hidden', variantStyles[variant], className)}
-      {...props}
-    />
-  );
-});
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = 'default', ...props }, ref) => {
+    const variantStyles = {
+      default:
+        'bg-[#0F1218] border border-[#262C3A] shadow-[0_12px_36px_-6px_rgba(0,0,0,0.7)] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/25 before:to-transparent',
+      elevated:
+        'bg-[#161A22] border border-[#262C3A] shadow-[0_16px_48px_-8px_rgba(0,0,0,0.85)] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/35 before:to-transparent',
+      gold:
+        'bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_12px_40px_-6px_rgba(0,0,0,0.85),0_0_24px_-4px_rgba(197,160,89,0.1)] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E]/60 before:to-transparent',
+      interactive:
+        'bg-[#0F1218] border border-[#262C3A] hover:border-[rgba(197,160,89,0.45)] hover:shadow-[0_16px_48px_-6px_rgba(0,0,0,0.85),0_0_24px_-4px_rgba(197,160,89,0.15)] transition-all duration-250 cursor-pointer before:bg-gradient-to-r before:from-transparent before:via-[#C5A059]/30 before:to-transparent',
+      burgundy:
+        'bg-[#0F1218] border border-[#5C161D]/70 shadow-[0_12px_40px_-6px_rgba(92,22,29,0.2)] before:bg-gradient-to-r before:from-transparent before:via-[#8C232D] before:to-transparent',
+    };
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'rounded-[8px] relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[1px]',
+          variantStyles[variant],
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<
@@ -36,7 +49,7 @@ const CardHeader = React.forwardRef<
 CardHeader.displayName = 'CardHeader';
 
 const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
+  HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
   <h3
@@ -56,7 +69,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-xs text-[#858995] leading-relaxed', className)}
+    className={cn('text-xs text-[#8993A3] leading-relaxed', className)}
     {...props}
   />
 ));
