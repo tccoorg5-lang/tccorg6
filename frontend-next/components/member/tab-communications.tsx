@@ -21,6 +21,10 @@ import {
   Radio,
   FileText,
   Sparkles,
+  ShieldCheck,
+  ExternalLink,
+  Clock,
+  ChevronRight,
 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
@@ -68,7 +72,7 @@ const INSTITUTIONAL_ROOMS: ConclaveRoom[] = [
   },
   {
     id: 'room-mission-alpha',
-    name: 'Mission Alpha &bull; Public Welfare',
+    name: 'Mission Alpha \u2022 Public Welfare',
     description: 'Operational coordination channel for municipal transparency audits.',
     category: 'missions',
     isRoom: true,
@@ -96,6 +100,9 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
 
   // Mobile navigation state: show thread or list
   const [mobileShowThread, setMobileShowThread] = useState(false);
+
+  // Desktop side panel toggle for Peer Dossier
+  const [showPeerDossier, setShowPeerDossier] = useState(true);
 
   // New Dispatch / Fellow Search Modal
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -231,7 +238,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
       toast({
         type: 'error',
         title: 'Dispatch Transmission Error',
-        description: err.message || 'Unable to deliver encrypted dispatch to peer.',
+        description: err.message || 'Unable to deliver dispatch to peer.',
       });
     },
     onSettled: () => {
@@ -314,17 +321,17 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
   );
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] lg:h-[calc(100vh-4.5rem)] rounded-none lg:rounded-[8px] border-0 lg:border border-[#262C3A] bg-[#0F1218] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.85)] relative select-none w-full">
+    <div className="flex h-[calc(100vh-3.5rem)] lg:h-[calc(100vh-4rem)] rounded-none lg:rounded-[10px] border-0 lg:border border-[#262C3A] bg-[#0F1218] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.95)] relative select-none w-full">
       {/* ======================================================== */}
-      {/* MIDDLE PANEL: Dispatches Directory & Chambers List       */}
+      {/* PANEL 1: Dispatches Directory & Chambers List            */}
       {/* ======================================================== */}
       <div
-        className={`w-full md:w-80 lg:w-96 border-r border-[#262C3A] flex flex-col bg-[#080A0E] shrink-0 transition-all ${
+        className={`w-full md:w-80 lg:w-84 xl:w-96 border-r border-[#262C3A] flex flex-col bg-[#080A0E] shrink-0 transition-all ${
           mobileShowThread ? 'hidden md:flex' : 'flex'
         }`}
       >
         {/* Panel Header */}
-        <div className="p-4 border-b border-[#262C3A] flex items-center justify-between">
+        <div className="p-4 border-b border-[#262C3A] flex items-center justify-between bg-[#0F1218]/40">
           <div className="flex items-center gap-2">
             <MessageSquare className="w-4 h-4 text-[#C5A059]" />
             <h2 className="font-serif-formal text-sm font-bold tracking-wider text-[#D8B26E] uppercase">
@@ -344,7 +351,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
         </div>
 
         {/* Filter / Search Bar */}
-        <div className="p-3 border-b border-[#262C3A]/60 space-y-2">
+        <div className="p-3 border-b border-[#262C3A]/60 space-y-2 bg-[#080A0E]">
           <SearchInput
             value={filterQuery}
             onChange={(e) => setFilterQuery(e.target.value)}
@@ -358,8 +365,8 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
               onClick={() => setActiveCategory('all')}
               className={`py-1 rounded-[2px] transition-colors ${
                 activeCategory === 'all'
-                  ? 'bg-[#C5A059] text-[#080A0E]'
-                  : 'text-[#858995] hover:text-[#E9E2D3]'
+                  ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E]'
+                  : 'text-[#8993A3] hover:text-[#E9E2D3]'
               }`}
             >
               All
@@ -369,8 +376,8 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
               onClick={() => setActiveCategory('rooms')}
               className={`py-1 rounded-[2px] transition-colors ${
                 activeCategory === 'rooms'
-                  ? 'bg-[#C5A059] text-[#080A0E]'
-                  : 'text-[#858995] hover:text-[#E9E2D3]'
+                  ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E]'
+                  : 'text-[#8993A3] hover:text-[#E9E2D3]'
               }`}
             >
               Chambers
@@ -380,8 +387,8 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
               onClick={() => setActiveCategory('direct')}
               className={`py-1 rounded-[2px] transition-colors ${
                 activeCategory === 'direct'
-                  ? 'bg-[#C5A059] text-[#080A0E]'
-                  : 'text-[#858995] hover:text-[#E9E2D3]'
+                  ? 'bg-gradient-to-r from-[#D8B26E] to-[#C5A059] text-[#080A0E]'
+                  : 'text-[#8993A3] hover:text-[#E9E2D3]'
               }`}
             >
               Fellows
@@ -394,8 +401,9 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
           {/* Institutional Conclave Chambers Section */}
           {(activeCategory === 'all' || activeCategory === 'rooms') && (
             <div className="py-2">
-              <div className="px-3 py-1 font-serif-formal text-[0.625rem] font-bold text-[#858995] uppercase tracking-widest">
-                Institutional Conclave Chambers
+              <div className="px-3.5 py-1.5 font-serif-formal text-[0.625rem] font-bold text-[#8993A3] uppercase tracking-widest flex items-center justify-between">
+                <span>Conclave Chambers</span>
+                <span className="font-mono text-[0.5625rem] text-[#C5A059]">4 ACTIVE</span>
               </div>
               {filteredRooms.map((room) => {
                 const isSelected = activeRoom?.id === room.id;
@@ -409,13 +417,13 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                       setActivePartner(null);
                       setMobileShowThread(true);
                     }}
-                    className={`w-full p-3 flex items-start gap-3 text-left transition-all ${
+                    className={`w-full p-3.5 flex items-start gap-3 text-left transition-all ${
                       isSelected
-                        ? 'bg-[#1B2029] border-l-2 border-[#C5A059]'
+                        ? 'bg-[#1B2029] border-l-2 border-[#D8B26E] shadow-inner'
                         : 'hover:bg-[#161A22]/70'
                     }`}
                   >
-                    <div className="w-9 h-9 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.35)] flex items-center justify-center text-[#C5A059] shrink-0">
+                    <div className="w-9 h-9 rounded-[4px] bg-[#161A22] border border-[rgba(197,160,89,0.35)] flex items-center justify-center text-[#D8B26E] shrink-0">
                       <Users className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -427,7 +435,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                           Chamber
                         </Badge>
                       </div>
-                      <p className="text-[0.6875rem] text-[#858995] truncate mt-0.5 leading-snug">
+                      <p className="text-[0.6875rem] text-[#8993A3] truncate mt-0.5 leading-snug">
                         {room.description}
                       </p>
                     </div>
@@ -440,17 +448,18 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
           {/* Direct Fellow Dispatches Section */}
           {(activeCategory === 'all' || activeCategory === 'direct') && (
             <div className="py-2">
-              <div className="px-3 py-1 font-serif-formal text-[0.625rem] font-bold text-[#858995] uppercase tracking-widest">
-                Direct Fellow Transmissions
+              <div className="px-3.5 py-1.5 font-serif-formal text-[0.625rem] font-bold text-[#8993A3] uppercase tracking-widest flex items-center justify-between">
+                <span>Direct Fellow Dispatches</span>
+                <span className="font-mono text-[0.5625rem] text-[#C5A059]">{conversations.length} CHANNELS</span>
               </div>
 
               {isLoadingConvs ? (
-                <div className="p-8 text-center text-xs text-[#858995] flex items-center justify-center gap-2">
+                <div className="p-8 text-center text-xs text-[#8993A3] flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
                   <span>Scanning dispatches stream...</span>
                 </div>
               ) : filteredConversations.length === 0 ? (
-                <div className="p-6 text-center text-xs text-[#858995] space-y-2">
+                <div className="p-6 text-center text-xs text-[#8993A3] space-y-2">
                   <p>No active peer dispatches found.</p>
                   <Button
                     variant="outline"
@@ -484,13 +493,13 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                         setActivePartner(partner || null);
                         setMobileShowThread(true);
                       }}
-                      className={`w-full p-3 flex items-start gap-3 text-left transition-all ${
+                      className={`w-full p-3.5 flex items-start gap-3 text-left transition-all ${
                         isSelected
-                          ? 'bg-[#1B2029] border-l-2 border-[#C5A059]'
+                          ? 'bg-[#1B2029] border-l-2 border-[#D8B26E] shadow-inner'
                           : 'hover:bg-[#161A22]/70'
                       }`}
                     >
-                      <div className="w-9 h-9 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-center font-serif-formal text-xs font-bold text-[#C5A059] shrink-0">
+                      <div className="w-9 h-9 rounded-[4px] bg-[#161A22] border border-[#262C3A] flex items-center justify-center font-serif-formal text-xs font-bold text-[#D8B26E] shrink-0">
                         {partnerName[0].toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -499,17 +508,17 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                             {partnerName}
                           </span>
                           {time && (
-                            <span className="font-mono text-[0.625rem] text-[#858995]">
+                            <span className="font-mono text-[0.625rem] text-[#8993A3]">
                               {time}
                             </span>
                           )}
                         </div>
                         <div className="flex items-center justify-between mt-1">
-                          <p className="text-[0.6875rem] text-[#858995] truncate max-w-[170px]">
+                          <p className="text-[0.6875rem] text-[#8993A3] truncate max-w-[170px]">
                             {lastMsg}
                           </p>
                           {unread > 0 && (
-                            <span className="px-1.5 py-0.2 rounded-full text-[0.625rem] font-bold bg-[#C5A059] text-[#080A0E]">
+                            <span className="px-1.5 py-0.2 rounded-full text-[0.625rem] font-bold bg-[#D8B26E] text-[#080A0E] shadow-[0_0_8px_rgba(216,178,110,0.5)]">
                               {unread}
                             </span>
                           )}
@@ -525,23 +534,23 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
       </div>
 
       {/* ======================================================== */}
-      {/* RIGHT PANEL: Active Dispatch Thread & Exceptional Composer */}
+      {/* PANEL 2: Active Dispatch Thread & Exceptional Composer   */}
       {/* ======================================================== */}
       <div
-        className={`flex-1 flex flex-col bg-[#0F1218] transition-all ${
+        className={`flex-1 flex flex-col bg-[#0F1218] transition-all relative ${
           !mobileShowThread ? 'hidden md:flex' : 'flex'
         }`}
       >
         {activeRoom || activePartner ? (
           <>
             {/* Thread Header */}
-            <div className="p-4 border-b border-[#262C3A] flex items-center justify-between bg-[#161A22]/40 backdrop-blur-sm">
+            <div className="p-3.5 sm:p-4 border-b border-[#262C3A] flex items-center justify-between bg-[#161A22]/60 backdrop-blur-md">
               <div className="flex items-center gap-3">
                 {/* Mobile Back Button */}
                 <button
                   type="button"
                   onClick={() => setMobileShowThread(false)}
-                  className="md:hidden p-1.5 text-[#858995] hover:text-[#E9E2D3]"
+                  className="md:hidden p-1.5 text-[#8993A3] hover:text-[#E9E2D3]"
                 >
                   <ArrowLeft className="w-4 h-4" />
                 </button>
@@ -558,9 +567,9 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                   <h3 className="font-serif-formal text-sm font-bold text-[#D8B26E] tracking-wide">
                     {activeRoom ? activeRoom.name : activePartner?.codename || activePartner?.username}
                   </h3>
-                  <div className="flex items-center gap-2 text-[0.6875rem] text-[#858995]">
-                    <span className="text-[#4ADE80] font-medium flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" /> Active Standby
+                  <div className="flex items-center gap-2 text-[0.6875rem] text-[#8993A3]">
+                    <span className="text-[#4ADE80] font-medium flex items-center gap-1 font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] animate-pulse" /> Active Standby
                     </span>
                     <span>&bull;</span>
                     <span className="font-mono text-[#C5A059]">
@@ -574,18 +583,29 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
 
               {/* Thread Action Controls */}
               <div className="flex items-center gap-2">
-                <Badge variant="outline" className="hidden sm:inline-flex">
+                <Badge variant="outline" className="hidden sm:inline-flex items-center gap-1.5">
                   <Lock className="w-3 h-3 text-[#C5A059]" />
                   <span>Channel Protected</span>
                 </Badge>
+                
+                {activePartner && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPeerDossier(!showPeerDossier)}
+                    className="hidden xl:flex p-1.5 rounded-[4px] bg-[#161A22] border border-[#262C3A] text-[#8993A3] hover:text-[#D8B26E] transition-colors"
+                    title={showPeerDossier ? 'Hide Dossier Panel' : 'Show Dossier Panel'}
+                  >
+                    <Info className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Messages Scroll Area */}
-            <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-[#080A0E]/70">
+            <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-[#080A0E]/80">
               {/* Date Delimiter */}
               <div className="flex items-center justify-center my-2">
-                <span className="px-3 py-1 rounded-[3px] bg-[#161A22] border border-[#262C3A] text-[0.625rem] font-serif-formal tracking-widest text-[#858995] uppercase">
+                <span className="px-3 py-1 rounded-[3px] bg-[#161A22] border border-[#262C3A] text-[0.625rem] font-serif-formal tracking-widest text-[#8993A3] uppercase">
                   Today &bull; Encrypted Dispatches
                 </span>
               </div>
@@ -594,22 +614,22 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                 // Chamber Mock Dispatches
                 <div className="space-y-4">
                   <div className="flex flex-col items-start">
-                    <div className="max-w-[75%] p-4 rounded-[6px] bg-[#1B2029] text-xs leading-relaxed border border-[#262C3A] text-[#E9E2D3] space-y-1">
-                      <div className="flex items-center justify-between text-[0.625rem] text-[#C5A059] font-serif-formal font-bold pb-1 border-b border-[#262C3A]">
+                    <div className="max-w-[85%] sm:max-w-[75%] p-4 rounded-[6px] bg-[#1B2029] text-xs leading-relaxed border border-[#262C3A] text-[#E9E2D3] space-y-1 shadow-md">
+                      <div className="flex items-center justify-between text-[0.625rem] text-[#D8B26E] font-serif-formal font-bold pb-1.5 border-b border-[#262C3A]">
                         <span>Sovereign Founder</span>
                         <span>Official Dispatch</span>
                       </div>
-                      <p className="pt-1 text-[#E9E2D3]">
+                      <p className="pt-1.5 text-[#E9E2D3]">
                         Welcome to {activeRoom.name}. Deliberations in this chamber are preserved in the Society Archives. Maintain discretion and high standards of intellectual rigor.
                       </p>
-                      <div className="text-right text-[0.625rem] text-[#858995] font-mono mt-1">
+                      <div className="text-right text-[0.625rem] text-[#8993A3] font-mono mt-1">
                         10:00 UTC
                       </div>
                     </div>
                   </div>
                 </div>
               ) : isLoadingMsgs ? (
-                <div className="flex items-center justify-center h-full text-xs text-[#858995] gap-2">
+                <div className="flex items-center justify-center h-full text-xs text-[#8993A3] gap-2">
                   <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
                   <span>Decrypting dispatches stream...</span>
                 </div>
@@ -619,7 +639,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                   <h4 className="font-serif-formal text-sm font-bold text-[#D8B26E] uppercase tracking-wider">
                     Dispatch Channel Open
                   </h4>
-                  <p className="text-xs text-[#858995] max-w-sm leading-relaxed">
+                  <p className="text-xs text-[#8993A3] max-w-sm leading-relaxed">
                     Transmissions between you and {activePartner?.codename || 'Fellow'} are private and authenticated under the 2026 Society Protocol.
                   </p>
                 </div>
@@ -637,20 +657,20 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                       className={`flex flex-col ${isOutgoing ? 'items-end' : 'items-start'}`}
                     >
                       <div
-                        className={`max-w-[75%] p-3.5 rounded-[6px] text-xs leading-relaxed ${
+                        className={`max-w-[85%] sm:max-w-[75%] p-3.5 rounded-[6px] text-xs leading-relaxed ${
                           isOutgoing
-                            ? 'bg-[#221C12] text-[#E9E2D3] border border-[rgba(197,160,89,0.4)] shadow-[0_4px_16px_rgba(197,160,89,0.08)]'
-                            : 'bg-[#1B2029] text-[#E9E2D3] border border-[#262C3A]'
+                            ? 'bg-[#221C12] text-[#E9E2D3] border border-[rgba(197,160,89,0.45)] shadow-[0_4px_20px_rgba(197,160,89,0.1)]'
+                            : 'bg-[#1B2029] text-[#E9E2D3] border border-[#262C3A] shadow-md'
                         }`}
                       >
                         <p className="whitespace-pre-wrap break-words">{msg.content}</p>
-                        <div className="flex items-center justify-end gap-1.5 mt-2 text-[0.625rem] text-[#858995] font-mono">
+                        <div className="flex items-center justify-end gap-1.5 mt-2 text-[0.625rem] text-[#8993A3] font-mono">
                           <span>{time}</span>
                           {isOutgoing && (
                             msg.is_read ? (
-                              <CheckCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                              <CheckCheck className="w-3.5 h-3.5 text-[#D8B26E]" />
                             ) : (
-                              <Check className="w-3 h-3 text-[#858995]" />
+                              <Check className="w-3 h-3 text-[#8993A3]" />
                             )
                           )}
                         </div>
@@ -676,7 +696,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                         description: 'Signed archival document sharing protocol is active.',
                       })
                     }
-                    className="p-2 text-[#858995] hover:text-[#C5A059] transition-colors rounded-[3px] hover:bg-[#1B2029]"
+                    className="p-2 text-[#8993A3] hover:text-[#C5A059] transition-colors rounded-[3px] hover:bg-[#1B2029]"
                     title="Attach Research Document"
                   >
                     <Paperclip className="w-4 h-4" />
@@ -692,7 +712,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                         ? `Broadcast to ${activeRoom.name}...`
                         : `Transmit encrypted dispatch to ${activePartner?.codename || 'Fellow'}...`
                     }
-                    className="flex-1 bg-transparent text-xs text-[#E9E2D3] placeholder:text-[#858995] px-2 py-2 focus:outline-none"
+                    className="flex-1 bg-transparent text-xs text-[#E9E2D3] placeholder:text-[#8993A3] px-2 py-2 focus:outline-none"
                   />
 
                   {/* Send Button */}
@@ -709,7 +729,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-between text-[0.625rem] text-[#858995] px-1 font-mono">
+                <div className="flex items-center justify-between text-[0.625rem] text-[#8993A3] px-1 font-mono">
                   <span>DISCRETION MANDATED &bull; 2026 ARCHITECTURE</span>
                   <span className="hidden sm:inline">Press Enter to transmit dispatch</span>
                 </div>
@@ -722,7 +742,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
             <h3 className="font-serif-formal text-lg text-[#D8B26E] font-bold uppercase tracking-wider">
               Select Dispatch Channel
             </h3>
-            <p className="text-xs text-[#858995] max-w-sm leading-relaxed">
+            <p className="text-xs text-[#8993A3] max-w-sm leading-relaxed">
               Choose an active Fellow conversation or Conclave Chamber from the left directory to begin transmission.
             </p>
           </div>
@@ -730,11 +750,79 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
       </div>
 
       {/* ======================================================== */}
+      {/* PANEL 3: Desktop Peer Dossier & Security Telemetry       */}
+      {/* ======================================================== */}
+      {activePartner && showPeerDossier && (
+        <div className="hidden xl:flex w-72 border-l border-[#262C3A] flex-col justify-between bg-[#080A0E] p-4 shrink-0 overflow-y-auto">
+          <div className="space-y-5">
+            <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
+              <span className="font-serif-formal text-xs font-bold text-[#D8B26E] uppercase tracking-wider">
+                Peer Dossier
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowPeerDossier(false)}
+                className="text-[#8993A3] hover:text-[#E9E2D3] p-1"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Peer Avatar & Title */}
+            <div className="text-center space-y-2 py-2">
+              <div className="w-16 h-16 rounded-[6px] bg-[#161A22] border border-[rgba(197,160,89,0.45)] mx-auto flex items-center justify-center font-serif-formal text-xl font-bold text-[#D8B26E] shadow-lg">
+                {(activePartner.codename || 'F')[0].toUpperCase()}
+              </div>
+              <div>
+                <h4 className="font-serif-formal text-sm font-bold text-[#E9E2D3]">
+                  {activePartner.codename || activePartner.username}
+                </h4>
+                <span className="text-[0.625rem] font-mono text-[#C5A059]">
+                  {activePartner.society_rank || 'Initiate Fellow'}
+                </span>
+              </div>
+            </div>
+
+            {/* Peer Credentials Summary */}
+            <div className="p-3.5 rounded-[4px] bg-[#0F1218] border border-[#262C3A] space-y-2 text-xs">
+              <div className="flex justify-between py-1 border-b border-[#262C3A]/60">
+                <span className="text-[#8993A3]">Clearance:</span>
+                <span className="font-mono text-[#D8B26E]">CLASS IV</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-[#262C3A]/60">
+                <span className="text-[#8993A3]">Standing:</span>
+                <span className="text-[#4ADE80] font-mono">Active</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span className="text-[#8993A3]">Channel:</span>
+                <span className="text-[#38BDF8] font-mono">Protected</span>
+              </div>
+            </div>
+
+            {/* Security Protocol Notice */}
+            <div className="p-3 rounded-[4px] bg-[#161A22] border border-[#262C3A] space-y-1.5 text-[0.6875rem] text-[#8993A3]">
+              <div className="flex items-center gap-1.5 text-[#C5A059] font-serif-formal font-bold text-[0.625rem] uppercase">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Zero-Trust Protocol</span>
+              </div>
+              <p className="leading-relaxed">
+                Transmissions are authenticated against Supabase Row-Level Security policies and FastAPI token authorities.
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-3 border-t border-[#262C3A] text-center text-[0.625rem] font-mono text-[#8993A3]">
+            <span>ID: {activePartner.id.slice(0, 12)}...</span>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
       {/* MODAL: Locate Fellow for New Dispatch                    */}
       {/* ======================================================== */}
       {isSearchModalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="rounded-[8px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.85)] max-w-md w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#C5A059] before:to-transparent">
+        <div className="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="rounded-[10px] bg-[#0F1218] border border-[rgba(197,160,89,0.4)] shadow-[0_20px_60px_rgba(0,0,0,0.9)] max-w-md w-full p-6 space-y-4 relative before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-[#D8B26E] before:to-transparent">
             <div className="flex items-center justify-between border-b border-[#262C3A] pb-3">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-[#C5A059]" />
@@ -745,7 +833,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
               <button
                 type="button"
                 onClick={() => setIsSearchModalOpen(false)}
-                className="text-[#858995] hover:text-[#E9E2D3] p-1"
+                className="text-[#8993A3] hover:text-[#E9E2D3] p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -760,12 +848,12 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
 
             <div className="max-h-60 overflow-y-auto space-y-1 divide-y divide-[#262C3A]/50">
               {isSearching ? (
-                <div className="p-6 text-center text-xs text-[#858995] flex items-center justify-center gap-2">
+                <div className="p-6 text-center text-xs text-[#8993A3] flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
                   <span>Scanning Sovereign Roll...</span>
                 </div>
               ) : searchResults.length === 0 ? (
-                <div className="p-6 text-center text-xs text-[#858995]">
+                <div className="p-6 text-center text-xs text-[#8993A3]">
                   {searchQuery ? 'No Fellows found matching query' : 'Type to search registered Fellows'}
                 </div>
               ) : (
@@ -783,7 +871,7 @@ export function TabCommunications({ currentProfile }: TabCommunicationsProps) {
                         <div className="font-serif-formal text-xs font-semibold text-[#E9E2D3]">
                           {user.codename || user.username}
                         </div>
-                        <div className="text-[0.625rem] text-[#858995] font-mono">
+                        <div className="text-[0.625rem] text-[#8993A3] font-mono">
                           {user.member_number || 'SOC-FELLOW'}
                         </div>
                       </div>
