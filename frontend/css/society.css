@@ -3,7 +3,7 @@
    British Gentlemen's Club & Indian Institutional Elegance
    ==================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* ------------------------------------------------------------------
@@ -12,18 +12,22 @@
   --midnight-black: #080A0E;
   --obsidian:       #0F1218;
   --charcoal:       #161A22;
-  --charcoal-light: #202632;
+  --charcoal-light: #1B2029;
   --charcoal-border:#262C3A;
 
   /* Gold Metallics */
   --antique-gold:   #C5A059;
   --imperial-gold:  #D8B26E;
   --burnished-gold: #8C6D2D;
+  --platinum:       #C7CED8;
+  --muted-silver:   #8993A3;
+  --electric-cyan:  #06B6D4;
+  --font-mono:      'JetBrains Mono', monospace;
   --gold-glow:      rgba(197, 160, 89, 0.18);
   --gold-glow-lg:   rgba(197, 160, 89, 0.28);
   --gold-border:    rgba(197, 160, 89, 0.35);
   --gold-border-subtle: rgba(197, 160, 89, 0.15);
-  --gold-gradient:  linear-gradient(135deg, #C5A059 0%, #E6CA85 50%, #8C6D2D 100%);
+  --gold-gradient:  linear-gradient(135deg, #C5A059 0%, #D8B26E 50%, #8C6D2D 100%);
   --gold-gradient-radial: radial-gradient(circle, #E6CA85 0%, #C5A059 50%, #8C6D2D 100%);
 
   /* Imperial Burgundy */
@@ -82,9 +86,12 @@
 body.society-theme {
   background-color: var(--midnight-black);
   background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     radial-gradient(ellipse at 50% -10%, rgba(92, 22, 29, 0.20) 0%, transparent 60%),
     radial-gradient(circle at 100% 100%, rgba(197, 160, 89, 0.06) 0%, transparent 50%),
     radial-gradient(circle at 0% 100%, rgba(15, 18, 24, 0.9) 0%, transparent 60%);
+  background-size: 64px 64px, 64px 64px, auto, auto, auto;
   color: var(--ivory);
   font-family: var(--font-body);
   margin: 0;
@@ -386,7 +393,7 @@ body.society-theme {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--gold-gradient);
+  background: linear-gradient(90deg, transparent 0%, #C5A059 30%, #D8B26E 50%, #C5A059 70%, transparent 100%);
 }
 
 .society-card-header {
